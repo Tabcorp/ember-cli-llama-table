@@ -8,11 +8,7 @@ var LlamaTable = Em.Component.extend({
 	columns: null,
 
 	// table data
-	data: null,
-
-	init: function () {
-		// initialize state
-	}
+	rows: null
 });
 
 export default LlamaTable;
