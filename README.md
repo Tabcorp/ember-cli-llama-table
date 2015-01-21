@@ -1,25 +1,82 @@
-# Llama-table
+# ember-cli-llama-table
 
-This README outlines the details of collaborating on this Ember addon.
+Easy Ember.js table component.
 
-## Installation
+`ember-cli-llama-table` is an [Ember][ember] [component][component] for easily rendering tables with
+advanced features and functionality.
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+## Example
 
-## Running
+**controllers/index.js**:
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+```js
+import Ember from 'ember';
+export default Ember.Controller.extend({
+    tableColumns: [
+        {
+            name: 'foo',
+            label: 'Foo',
+            order: 1
+        },
+        {
+            name: 'bar',
+            label: 'Bar',
+            order: 2
+        }
+    ],
+    tableData: [
+        {
+            foo: 'abc',
+            bar: 'def'
+        },
+        {
+            foo: 'ghi',
+            bar: 'jkl'
+        }
+    ]
+});
+```
 
-## Running Tests
+**templates/index.hbs**:
 
-* `ember test`
-* `ember test --server`
+```hbs
+{{llama-table rows=tableData columns=tableColumns}}
+```
 
-## Building
+## Properties
 
-* `ember build`
+**`columns`**:
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+Column configuration. Defines the appearance and behaviour of table columns. Will be monitored for
+changes, causing the component to update accordingly.
+
+[See the wiki][columns] for more details.
+
+**`rows`**:
+
+Table data as an array of objects. Each object has properties which map with column identifiers. Row
+additions, removals or edits will be reflected by the table.
+
+## Installing
+
+With [npm][npm]:
+
+```sh
+$ npm install --save ember-cli-llama-table
+```
+
+Or with [Ember CLI][cli]:
+
+```sh
+$ ember install:npm ember-cli-llama-table
+```
+
+## License
+
+[MIT license](LICENSE.md).
+
+[ember]: http://emberjs.com/
+[component]: http://emberjs.com/api/classes/Ember.Component.html
+[columns]: https://github.com/luxbet/ember-cli-llama-table/wiki/Column-definition
+[npm]: https://www.npmjs.com/
+[cli]: http://www.ember-cli.com/
