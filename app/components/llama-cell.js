@@ -1,11 +1,7 @@
 import Em from 'ember';
 
 var LlamaCell = Em.Component.extend({
-	classNames: 'llama-cell',
-
-	beforeInsertElement: function () {
-		console.log('todo: find out what this event is called');
-	}
+	classNames: 'llama-cell'
 });
 
 export default LlamaCell;

@@ -4,6 +4,8 @@ var get = Em.get;
 var LlamaBodyCell = LlamaCell.extend({
 	layoutName: 'llama-body-cell',
 	classNames: 'llama-body-cell llama-cell',
+	attributeBindings: ['tabindex'],
+	tabindex: 0,
 
 	// column definition
 	column: null,
