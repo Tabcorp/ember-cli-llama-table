@@ -1,10 +1,9 @@
 import Em from 'ember';
 var get = Em.get;
 
-var LlamaTdBody = Em.Component.extend({
-	tagName: 'td',
-	layoutName: 'llama-td-body',
-	classNames: 'llama-td-body llama-td',
+var LlamaBodyCell = Em.Component.extend({
+	layoutName: 'llama-body-cell',
+	classNames: 'llama-body-cell llama-cell',
 
 	// column definition
 	column: null,
@@ -20,4 +19,4 @@ var LlamaTdBody = Em.Component.extend({
 	}.property('column', 'row')
 });
 
-export default LlamaTdBody;
+export default LlamaBodyCell;
