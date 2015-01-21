@@ -1,6 +1,6 @@
-import Em from 'ember';
+import LlamaCell from './llama-cell';
 
-var LlamaHeaderCell = Em.Component.extend({
+var LlamaHeaderCell = LlamaCell.extend({
 	layoutName: 'llama-header-cell',
 	classNames: 'llama-header-cell llama-cell',
 

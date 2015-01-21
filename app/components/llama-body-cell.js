@@ -1,7 +1,7 @@
-import Em from 'ember';
+import LlamaCell from './llama-cell';
 var get = Em.get;
 
-var LlamaBodyCell = Em.Component.extend({
+var LlamaBodyCell = LlamaCell.extend({
 	layoutName: 'llama-body-cell',
 	classNames: 'llama-body-cell llama-cell',
 
