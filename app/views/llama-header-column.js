@@ -1,8 +1,8 @@
-import Em from 'ember';
+import LlamaColumn from './llama-column';
 
-var LlamaHeaderColumn = Em.View.extend({
+var LlamaHeaderColumn = LlamaColumn.extend({
 	layoutName: 'llama-header-column',
-	classNames: 'llama-header-column llama-column',
+	classNames: 'llama-header-column',
 
 	// column definition
 	column: null
