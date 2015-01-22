@@ -5,10 +5,7 @@ var LlamaHeaderColumn = Em.View.extend({
 	classNames: 'llama-header-column llama-column',
 
 	// column definition
-	column: null,
-
-	// table data
-	rows: null
+	column: null
 });
 
 export default LlamaHeaderColumn;

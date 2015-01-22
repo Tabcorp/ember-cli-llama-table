@@ -5,10 +5,7 @@ var LlamaBodyColumn = Em.View.extend({
 	classNames: 'llama-body-column llama-column',
 
 	// column definition
-	column: null,
-
-	// table data
-	rows: null
+	column: null
 });
 
 export default LlamaBodyColumn;
