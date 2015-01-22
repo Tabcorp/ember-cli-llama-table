@@ -8,7 +8,13 @@ var LlamaTable = Em.Component.extend({
 	columns: null,
 
 	// table data
-	rows: null
+	rows: null,
+
+	columngroups: function () {
+		var columns = this.get('columns');
+		// single group for now
+		return [columns];
+	}.property('columns')
 });
 
 export default LlamaTable;
