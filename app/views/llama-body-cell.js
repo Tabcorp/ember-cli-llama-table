@@ -1,3 +1,4 @@
+import Em from 'ember';
 import LlamaCell from './llama-cell';
 var get = Em.get;
 

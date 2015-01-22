@@ -1,6 +1,6 @@
 import Em from 'ember';
 
-var LlamaCell = Em.Component.extend({
+var LlamaCell = Em.View.extend({
 	classNames: 'llama-cell'
 });
 

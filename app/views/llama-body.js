@@ -1,6 +1,6 @@
 import Em from 'ember';
 
-var LlamaBody = Em.Component.extend({
+var LlamaBody = Em.View.extend({
 	layoutName: 'llama-body',
 	classNames: 'llama-body',
 
