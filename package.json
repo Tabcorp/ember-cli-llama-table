@@ -1,7 +1,23 @@
 {
   "name": "ember-cli-llama-table",
   "version": "0.2.1",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Easy Ember.js table component",
+  "author": "Jamie Hoeks <j@skeoh.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/luxbet/ember-cli-llama-table",
+  "keywords": [
+    "ember-addon",
+    "ember",
+    "table",
+    "llama"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luxbet/ember-cli-llama-table.git"
+  },
+  "bugs": {
+    "url": "https://github.com/luxbet/ember-cli-llama-table/issues"
+  },
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,12 +27,6 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
-  "engines": {
-    "node": ">= 0.10.0"
-  },
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.0",
     "broccoli-ember-hbs-template-compiler": "^1.6.1",
@@ -31,11 +41,5 @@
     "ember-export-application-global": "^1.0.0",
     "express": "^4.8.5",
     "glob": "^4.0.5"
-  },
-  "keywords": [
-    "ember-addon"
-  ],
-  "ember-addon": {
-    "configPath": "tests/dummy/config"
   }
 }
