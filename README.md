@@ -43,6 +43,8 @@ export default Ember.Controller.extend({
 {{llama-table rows=tableData columns=tableColumns}}
 ```
 
+For an example implementation, see [j-/example-llama-table-app][example].
+
 ## Properties
 
 **`columns`**:
@@ -78,5 +80,6 @@ $ ember install:npm ember-cli-llama-table
 [ember]: http://emberjs.com/
 [component]: http://emberjs.com/api/classes/Ember.Component.html
 [columns]: https://github.com/luxbet/ember-cli-llama-table/wiki/Column-definition
+[example]: https://github.com/j-/example-llama-table-app
 [npm]: https://www.npmjs.com/
 [cli]: http://www.ember-cli.com/
