@@ -6,11 +6,11 @@ var SCROLL_TOP_ACTION = 'scrollY';
 
 var ScrollXYMixin = Em.Mixin.create(ScrollHandlerMixin, {
 
-	_scrollLeft: Ember.computed(function () {
+	_scrollLeft: Em.computed(function () {
 		return this.$().scrollLeft();
 	}),
 
-	_scrollTop: Ember.computed(function () {
+	_scrollTop: Em.computed(function () {
 		return this.$().scrollTop();
 	}),
 
