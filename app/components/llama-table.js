@@ -14,7 +14,13 @@ var LlamaTable = Em.Component.extend({
 		var columns = this.get('columns');
 		// single group for now
 		return [columns];
-	}.property('columns')
+	}.property('columns'),
+
+	actions: {
+		scrollX: function (pos) {
+			this.$('.llama-header').css('marginLeft', -pos);
+		}
+	}
 });
 
 export default LlamaTable;
