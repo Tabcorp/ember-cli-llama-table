@@ -2,6 +2,8 @@
 
 Easy Ember.js table component.
 
+[![master branch build status](https://travis-ci.org/luxbet/ember-cli-llama-table.svg?branch=master)](https://travis-ci.org/luxbet/ember-cli-llama-table)
+
 `ember-cli-llama-table` is an [Ember][ember] [component][component] for easily
 rendering tables with advanced features and functionality.
 
