@@ -2,8 +2,8 @@
 
 Easy Ember.js table component.
 
-`ember-cli-llama-table` is an [Ember][ember] [component][component] for easily rendering tables with
-advanced features and functionality.
+`ember-cli-llama-table` is an [Ember][ember] [component][component] for easily
+rendering tables with advanced features and functionality.
 
 ## Example
 
@@ -49,15 +49,16 @@ For an example implementation, see [j-/example-llama-table-app][example].
 
 **`columns`**:
 
-Column configuration. Defines the appearance and behaviour of table columns. Will be monitored for
-changes, causing the component to update accordingly.
+Column configuration. Defines the appearance and behaviour of table columns.
+Will be monitored for changes, causing the component to update accordingly.
 
 [See the wiki][columns] for more details.
 
 **`rows`**:
 
-Table data as an array of objects. Each object has properties which map with column identifiers. Row
-additions, removals or edits will be reflected by the table.
+Table data as an array of objects. Each object has properties which map with
+column identifiers. Row additions, removals or edits will be reflected by the
+table.
 
 ## Installing
 
