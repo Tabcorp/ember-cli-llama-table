@@ -1,4 +1,5 @@
 import Em from 'ember';
+var get = Em.get;
 
 var LlamaTable = Em.Component.extend({
 	layoutName: 'llama-table',
@@ -9,6 +10,14 @@ var LlamaTable = Em.Component.extend({
 
 	// table data
 	rows: null,
+
+	sortedRows: Em.computed(function () {
+		return Em.ArrayController.create({
+			model: this.get('rows'),
+			sortProperties: [],
+			sortAscending: true
+		});
+	}),
 
 	columngroups: function () {
 		var columns = this.get('columns');
@@ -43,6 +52,21 @@ var LlamaTable = Em.Component.extend({
 		focusDown: function (row, col) {
 			var $cell = this.findCellAtPosition(row + 1, col);
 			$cell.focus();
+		},
+		sortBy: function (column) {
+			var sortedRows = this.get('sortedRows');
+			var sortProperties = sortedRows.get('sortProperties');
+			if (column === sortProperties[0]) {
+				sortedRows.setProperties({
+					sortAscending: !sortedRows.get('sortAscending')
+				});
+			}
+			else {
+				sortedRows.setProperties({
+					sortProperties: [column],
+					sortAscending: true
+				});
+			}
 		}
 	}
 });

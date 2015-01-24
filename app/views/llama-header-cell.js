@@ -5,7 +5,14 @@ var LlamaHeaderCell = LlamaCell.extend({
 	classNames: 'llama-header-cell',
 
 	// column definition
-	column: null
+	column: null,
+
+	mouseDown: function (e) {
+		if (e.which === 1) {
+			e.preventDefault();
+			this.get('controller').send('sortBy', this.get('column.name'));
+		}
+	}
 });
 
 export default LlamaHeaderCell;
