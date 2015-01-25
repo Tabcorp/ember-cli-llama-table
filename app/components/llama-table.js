@@ -1,4 +1,5 @@
 import Em from 'ember';
+import RowsController from 'llama-table/controllers/rows';
 var get = Em.get;
 
 var LlamaTable = Em.Component.extend({
@@ -11,11 +12,9 @@ var LlamaTable = Em.Component.extend({
 	// table data
 	rows: null,
 
-	sortedRows: function () {
-		return Em.ArrayController.create({
-			model: this.get('rows'),
-			sortProperties: [],
-			sortAscending: true
+	rowsController: function () {
+		return RowsController.create({
+			model: this.get('rows')
 		});
 	}.property('rows'),
 
@@ -54,7 +53,7 @@ var LlamaTable = Em.Component.extend({
 			$cell.focus();
 		},
 		sortBy: function (column) {
-			var sortedRows = this.get('sortedRows');
+			var sortedRows = this.get('rowsController');
 			var sortProperties = sortedRows.get('sortProperties');
 			if (column === sortProperties[0]) {
 				sortedRows.setProperties({
