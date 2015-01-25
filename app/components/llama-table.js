@@ -11,13 +11,13 @@ var LlamaTable = Em.Component.extend({
 	// table data
 	rows: null,
 
-	sortedRows: Em.computed(function () {
+	sortedRows: function () {
 		return Em.ArrayController.create({
 			model: this.get('rows'),
 			sortProperties: [],
 			sortAscending: true
 		});
-	}),
+	}.property('rows'),
 
 	columngroups: function () {
 		var columns = this.get('columns');
