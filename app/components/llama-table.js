@@ -1,4 +1,5 @@
 import Em from 'ember';
+import ColumnsController from 'llama-table/controllers/columns';
 import RowsController from 'llama-table/controllers/rows';
 var get = Em.get;
 
@@ -8,6 +9,12 @@ var LlamaTable = Em.Component.extend({
 
 	// column definitions
 	columns: null,
+
+	columnsController: function () {
+		return ColumnsController.create({
+			model: this.get('columns')
+		});
+	}.property('columns'),
 
 	// table data
 	rows: null,
@@ -19,7 +26,7 @@ var LlamaTable = Em.Component.extend({
 	}.property('rows'),
 
 	columngroups: function () {
-		var columns = this.get('columns');
+		var columns = this.get('columnsController');
 		// single group for now
 		return [columns];
 	}.property('columns'),
