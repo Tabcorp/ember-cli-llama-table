@@ -1,1 +1,1 @@
-{{#each column in view.columns}}{{view 'llama-header-column' column=column}}{{/each}}
+{{#each column in view.columns}}{{#unless column.isHidden}}{{view 'llama-header-column' column=column}}{{/unless}}{{/each}}
