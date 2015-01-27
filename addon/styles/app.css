@@ -1,0 +1,51 @@
+.llama-table {
+	overflow: hidden;
+	width: 100%;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.llama-columngroup {
+	overflow: hidden;
+}
+
+.llama-column {
+	width: 200px;
+	float: left;
+	display: inline-block;
+}
+
+.llama-cell {
+	box-sizing: border-box;
+	height: 30px;
+	line-height: 20px;
+	padding: 5px;
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	border-style: solid;
+}
+
+.llama-header {
+	overflow: hidden;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+
+.llama-header-cell {
+	border-width: 0 1px 0 0;
+	font-weight: bold;
+}
+
+.llama-body-cell {
+	border-width: 0 1px 1px 0;
+}
+
+.llama-body-cell:last-child {
+	border-bottom-width: 0;
+}
+
+.llama-body {
+	overflow: auto;
+}
