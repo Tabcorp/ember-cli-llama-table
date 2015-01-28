@@ -34,6 +34,32 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 		return rows.indexOf(row);
 	},
 
+	mouseEnter: function () {
+		var $this = this.$();
+		var $body = $this.closest('.llama-body');
+		var $columns = $body.find('.llama-column');
+		var index = $this.index();
+		$columns.each(function () {
+			var $column = Em.$(this);
+			var $cells = $column.find('.llama-cell');
+			var $cell = $cells.eq(index);
+			$cell.addClass('hover');
+		});
+	},
+
+	mouseLeave: function () {
+		var $this = this.$();
+		var $body = $this.closest('.llama-body');
+		var $columns = $body.find('.llama-column');
+		var index = $this.index();
+		$columns.each(function () {
+			var $column = Em.$(this);
+			var $cells = $column.find('.llama-cell');
+			var $cell = $cells.eq(index);
+			$cell.removeClass('hover');
+		});
+	},
+
 	actions: {
 		keyLeft: function () {
 			var row = this.getRowIndex();
