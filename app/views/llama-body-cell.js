@@ -53,13 +53,13 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 
 	getColumnIndex: function () {
 		var column = this.get('column');
-		var columns = this.get('controller.columns');
+		var columns = this.get('controller.sortedColumns');
 		return columns.indexOf(column);
 	},
 
 	getRowIndex: function () {
 		var row = this.get('row');
-		var rows = this.get('controller.rows');
+		var rows = this.get('controller.sortedRows');
 		return rows.indexOf(row);
 	},
 
