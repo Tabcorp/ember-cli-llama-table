@@ -8,7 +8,7 @@ var LlamaBodyColumn = LlamaColumn.extend({
 	layoutName: 'llama-body-column',
 	classNames: 'llama-body-column',
 
-	content: Em.computed.alias('controller.rows'),
+	content: Em.computed.alias('controller.sortedRows'),
 	itemViewClass: function () {
 		var controller = this.get('controller');
 		var column = this.get('column');
