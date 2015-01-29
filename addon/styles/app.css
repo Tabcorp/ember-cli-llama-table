@@ -51,3 +51,25 @@
 	overflow: auto;
 	min-height: 30px;
 }
+
+.llama-header-cell .sort-indicator {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 5px 5px;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	border-bottom-color: inherit;
+	border-top-width: 0;
+	float: right;
+	margin: 7px 3px;
+}
+
+.llama-header-cell.sort-by-this-descending .sort-indicator {
+	border-width: 5px 5px 0;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	border-top-color: inherit;
+}
