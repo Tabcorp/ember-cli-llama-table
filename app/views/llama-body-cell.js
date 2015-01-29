@@ -17,6 +17,7 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 	// table definition
 	row: null,
 
+	// only calculated once
 	observedFields: function () {
 		var observes = this.get('column.observes');
 		if (!Em.isEmpty(observes)) {
@@ -38,10 +39,15 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 		removeObserver(row, observes, this, 'updateValue');
 	},
 
-	updateValue: function () {
+	getValue: function () {
 		var id = this.get('column.name');
 		var row = this.get('row');
 		var value = get(row, id);
+		return value;
+	},
+
+	updateValue: function () {
+		var value = this.getValue();
 		this.set('value', value);
 	}.on('init').observes('column'),
 

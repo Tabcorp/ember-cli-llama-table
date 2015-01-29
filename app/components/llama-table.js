@@ -1,6 +1,8 @@
 import Em from 'ember';
 import ColumnsController from 'llama-table/controllers/columns';
 import RowsController from 'llama-table/controllers/rows';
+import LlamaBodyCell from '../views/llama-body-cell';
+import LlamaNumberCell from '../views/llama-number-cell';
 var get = Em.get;
 
 var LlamaTable = Em.Component.extend({
@@ -37,6 +39,30 @@ var LlamaTable = Em.Component.extend({
 		var $cells = $column.find('.llama-body-cell');
 		var $cell = $cells.eq(row);
 		return $cell;
+	},
+
+	// component configuration
+	config: null,
+
+	getCellType: function (name) {
+		return this.getConfigCellType(name) || this.getDefaultCellType(name);
+	},
+
+	getConfigCellType: function (name) {
+		var types = this.get('config.types');
+		if (Em.isBlank(types)) return null;
+		var type = types.findBy('name', name);
+		if (Em.isBlank(type)) return null;
+		return get(type, 'view');
+	},
+
+	getDefaultCellType: function (name) {
+		switch (name) {
+			case 'number':
+				return LlamaNumberCell;
+			default:
+				return LlamaBodyCell;
+		}
 	},
 
 	actions: {
