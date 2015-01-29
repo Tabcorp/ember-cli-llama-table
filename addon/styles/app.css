@@ -48,4 +48,5 @@
 
 .llama-body {
 	overflow: auto;
+	min-height: 30px;
 }
