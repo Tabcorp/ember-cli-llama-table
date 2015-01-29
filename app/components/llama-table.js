@@ -1,9 +1,8 @@
 import Em from 'ember';
-import ColumnsController from 'llama-table/controllers/columns';
-import RowsController from 'llama-table/controllers/rows';
 import LlamaBodyCell from '../views/llama-body-cell';
 import LlamaNumberCell from '../views/llama-number-cell';
 var get = Em.get;
+var Sortable = Em.ArrayProxy.extend(Em.SortableMixin);
 
 var LlamaTable = Em.Component.extend({
 	layoutName: 'llama-table',
@@ -12,26 +11,30 @@ var LlamaTable = Em.Component.extend({
 	// column definitions
 	columns: null,
 
-	columnsController: function () {
-		return ColumnsController.create({
-			model: this.get('columns')
+	sortedColumns: function () {
+		return Sortable.create({
+			sortProperties: ['order'],
+			sortAscending: true,
+			content: this.get('columns')
 		});
-	}.property('columns'),
+	}.on('init').property(),
 
 	// table data
 	rows: null,
 
-	rowsController: function () {
-		return RowsController.create({
-			model: this.get('rows')
+	sortedRows: function () {
+		return Sortable.create({
+			sortProperties: [],
+			sortAscending: true,
+			content: this.get('rows')
 		});
-	}.property('rows'),
+	}.on('init').property(),
 
 	columngroups: function () {
-		var columns = this.get('columnsController');
+		var columns = this.get('sortedColumns');
 		// single group for now
 		return [columns];
-	}.property('columns'),
+	}.property('sortedColumns'),
 
 	findCellAtPosition: function (row, col) {
 		var $columns = this.$('.llama-body-column');
@@ -86,7 +89,7 @@ var LlamaTable = Em.Component.extend({
 			$cell.focus();
 		},
 		sortBy: function (column) {
-			var sortedRows = this.get('rowsController');
+			var sortedRows = this.get('sortedRows');
 			var sortProperties = sortedRows.get('sortProperties');
 			if (column === sortProperties[0]) {
 				sortedRows.setProperties({

@@ -8,8 +8,6 @@ var LlamaBodyColumn = LlamaColumn.extend({
 	layoutName: 'llama-body-column',
 	classNames: 'llama-body-column',
 
-	controller: Em.computed.alias('parentView.parentView.parentView'),
-
 	content: Em.computed.alias('controller.rows'),
 	itemViewClass: function () {
 		var controller = this.get('controller');
