@@ -1,0 +1,33 @@
+@border-color: #ccc;
+@header-bg: #f8f8f8;
+@hover-bg: #ffe;
+
+.llama-table {
+	border-color: @border-color;
+}
+
+.llama-column {
+	width: 200px;
+}
+
+.llama-cell {
+	border-color: @border-color;
+	cursor: default;
+}
+
+.llama-header {
+	background: @header-bg;
+	border-color: @border-color;
+
+	.llama-cell {
+		cursor: pointer;
+	}
+}
+
+.llama-body-cell.hover {
+	background: @hover-bg;
+}
+
+.llama-body-cell:focus {
+	box-shadow: inset 0 0 0 2px black;
+}

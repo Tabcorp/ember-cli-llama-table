@@ -1,0 +1,20 @@
+<h3>Demo table</h3>
+
+{{llama-table
+	rows=tableData
+	columns=tableColumns
+	config=config
+	removeRow="removeRow"
+}}
+
+<h4>Actions</h4>
+
+<button {{action 'addColumn'}}>Add new column</button>
+<button {{action 'shuffleColumns'}}>Shuffle columns</button>
+<button {{action 'updateData'}}>Update data</button>
+
+<h4>Info</h4>
+
+<p>
+	<a href="http://rickandmorty.wikia.com/wiki/Rick_and_Morty" title="Rick and Morty Wiki">Table data source</a>
+</p>
