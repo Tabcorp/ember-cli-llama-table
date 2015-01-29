@@ -14,7 +14,7 @@ var LlamaColumngroup = Em.View.extend({
 	},
 
 	onChildViewUpdate: function () {
-		Em.run.later(this, this.updateTotalWidth, 0);
+		Em.run.next(this, this.updateTotalWidth);
 	}.observes('childViews'),
 
 	didInsertElement: function () {
