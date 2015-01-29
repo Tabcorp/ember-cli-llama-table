@@ -11,18 +11,18 @@ var LlamaBodyColumn = LlamaColumn.extend({
 	controller: Em.computed.alias('parentView.parentView.parentView'),
 
 	content: Em.computed.alias('controller.rows'),
-	itemViewClass: LlamaBodyCell,
-
-	createChildView: function (View, attrs) {
+	itemViewClass: function () {
 		var controller = this.get('controller');
 		var column = this.get('column');
 		var type = get(column, 'type');
-		var Type = controller.getCellType(type);
-		if (Type) {
-			View = Type;
-		}
+		return controller.getCellType(type);
+	}.property(),
+
+	createChildView: function (View, attrs) {
+		var column = this.get('column');
+		var row = get(attrs, 'content');
 		set(attrs, 'column', column);
-		set(attrs, 'row', attrs.content);
+		set(attrs, 'row', row);
 		return this._super(View, attrs);
 	},
 
