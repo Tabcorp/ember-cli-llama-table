@@ -2,6 +2,8 @@ import Em from 'ember';
 import LlamaCell from './llama-cell';
 import ArrowKeysMixin from 'llama-table/mixins/arrow-keys';
 var get = Em.get;
+var addObserver = Em.addObserver;
+var removeObserver = Em.removeObserver;
 
 var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 	layoutName: 'llama-body-cell',
@@ -15,12 +17,33 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 	// table definition
 	row: null,
 
-	value: function () {
+	observedFields: function () {
+		var observes = this.get('column.observes');
+		if (!Em.isEmpty(observes)) {
+			return observes;
+		}
+		var id = this.get('column.name');
+		return id;
+	}.property(),
+
+	didInsertElement: function () {
+		var row = this.get('row');
+		var observes = this.get('observedFields');
+		addObserver(row, observes, this, 'updateValue');
+	},
+
+	willDestroyElement: function () {
+		var row = this.get('row');
+		var observes = this.get('observedFields');
+		removeObserver(row, observes, this, 'updateValue');
+	},
+
+	updateValue: function () {
 		var id = this.get('column.name');
 		var row = this.get('row');
 		var value = get(row, id);
-		return value;
-	}.property('column', 'row'),
+		this.set('value', value);
+	}.on('init').observes('column'),
 
 	getColumnIndex: function () {
 		var column = this.get('column');
