@@ -31,6 +31,7 @@
 	overflow: hidden;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
+	min-height: 30px;
 }
 
 .llama-header-cell {
