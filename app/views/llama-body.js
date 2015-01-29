@@ -2,7 +2,7 @@ import Em from 'ember';
 import ScrollXYMixin from 'llama-table/mixins/scroll-xy';
 
 var LlamaBody = Em.View.extend(ScrollXYMixin, {
-	layoutName: 'llama-body',
+	templateName: 'llama-body',
 	classNames: 'llama-body',
 
 	actions: {

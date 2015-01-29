@@ -2,7 +2,7 @@ import Em from 'ember';
 import LlamaCell from './llama-cell';
 
 var LlamaHeaderCell = LlamaCell.extend({
-	layoutName: 'llama-header-cell',
+	templateName: 'llama-header-cell',
 	classNames: 'llama-header-cell',
 	attributeBindings: ['title'],
 	title: Em.computed.alias('column.label'),

@@ -4,7 +4,6 @@ import LlamaHeaderCell from './llama-header-cell';
 var set = Em.set;
 
 var LlamaHeaderColumn = LlamaColumn.extend({
-	layoutName: 'llama-header-column',
 	classNames: 'llama-header-column',
 
 	content: function () {

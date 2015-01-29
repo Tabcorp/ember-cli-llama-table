@@ -6,7 +6,7 @@ var addObserver = Em.addObserver;
 var removeObserver = Em.removeObserver;
 
 var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
-	layoutName: 'llama-body-cell',
+	templateName: 'llama-body-cell',
 	classNames: 'llama-body-cell',
 	attributeBindings: ['tabindex'],
 	tabindex: 0,

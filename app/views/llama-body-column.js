@@ -5,7 +5,6 @@ var get = Em.get;
 var set = Em.set;
 
 var LlamaBodyColumn = LlamaColumn.extend({
-	layoutName: 'llama-body-column',
 	classNames: 'llama-body-column',
 
 	content: Em.computed.alias('controller.sortedRows'),

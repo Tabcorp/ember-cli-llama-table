@@ -5,7 +5,6 @@ var get = Em.get;
 var Sortable = Em.ArrayProxy.extend(Em.SortableMixin);
 
 var LlamaTable = Em.Component.extend({
-	layoutName: 'llama-table',
 	classNames: 'llama-table-component',
 
 	// column definitions
