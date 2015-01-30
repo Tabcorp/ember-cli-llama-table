@@ -5,7 +5,7 @@ var RemoveButtonCell = ButtonCell.extend({
 	actions: {
 		click: function () {
 			var controller = this.get('controller');
-			var rows = this.get('parentView.content');
+			var rows = controller.get('rows');
 			var row = this.get('content');
 			var index = rows.indexOf(row);
 			controller.sendAction('removeRow', index);
