@@ -51,6 +51,13 @@ var IndexController = Em.Controller.extend({
 				});
 			}
 			console.timeEnd(label);
+			console.time('Render records');
+			Em.run.next(function () {
+				console.timeEnd('Render records');
+			});
+		},
+		clear: function () {
+			this.get('tableData').clear();
 		}
 	}
 });
