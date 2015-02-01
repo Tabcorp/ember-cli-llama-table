@@ -1,0 +1,20 @@
+<h3>Stress test</h3>
+
+<p>This table tests the limits of Llama Table's rendering capabilities.</p>
+
+{{llama-table
+	rows=tableData
+	columns=tableColumns
+	config=config
+}}
+
+<h4>Actions</h4>
+
+<button {{action 'add' 10}}>Add 10 rows</button>
+<button {{action 'add' 50}}>Add 50 rows</button>
+<button {{action 'add' 100}}>Add 100 rows</button>
+<button {{action 'add' 250}}>Add 250 rows</button>
+<button {{action 'add' 500}}>Add 500 rows</button>
+<button {{action 'add' 1000}}>Add 1,000 rows</button>
+<button {{action 'add' 5000}}>Add 5,000 rows</button>
+<button {{action 'add' 10000}}>Add 10,000 rows</button>
