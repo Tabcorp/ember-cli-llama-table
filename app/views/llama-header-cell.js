@@ -4,9 +4,13 @@ import LlamaCell from './llama-cell';
 var LlamaHeaderCell = LlamaCell.extend({
 	templateName: 'llama-header-cell',
 	classNames: 'llama-header-cell',
-	classNameBindings: ['sortByThis', 'sortByThisAscending', 'sortByThisDescending'],
+	classNameBindings: ['sortByThis', 'sortByThisAscending', 'sortByThisDescending', 'isSortable'],
 	attributeBindings: ['title'],
 	title: Em.computed.alias('column.label'),
+
+	isSortable: function () {
+		return !(this.get('column.isSortable') === false);
+	}.property('column.isSortable'),
 
 	// column definition
 	column: null,
@@ -28,7 +32,9 @@ var LlamaHeaderCell = LlamaCell.extend({
 	mouseDown: function (e) {
 		if (e.which === 1) {
 			e.preventDefault();
-			this.get('controller').send('sortBy', this.get('column.name'));
+			if (this.get('isSortable')) {
+				this.get('controller').send('sortBy', this.get('column.name'));
+			}
 		}
 	}
 });

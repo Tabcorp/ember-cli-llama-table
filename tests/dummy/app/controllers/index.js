@@ -41,7 +41,8 @@ var IndexController = Em.Controller.extend({
 			name: 'remove',
 			label: 'Remove',
 			order: 8,
-			type: 'remove'
+			type: 'remove',
+			isSortable: false
 		})
 	]),
 	tableData: [
