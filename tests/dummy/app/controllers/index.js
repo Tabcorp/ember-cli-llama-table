@@ -1,50 +1,51 @@
 import Em from 'ember';
 import RemoveButton from '../views/remove-button-cell';
 var set = Em.set;
+var get = Em.get;
 
 var IndexController = Em.Controller.extend({
-	tableColumns: Em.A([
-		Em.Object.create({
+	tableColumns: [
+		{
 			name: 'episode',
 			label: 'Episode',
 			order: 1,
 			type: 'number'
-		}),
-		Em.Object.create({
+		},
+		{
 			name: 'title',
 			label: 'Title',
 			order: 2
-		}),
-		Em.Object.create({
+		},
+		{
 			name: 'airdate',
 			label: 'Original airdate',
 			order: 5
-		}),
-		Em.Object.create({
+		},
+		{
 			name: 'description',
 			label: 'Description',
 			order: 3
-		}),
-		Em.Object.create({
+		},
+		{
 			name: 'million_viewers',
 			label: 'Viewers (in millions)',
 			order: 4,
 			type: 'number'
-		}),
-		Em.Object.create({
+		},
+		{
 			name: 'screenshot',
 			label: 'Screenshot URL',
 			order: 7,
 			isHidden: true
-		}),
-		Em.Object.create({
+		},
+		{
 			name: 'remove',
 			label: 'Remove',
 			order: 8,
 			type: 'remove',
 			isSortable: false
-		})
-	]),
+		}
+	],
 	tableData: [
 		{
 			screenshot: 'http://i.imgur.com/r3WXxQ8.jpg',
@@ -145,22 +146,21 @@ var IndexController = Em.Controller.extend({
 	},
 	actions: {
 		addColumn: function () {
-			var newCol = Em.Object.create({
+			this.get('tableColumns').pushObject({
 				name: 'screenshot',
 				label: 'Screenshot URL',
 				order: 0
 			});
-			this.get('tableColumns').pushObject(newCol);
 		},
 		shuffleColumns: function () {
 			var cols = this.get('tableColumns');
-			var n = this.get('tableColumns.length');
+			var n = cols.length;
 			var j, tmp;
 			for (var i = n - 1; i >= 1; i--) {
 				j = Math.floor(Math.random() * i);
-				tmp = cols.objectAt(j).get('order');
-				cols.objectAt(j).set('order', cols.objectAt(i).get('order'));
-				cols.objectAt(i).set('order', tmp);
+				tmp = get(cols.objectAt(j), 'order');
+				set(cols.objectAt(j), 'order', get(cols.objectAt(i), 'order'));
+				set(cols.objectAt(i), 'order', tmp);
 			}
 		},
 		updateData: function () {
