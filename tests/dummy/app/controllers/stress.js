@@ -51,13 +51,18 @@ var IndexController = Em.Controller.extend({
 				});
 			}
 			console.timeEnd(label);
-			console.time('Render records');
+			label = 'Render %@ rows'.fmt(num);
+			console.time(label);
 			Em.run.next(function () {
-				console.timeEnd('Render records');
+				console.timeEnd(label);
 			});
 		},
 		clear: function () {
+			var len = this.get('tableData.length');
+			var label = 'Clear %@ rows'.fmt(len);
+			console.time(label);
 			this.get('tableData').clear();
+			console.timeEnd(label);
 		}
 	}
 });
