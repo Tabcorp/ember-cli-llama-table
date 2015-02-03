@@ -16,7 +16,7 @@ var LlamaTable = Em.Component.extend({
 			sortAscending: true,
 			content: this.get('columns')
 		});
-	}.on('init').property(),
+	}.property(),
 
 	// table data
 	rows: null,
@@ -27,7 +27,7 @@ var LlamaTable = Em.Component.extend({
 			sortAscending: true,
 			content: this.get('rows')
 		});
-	}.on('init').property(),
+	}.property(),
 
 	columngroups: function () {
 		var columns = this.get('sortedColumns');
