@@ -5,10 +5,18 @@ var Sortable = Em.SortableMixin;
 
 var ControllerArray = ArrayProxy.extend({
 	itemController: Em.ObjectController,
+	lookupItemController: function (object) {
+		return this.get('itemController');
+	},
 	mapController: function (obj) {
-		return this.itemController.create({
-			content: obj
-		});
+		var controllerClass = this.lookupItemController(obj);
+		if (controllerClass) {
+			return controllerClass.create({
+				target: this,
+				parentController: this,
+				content: obj
+			});
+		}
 	},
 	arrangedContent: function () {
 		return this.get('content').map(this.mapController, this);
