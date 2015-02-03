@@ -3,10 +3,12 @@ import Em from 'ember';
 var LlamaCell = Em.View.extend({
 	classNames: 'llama-cell',
 
-	click: function() {
+	click: function () {
 		if (this.get('column.isClickable')) {
 			var controller = this.get('controller');
-			controller.sendAction('cellClick', this.get('content'), this.get('column.name'));
+			var row = this.get('row');
+			var column = this.get('column');
+			controller.sendAction('cellClick', row, column);
 		}
 	}
 

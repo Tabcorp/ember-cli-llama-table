@@ -187,8 +187,11 @@ var IndexController = Em.Controller.extend({
 				}
 			});
 		},
-		cellClick: function(row, clicked) {
-			this.get('clickEvents').pushObject({row: row, clicked: clicked});
+		cellClick: function (row, column) {
+			this.get('clickEvents').pushObject({
+				row: get(row, 'million_viewers'),
+				clicked: get(column, 'name')
+			});
 		}
 	}
 });
