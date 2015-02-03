@@ -30,7 +30,8 @@ var IndexController = Em.Controller.extend({
 			name: 'million_viewers',
 			label: 'Viewers (in millions)',
 			order: 4,
-			type: 'number'
+			type: 'number',
+			isClickable: true
 		},
 		{
 			name: 'screenshot',
@@ -144,6 +145,7 @@ var IndexController = Em.Controller.extend({
 			}
 		]
 	},
+	clickEvents: Em.A(),
 	actions: {
 		addColumn: function () {
 			this.get('tableColumns').pushObject({
@@ -184,6 +186,9 @@ var IndexController = Em.Controller.extend({
 					set(column, 'isHidden', !get(column, 'isHidden'));
 				}
 			});
+		},
+		cellClick: function(row, clicked) {
+			this.get('clickEvents').pushObject({row: row, clicked: clicked});
 		}
 	}
 });
