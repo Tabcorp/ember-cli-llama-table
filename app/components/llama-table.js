@@ -1,8 +1,9 @@
 import Em from 'ember';
 import LlamaBodyCell from '../views/llama-body-cell';
 import LlamaNumberCell from '../views/llama-number-cell';
+import Columns from 'llama-table/controllers/columns';
+import Rows from 'llama-table/controllers/rows';
 var get = Em.get;
-var Sortable = Em.ArrayProxy.extend(Em.SortableMixin);
 
 var LlamaTable = Em.Component.extend({
 	classNames: 'llama-table-component',
@@ -11,7 +12,7 @@ var LlamaTable = Em.Component.extend({
 	columns: null,
 
 	sortedColumns: function () {
-		return Sortable.create({
+		return Columns.create({
 			sortProperties: ['order'],
 			sortAscending: true,
 			content: this.get('columns')
@@ -22,7 +23,7 @@ var LlamaTable = Em.Component.extend({
 	rows: null,
 
 	sortedRows: function () {
-		return Sortable.create({
+		return Rows.create({
 			sortProperties: [],
 			sortAscending: true,
 			content: this.get('rows')

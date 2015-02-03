@@ -9,31 +9,36 @@ var IndexController = Em.Controller.extend({
 			name: 'a',
 			label: 'A',
 			order: 1,
-			type: 'number'
+			type: 'number',
+			width: 80
 		},
 		{
 			name: 'b',
 			label: 'B',
 			order: 2,
-			type: 'number'
+			type: 'number',
+			width: 80
 		},
 		{
 			name: 'c',
 			label: 'C',
 			order: 3,
-			type: 'number'
+			type: 'number',
+			width: 80
 		},
 		{
 			name: 'd',
 			label: 'D',
 			order: 4,
-			type: 'number'
+			type: 'number',
+			width: 80
 		},
 		{
 			name: 'e',
 			label: 'E',
 			order: 5,
-			type: 'number'
+			type: 'number',
+			width: 80
 		}
 	],
 	tableData: [],
