@@ -29,7 +29,8 @@ var IndexController = Em.Controller.extend({
 			name: 'million_viewers',
 			label: 'Viewers (in millions)',
 			order: 4,
-			type: 'number'
+			type: 'number',
+			isClickable: true
 		}),
 		Em.Object.create({
 			name: 'screenshot',
@@ -142,6 +143,7 @@ var IndexController = Em.Controller.extend({
 			}
 		]
 	},
+	clickEvents: Em.A(),
 	actions: {
 		addColumn: function () {
 			var newCol = Em.Object.create({
@@ -173,6 +175,9 @@ var IndexController = Em.Controller.extend({
 		},
 		removeRow: function (index) {
 			this.get('tableData').removeAt(index);
+		},
+		cellClick: function(row, clicked) {
+			this.get('clickEvents').pushObject({row: row, clicked: clicked});
 		}
 	}
 });

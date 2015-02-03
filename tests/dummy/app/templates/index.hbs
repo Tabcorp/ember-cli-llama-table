@@ -5,6 +5,7 @@
 	columns=tableColumns
 	config=config
 	removeRow="removeRow"
+	cellClick="cellClick"
 }}
 
 <h4>Actions</h4>
@@ -18,3 +19,14 @@
 <p>
 	<a href="http://rickandmorty.wikia.com/wiki/Rick_and_Morty" title="Rick and Morty Wiki">Table data source</a>
 </p>
+
+
+<h4>Events</h4>
+
+{{#each clickEvent in clickEvents}}
+
+	<p>
+		Clicked : {{clickEvent.row}} {{clickEvent.clicked}}
+	</p>
+
+{{/each}}
