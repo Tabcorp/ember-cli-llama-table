@@ -174,6 +174,14 @@ var IndexController = Em.Controller.extend({
 		},
 		removeRow: function (index) {
 			this.get('tableData').removeAt(index);
+		},
+		toggleHidden: function () {
+			var columnName = 'screenshot';
+			this.get('tableColumns').forEach(function (column) {
+				if (get(column, 'name') === columnName) {
+					set(column, 'isHidden', !get(column, 'isHidden'));
+				}
+			});
 		}
 	}
 });
