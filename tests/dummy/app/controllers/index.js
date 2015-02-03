@@ -155,12 +155,14 @@ var IndexController = Em.Controller.extend({
 		shuffleColumns: function () {
 			var cols = this.get('tableColumns');
 			var n = cols.length;
-			var j, tmp;
+			var j, left, right, tmp;
 			for (var i = n - 1; i >= 1; i--) {
 				j = Math.floor(Math.random() * i);
-				tmp = get(cols.objectAt(j), 'order');
-				set(cols.objectAt(j), 'order', get(cols.objectAt(i), 'order'));
-				set(cols.objectAt(i), 'order', tmp);
+				left = cols.objectAt(i);
+				right = cols.objectAt(j);
+				tmp = get(right, 'order');
+				set(right, 'order', get(left, 'order'));
+				set(left, 'order', tmp);
 			}
 		},
 		updateData: function () {
