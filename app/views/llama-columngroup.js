@@ -13,7 +13,7 @@ var LlamaColumngroup = Em.View.extend({
 			}
 		});
 		return total;
-	}.property('columns.@each'),
+	}.property('columns.@each.width', 'columns.@each.isHidden'),
 
 	setWidth: function () {
 		var width = this.get('width');
