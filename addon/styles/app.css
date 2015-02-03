@@ -24,6 +24,7 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	border-style: solid;
+	position: relative;
 }
 
 .llama-header {
@@ -71,4 +72,13 @@
 	border-right-color: transparent;
 	border-bottom-color: transparent;
 	border-top-color: inherit;
+}
+
+.llama-header-cell .resize-handle {
+	position: absolute;
+	top: 0;
+	right: -5px;
+	bottom: 0;
+	width: 10px;
+	cursor: ew-resize;
 }

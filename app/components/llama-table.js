@@ -1,11 +1,12 @@
 import Em from 'ember';
 import LlamaBodyCell from '../views/llama-body-cell';
 import LlamaNumberCell from '../views/llama-number-cell';
+import ResizeColumns from 'llama-table/mixins/resize-columns';
 import Columns from 'llama-table/controllers/columns';
 import Rows from 'llama-table/controllers/rows';
 var get = Em.get;
 
-var LlamaTable = Em.Component.extend({
+var LlamaTable = Em.Component.extend(ResizeColumns, {
 	classNames: 'llama-table-component',
 
 	// column definitions

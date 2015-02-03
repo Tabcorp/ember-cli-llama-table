@@ -9,7 +9,8 @@ var IndexController = Em.Controller.extend({
 			name: 'episode',
 			label: 'Episode',
 			order: 1,
-			type: 'number'
+			type: 'number',
+			width: 80
 		},
 		{
 			name: 'title',
@@ -24,7 +25,8 @@ var IndexController = Em.Controller.extend({
 		{
 			name: 'description',
 			label: 'Description',
-			order: 3
+			order: 3,
+			width: 400
 		},
 		{
 			name: 'million_viewers',

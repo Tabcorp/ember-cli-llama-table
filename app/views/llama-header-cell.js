@@ -12,6 +12,10 @@ var LlamaHeaderCell = LlamaCell.extend({
 		return !(this.get('column.isSortable') === false);
 	}.property('column.isSortable'),
 
+	isResizable: function () {
+		return !(this.get('column.isResizable') === false);
+	}.property('column.isResizable'),
+
 	// column definition
 	column: null,
 
@@ -30,10 +34,15 @@ var LlamaHeaderCell = LlamaCell.extend({
 	sortByThisDescending: Em.computed.and('sortByThis', 'sortDescending'),
 
 	mouseDown: function (e) {
+		var isResizeAction = Em.$(e.target).is('.resize-handle');
+		var controller = this.get('controller');
 		if (e.which === 1) {
 			e.preventDefault();
-			if (this.get('isSortable')) {
-				this.get('controller').send('sortBy', this.get('column.name'));
+			if (isResizeAction && this.get('isResizable')) {
+				controller.send('startResize', e, this.get('column'));
+			}
+			else if (this.get('isSortable')) {
+				controller.send('sortBy', this.get('column.name'));
 			}
 		}
 	}
