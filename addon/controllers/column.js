@@ -9,7 +9,8 @@ var defaultValue = function (prop, val) {
 };
 
 var ColumnController = Em.ObjectProxy.extend({
-	width: defaultValue('width', 200)
+	width: defaultValue('width', 200),
+	minWidth: defaultValue('minWidth', 50)
 });
 
 export default ColumnController;
