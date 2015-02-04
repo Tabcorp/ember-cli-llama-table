@@ -52,26 +52,41 @@
 	min-height: 30px;
 }
 
-.llama-header-cell .sort-indicator {
+.llama-header-cell .column-label {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	padding: 5px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.llama-header-cell.sort-by-this .column-label {
+	right: 15px;
+}
+
+.llama-header-cell.sort-by-this .sort-indicator {
 	display: inline-block;
 	width: 0;
 	height: 0;
 	border-style: solid;
-	border-width: 0 5px 5px;
+	border-top-color: inherit;
 	border-left-color: transparent;
 	border-right-color: transparent;
 	border-bottom-color: inherit;
-	border-top-width: 0;
 	float: right;
 	margin: 7px 3px;
 }
 
+.llama-header-cell.sort-by-this-ascending .sort-indicator {
+	border-width: 0 5px 5px;
+}
+
 .llama-header-cell.sort-by-this-descending .sort-indicator {
 	border-width: 5px 5px 0;
-	border-left-color: transparent;
-	border-right-color: transparent;
-	border-bottom-color: transparent;
-	border-top-color: inherit;
 }
 
 .llama-header-cell .resize-handle {
