@@ -26,7 +26,7 @@ var LlamaHeaderCell = LlamaCell.extend({
 	sortByThis: function () {
 		var sortProperties = this.get('sortProperties');
 		var thisColumn = this.get('column.name');
-		var contained = sortProperties.contains(thisColumn);
+		var contained = Em.isArray(sortProperties) && sortProperties.contains(thisColumn);
 		return contained;
 	}.property('sortProperties.firstObject', 'column.name'),
 
