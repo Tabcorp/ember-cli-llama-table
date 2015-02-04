@@ -70,6 +70,7 @@ table.
 Table configuration. Specifies additional properties as a single object.
 * `'sortProperties'` (`String[]`) - Names of columns to sort by
 * `'sortAscending'` (`Boolean`)
+* `'sortFunction'` (`Function`)
 * `'types'` (`Object[]`) - Collection of types defined with fields:
   * `'name'` (`String`) - Maps to column definition type
   * `'view'` (`Ember.View`) - View constructor to use for this cell
