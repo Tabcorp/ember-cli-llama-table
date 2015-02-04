@@ -10,7 +10,7 @@ var IndexController = Em.Controller.extend({
 			label: 'Episode',
 			order: 1,
 			type: 'number',
-			width: 80
+			width: 50
 		},
 		{
 			name: 'title',
@@ -46,7 +46,9 @@ var IndexController = Em.Controller.extend({
 			label: 'Remove',
 			order: 8,
 			type: 'remove',
-			isSortable: false
+			isSortable: false,
+			minWidth: 100,
+			maxWidth: 250
 		}
 	],
 	tableData: [
