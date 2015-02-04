@@ -143,7 +143,6 @@ var IndexController = Em.Controller.extend({
 	],
 	config: {
 		sortProperties: ['episode'],
-		sortAscending: true,
 		types: [
 			{
 				name: 'remove',

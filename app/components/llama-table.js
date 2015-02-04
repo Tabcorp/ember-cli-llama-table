@@ -58,7 +58,9 @@ var LlamaTable = Em.Component.extend(ResizeColumns, {
 			return sortProperties;
 		}
 	}.property('config.sortProperties'),
-	sortAscending: Em.computed.bool('config.sortAscending'),
+	sortAscending: function () {
+		return !(this.get('config.sortAscending') === false);
+	}.property('config.sortAscending'),
 
 	columngroups: function () {
 		var columns = this.get('sortedColumns');
