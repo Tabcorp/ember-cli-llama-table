@@ -24,12 +24,18 @@ var LlamaTable = Em.Component.extend(ResizeColumns, {
 	rows: null,
 
 	sortedRows: function () {
-		return Rows.create({
+		var options = {
 			sortProperties: this.get('sortProperties'),
 			sortAscending: this.get('sortAscending'),
-			sortFunction: this.get('sortFunction'),
 			content: this.get('rows')
-		});
+		};
+		// if `sortFunction` is present it will be called
+		// even if the value itself is falsy and not a function
+		var sortFunction = this.get('sortFunction');
+		if (!Em.isBlank(sortFunction)) {
+			options.sortFunction = sortFunction;
+		}
+		return Rows.create(options);
 	}.property(),
 
 	sortProperties: function () {
