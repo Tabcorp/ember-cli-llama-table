@@ -9,11 +9,11 @@ var LlamaHeaderCell = LlamaCell.extend({
 	title: Em.computed.alias('column.label'),
 
 	isSortable: function () {
-		return !(this.get('column.isSortable') === false);
+		return this.get('controller.isSortable') && !(this.get('column.isSortable') === false);
 	}.property('column.isSortable'),
 
 	isResizable: function () {
-		return !(this.get('column.isResizable') === false);
+		return this.get('controller.isResizable') && !(this.get('column.isResizable') === false);
 	}.property('column.isResizable'),
 
 	// column definition

@@ -38,6 +38,13 @@ var LlamaTable = Em.Component.extend(ResizeColumns, {
 		return Rows.create(options);
 	}.property(),
 
+	isSortable: function () {
+		return !(this.get('config.isSortable') === false);
+	}.property('config.isSortable'),
+	isResizable: function () {
+		return !(this.get('config.isResizable') === false);
+	}.property('config.isResizable'),
+
 	sortProperties: function () {
 		var sortProperties = this.get('config.sortProperties');
 		if (!Em.isArray(sortProperties)) {
@@ -47,7 +54,7 @@ var LlamaTable = Em.Component.extend(ResizeColumns, {
 			return sortProperties;
 		}
 	}.property('config.sortProperties'),
-	sortAscending: Em.computed.alias('config.sortAscending'),
+	sortAscending: Em.computed.bool('config.sortAscending'),
 	sortFunction: Em.computed.alias('config.sortFunction'),
 
 	columngroups: function () {

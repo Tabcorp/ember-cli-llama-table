@@ -42,6 +42,10 @@ var IndexController = Em.Controller.extend({
 		}
 	],
 	tableData: [],
+	tableConfig: {
+		isSortable: false,
+		isResizable: false
+	},
 	actions: {
 		add: function (num) {
 			var label = 'Add %@ rows'.fmt(num);
