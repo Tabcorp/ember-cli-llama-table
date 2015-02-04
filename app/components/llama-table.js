@@ -31,9 +31,13 @@ var LlamaTable = Em.Component.extend(ResizeColumns, {
 		};
 		// if `sortFunction` is present it will be called
 		// even if the value itself is falsy and not a function
-		var sortFunction = this.get('sortFunction');
-		if (!Em.isBlank(sortFunction)) {
+		var sortFunction = this.get('config.sortFunction');
+		if (typeof sortFunction === 'function') {
 			options.sortFunction = sortFunction;
+		}
+		var orderBy = this.get('config.orderBy');
+		if (typeof orderBy === 'function') {
+			options.orderBy = orderBy;
 		}
 		return Rows.create(options);
 	}.property(),
@@ -55,7 +59,6 @@ var LlamaTable = Em.Component.extend(ResizeColumns, {
 		}
 	}.property('config.sortProperties'),
 	sortAscending: Em.computed.bool('config.sortAscending'),
-	sortFunction: Em.computed.alias('config.sortFunction'),
 
 	columngroups: function () {
 		var columns = this.get('sortedColumns');
