@@ -35,17 +35,20 @@ export default Ember.Controller.extend({
             foo: 'ghi',
             bar: 'jkl'
         }
-    ]
+    ],
+    tableConfig: {
+        sortProperties: ['foo', 'bar']
+    }
 });
 ```
 
 **templates/index.hbs**:
 
 ```hbs
-{{llama-table rows=tableData columns=tableColumns}}
+{{llama-table rows=tableData columns=tableColumns config=tableConfig}}
 ```
 
-For an example implementation, see [j-/example-llama-table-app][example].
+For an example implementation, see [the project page][example].
 
 ## Properties
 
@@ -54,13 +57,22 @@ For an example implementation, see [j-/example-llama-table-app][example].
 Column configuration. Defines the appearance and behaviour of table columns.
 Will be monitored for changes, causing the component to update accordingly.
 
-[See the wiki][columns] for more details.
+[Wiki page on column definitions][columns].
 
 **`rows`**:
 
 Table data as an array of objects. Each object has properties which map with
 column identifiers. Row additions, removals or edits will be reflected by the
 table.
+
+**`config`**
+
+Table configuration. Specifies additional properties as a single object.
+* `'sortProperties'` (`String[]`) - Names of columns to sort by
+* `'sortAscending'` (`Boolean`)
+* `'types'` (`Object[]`) - Collection of types defined with fields:
+  * `'name'` (`String`) - Maps to column definition type
+  * `'view'` (`Ember.View`) - View constructor to use for this cell
 
 ## Installing
 
@@ -83,6 +95,6 @@ $ ember install:npm ember-cli-llama-table
 [ember]: http://emberjs.com/
 [component]: http://emberjs.com/api/classes/Ember.Component.html
 [columns]: https://github.com/luxbet/ember-cli-llama-table/wiki/Column-definition
-[example]: https://github.com/j-/example-llama-table-app
+[example]: http://luxbet.github.io/ember-cli-llama-table
 [npm]: https://www.npmjs.com/
 [cli]: http://www.ember-cli.com/
