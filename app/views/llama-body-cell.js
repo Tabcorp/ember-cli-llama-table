@@ -89,6 +89,15 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 		});
 	},
 
+	click: function () {
+		if (this.get('column.isClickable')) {
+			var controller = this.get('controller');
+			var row = this.get('row');
+			var column = this.get('column');
+			controller.sendAction('cellClick', row, column);
+		}
+	},
+
 	actions: {
 		keyLeft: function () {
 			var row = this.getRowIndex();
