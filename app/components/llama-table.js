@@ -27,6 +27,7 @@ var LlamaTable = Em.Component.extend(ResizeColumns, {
 		return Rows.create({
 			sortProperties: this.get('sortProperties'),
 			sortAscending: this.get('sortAscending'),
+			sortFunction: this.get('sortFunction'),
 			content: this.get('rows')
 		});
 	}.property(),
@@ -41,6 +42,7 @@ var LlamaTable = Em.Component.extend(ResizeColumns, {
 		}
 	}.property('config.sortProperties'),
 	sortAscending: Em.computed.alias('config.sortAscending'),
+	sortFunction: Em.computed.alias('config.sortFunction'),
 
 	columngroups: function () {
 		var columns = this.get('sortedColumns');
