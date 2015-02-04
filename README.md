@@ -68,12 +68,8 @@ table.
 **`config`**
 
 Table configuration. Specifies additional properties as a single object.
-* `'sortProperties'` (`String[]`) - Names of columns to sort by
-* `'sortAscending'` (`Boolean`)
-* `'sortFunction'` (`Function`)
-* `'types'` (`Object[]`) - Collection of types defined with fields:
-  * `'name'` (`String`) - Maps to column definition type
-  * `'view'` (`Ember.View`) - View constructor to use for this cell
+
+[Wiki page on table configuration][config].
 
 ## Installing
 
@@ -96,6 +92,7 @@ $ ember install:npm ember-cli-llama-table
 [ember]: http://emberjs.com/
 [component]: http://emberjs.com/api/classes/Ember.Component.html
 [columns]: https://github.com/luxbet/ember-cli-llama-table/wiki/Column-definition
+[config]: https://github.com/luxbet/ember-cli-llama-table/wiki/Table-configuration
 [example]: http://luxbet.github.io/ember-cli-llama-table
 [npm]: https://www.npmjs.com/
 [cli]: http://www.ember-cli.com/
