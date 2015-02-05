@@ -1,0 +1,8 @@
+{
+	"name": "ember-cli-llama-table",
+	"description": "Easy Ember.js table component",
+	"options": {
+		"outdir": "docs",
+		"paths": ["app", "addon"]
+	}
+}
