@@ -1,4 +1,5 @@
 import Em from 'ember';
+import InboundActions from 'ember-component-inbound-actions/inbound-actions';
 import LlamaBodyCell from '../views/llama-body-cell';
 import LlamaNumberCell from '../views/llama-number-cell';
 import ResizeColumns from 'llama-table/mixins/resize-columns';
@@ -14,7 +15,7 @@ var get = Em.get;
  * @extends Ember.Component
  * @uses ResizeColumnsMixin
  */
-var LlamaTable = Em.Component.extend(ResizeColumns, {
+var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
 	classNames: 'llama-table-component',
 
 	/**
