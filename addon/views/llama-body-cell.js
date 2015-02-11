@@ -1,12 +1,13 @@
 import Em from 'ember';
 import LlamaCell from './llama-cell';
 import ArrowKeysMixin from 'llama-table/mixins/arrow-keys';
+import template from 'llama-table/templates/llama-body-cell';
 var get = Em.get;
 var addObserver = Em.addObserver;
 var removeObserver = Em.removeObserver;
 
 var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
-	templateName: 'llama-body-cell',
+	template: template,
 	classNames: 'llama-body-cell',
 	attributeBindings: ['tabindex'],
 	tabindex: 0,

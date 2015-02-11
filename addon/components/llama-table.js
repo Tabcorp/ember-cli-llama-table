@@ -5,6 +5,7 @@ import LlamaNumberCell from '../views/llama-number-cell';
 import ResizeColumns from 'llama-table/mixins/resize-columns';
 import Columns from 'llama-table/controllers/columns';
 import Rows from 'llama-table/controllers/rows';
+import layout from 'llama-table/templates/components/llama-table';
 var get = Em.get;
 
 /**
@@ -16,6 +17,7 @@ var get = Em.get;
  * @uses ResizeColumnsMixin
  */
 var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
+	layout: layout,
 	classNames: 'llama-table-component',
 
 	/**
@@ -83,7 +85,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
 	 * @default true
 	 */
 	isSortable: function () {
-		return !(this.get('config.isSortable') === false);
+		return this.get('config.isSortable') !== false;
 	}.property('config.isSortable'),
 
 	/**
@@ -93,7 +95,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
 	 * @default true
 	 */
 	isResizable: function () {
-		return !(this.get('config.isResizable') === false);
+		return this.get('config.isResizable') !== false;
 	}.property('config.isResizable'),
 
 	/**
@@ -109,7 +111,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
 	 * @default true
 	 */
 	sortAscending: function () {
-		return !(this.get('config.sortAscending') === false);
+		return this.get('config.sortAscending') !== false;
 	}.property('config.sortAscending'),
 
 	/**

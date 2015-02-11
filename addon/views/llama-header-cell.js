@@ -1,19 +1,20 @@
 import Em from 'ember';
 import LlamaCell from './llama-cell';
+import template from 'llama-table/templates/llama-header-cell';
 
 var LlamaHeaderCell = LlamaCell.extend({
-	templateName: 'llama-header-cell',
+	template: template,
 	classNames: 'llama-header-cell',
 	classNameBindings: ['sortByThis', 'sortByThisAscending', 'sortByThisDescending', 'isSortable'],
 	attributeBindings: ['title'],
 	title: Em.computed.alias('column.label'),
 
 	isSortable: function () {
-		return this.get('controller.isSortable') && !(this.get('column.isSortable') === false);
+		return this.get('controller.isSortable') && this.get('column.isSortable') !== false;
 	}.property('column.isSortable'),
 
 	isResizable: function () {
-		return this.get('controller.isResizable') && !(this.get('column.isResizable') === false);
+		return this.get('controller.isResizable') && this.get('column.isResizable') !== false;
 	}.property('column.isResizable'),
 
 	// column definition

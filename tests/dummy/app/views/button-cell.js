@@ -1,4 +1,4 @@
-import LlamaBodyCell from '../views/llama-body-cell';
+import LlamaBodyCell from 'llama-table/views/llama-body-cell';
 
 var ButtonCell = LlamaBodyCell.extend({
 	layoutName: 'button-cell',

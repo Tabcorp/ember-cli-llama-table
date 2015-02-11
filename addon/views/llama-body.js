@@ -1,9 +1,10 @@
 import Em from 'ember';
 import ScrollXYMixin from 'llama-table/mixins/scroll-xy';
 import CopyController from 'llama-table/controllers/copy';
+import template from 'llama-table/templates/llama-body';
 
 var LlamaBody = Em.View.extend(ScrollXYMixin, {
-	templateName: 'llama-body',
+	template: template,
 	classNames: 'llama-body',
 
 	copyController: CopyController.create(),
