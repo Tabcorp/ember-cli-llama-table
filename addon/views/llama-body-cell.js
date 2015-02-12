@@ -90,11 +90,14 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 	},
 
 	click: function () {
+		var controller = this.get('controller');
+		var row = this.get('row');
+		var column = this.get('column');
 		if (this.get('column.isClickable')) {
-			var controller = this.get('controller');
-			var row = this.get('row');
-			var column = this.get('column');
 			controller.sendAction('cellClick', row, column);
+		}
+		if (controller.get('enableRowClick')) {
+			controller.sendAction('rowClick', row);
 		}
 	},
 

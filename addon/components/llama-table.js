@@ -131,6 +131,14 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
 	}.property('sortedColumns'),
 
 	/**
+	 * Allows row click actions to propagate.
+	 * @property {Boolean} enableRowClick
+	 */
+	enableRowClick: function () {
+		return this.get('config.enableRowClick') !== false;
+	}.property('config.enableRowClick'),
+
+	/**
 	 * Destroy created objects.
 	 * @method willDestroy
 	 */
