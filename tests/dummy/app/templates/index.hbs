@@ -26,10 +26,6 @@
 
 <h4>Events</h4>
 
-{{#each clickEvent in clickEvents}}
-
-	<p>
-		Clicked : {{clickEvent.row}} {{clickEvent.clicked}}
-	</p>
-
+{{#each event in events}}
+	<p>Clicked row {{event.index}}: {{event.row.title}}<br>Clicked on "{{event.column.label}}"</p>
 {{/each}}
