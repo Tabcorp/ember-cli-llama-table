@@ -6,7 +6,14 @@ var LlamaBody = Em.View.extend(ScrollXYMixin, {
 	templateName: 'llama-body',
 	classNames: 'llama-body',
 
-	copyController: CopyController.create(),
+	copyController: function () {
+		return CopyController.create();
+	}.property(),
+
+	willDestroy: function () {
+		this.get('copyController').destroy();
+		this._super();
+	},
 
 	keyDown: function (e) {
 		var controller = this.get('copyController');

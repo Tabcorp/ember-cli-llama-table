@@ -12,6 +12,11 @@ var ResizeColumns = Em.Mixin.create({
 		return ResizeController.create();
 	}.property(),
 
+	willDestroy: function () {
+		this.get('resizeController').destroy();
+		this._super();
+	},
+
 	updateResize: function () {
 		var beginWidth = this.get('resizeBeginWidth');
 		var column = this.get('resizeColumn');

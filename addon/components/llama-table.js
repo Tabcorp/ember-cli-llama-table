@@ -131,6 +131,16 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
 	}.property('sortedColumns'),
 
 	/**
+	 * Destroy created objects.
+	 * @method willDestroy
+	 */
+	willDestroy: function () {
+		this.get('sortedColumns').destroy();
+		this.get('sortedRows').destroy();
+		this._super();
+	},
+
+	/**
 	 * Returns the cell at a given row/column position.
 	 * @method findCellAtPosition
 	 * @param {Object} row Reference to row data
