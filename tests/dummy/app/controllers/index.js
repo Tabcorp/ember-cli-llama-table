@@ -150,7 +150,7 @@ var IndexController = Em.Controller.extend({
 			}
 		]
 	},
-	clickEvents: Em.A(),
+	events: Em.A(),
 	actions: {
 		addColumn: function () {
 			this.get('tableColumns').pushObject({
@@ -193,10 +193,18 @@ var IndexController = Em.Controller.extend({
 			});
 		},
 		cellClick: function (row, column) {
-			this.get('clickEvents').pushObject({
-				row: get(row, 'million_viewers'),
-				clicked: get(column, 'name')
-			});
+			var events = this.get('events');
+			var data = this.get('tableData');
+			var newEvent = {
+				index: data.indexOf(row),
+				row: row,
+				column: column
+			};
+			var targetLength = 5;
+			var actualLength = events.get('length');
+			var removeCount = Math.max(actualLength - targetLength, 0);
+			events.replace(actualLength - removeCount, removeCount);
+			events.unshiftObject(newEvent);
 		}
 	}
 });
