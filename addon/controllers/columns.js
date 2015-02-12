@@ -25,6 +25,15 @@ var ControllerArray = ArrayProxy.extend({
 		var addedObjects = arr.slice(i, i + addedCount);
 		addedObjects = addedObjects.map(this.mapController, this);
 		this.get('arrangedContent').replace(i, removedCount, addedObjects);
+	},
+	contentArrayWillChange: function (arr, i, removedCount, addedCount) {
+		var arranged = this.get('arrangedContent');
+		var removedObjects = arranged.slice(i, i + removedCount);
+		removedObjects.invoke('destroy');
+	},
+	willDestroy: function () {
+		this.get('arrangedContent').invoke('destroy');
+		this._super();
 	}
 });
 
@@ -34,7 +43,11 @@ var Columns = ArrayProxy.extend(Sortable, {
 			itemController: Column,
 			content: value
 		});
-	}.property()
+	}.property(),
+	willDestroy: function () {
+		this.get('content').destroy();
+		this._super();
+	}
 });
 
 export default Columns;
