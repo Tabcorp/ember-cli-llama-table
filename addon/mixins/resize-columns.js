@@ -8,7 +8,9 @@ var ResizeColumns = Em.Mixin.create({
 	resizeColumn: null,
 	resizeBeginWidth: null,
 
-	resizeController: ResizeController.create(),
+	resizeController: function () {
+		return ResizeController.create();
+	}.property(),
 
 	updateResize: function () {
 		var beginWidth = this.get('resizeBeginWidth');
