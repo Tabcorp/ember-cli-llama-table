@@ -1,9 +1,8 @@
 import Em from 'ember';
 import LlamaCell from './llama-cell';
-import template from 'llama-table/templates/llama-header-cell';
 
 var LlamaHeaderCell = LlamaCell.extend({
-	template: template,
+	templateName: 'llama-header-cell',
 	classNames: 'llama-header-cell',
 	classNameBindings: ['sortByThis', 'sortByThisAscending', 'sortByThisDescending', 'isSortable'],
 	attributeBindings: ['title'],

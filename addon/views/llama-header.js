@@ -1,8 +1,7 @@
 import Em from 'ember';
-import template from 'llama-table/templates/llama-header';
 
 var LlamaHeader = Em.View.extend({
-	template: template,
+	templateName: 'llama-header',
 	classNames: 'llama-header'
 });
 

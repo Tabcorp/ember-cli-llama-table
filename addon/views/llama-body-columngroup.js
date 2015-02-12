@@ -1,8 +1,7 @@
 import LlamaColumngroup from './llama-columngroup';
-import template from 'llama-table/templates/llama-body-columngroup';
 
 var LlamaBodyColumngroup = LlamaColumngroup.extend({
-	template: template,
+	templateName: 'llama-body-columngroup',
 	classNames: 'llama-body-columngroup'
 });
 

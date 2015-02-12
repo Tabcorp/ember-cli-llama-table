@@ -5,7 +5,6 @@ import LlamaNumberCell from '../views/llama-number-cell';
 import ResizeColumns from 'llama-table/mixins/resize-columns';
 import Columns from 'llama-table/controllers/columns';
 import Rows from 'llama-table/controllers/rows';
-import layout from 'llama-table/templates/components/llama-table';
 var get = Em.get;
 
 /**
@@ -17,7 +16,6 @@ var get = Em.get;
  * @uses ResizeColumnsMixin
  */
 var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
-	layout: layout,
 	classNames: 'llama-table-component',
 
 	/**
