@@ -1,17 +1,11 @@
 import Em from 'ember';
+import { defaultValue } from 'llama-table/computed';
 var get = Em.get;
 
-var defaultValue = function (prop, val) {
-	return Em.computed('content.' + prop, function () {
-		var content = this.get('content');
-		return content && get(content, prop) || val;
-	});
-};
-
 var ColumnController = Em.ObjectProxy.extend({
-	width: defaultValue('width', 200),
-	minWidth: defaultValue('minWidth', 50),
-	isClickable: defaultValue('isClickable', true)
+	width: defaultValue('content.width', 200),
+	minWidth: defaultValue('content.minWidth', 50),
+	isClickable: defaultValue('content.isClickable', true)
 });
 
 export default ColumnController;

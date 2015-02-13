@@ -4,6 +4,7 @@ import ResizeColumns from 'llama-table/mixins/resize-columns';
 import CellTypes from 'llama-table/mixins/cell-types';
 import Columns from 'llama-table/controllers/columns';
 import Rows from 'llama-table/controllers/rows';
+import { defaultValue } from 'llama-table/computed';
 
 /**
  * Llama Table Ember component.
@@ -80,9 +81,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, {
 	 * @optional
 	 * @default true
 	 */
-	isSortable: function () {
-		return this.get('config.isSortable') !== false;
-	}.property('config.isSortable'),
+	isSortable: defaultValue('config.isSortable', true),
 
 	/**
 	 * Enables resizing columns by dragging header boundaries.
@@ -90,9 +89,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, {
 	 * @optional
 	 * @default true
 	 */
-	isResizable: function () {
-		return this.get('config.isResizable') !== false;
-	}.property('config.isResizable'),
+	isResizable: defaultValue('config.isResizable', true),
 
 	/**
 	 * Column names to sort table by.
@@ -106,9 +103,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, {
 	 * @optional
 	 * @default true
 	 */
-	sortAscending: function () {
-		return this.get('config.sortAscending') !== false;
-	}.property('config.sortAscending'),
+	sortAscending: defaultValue('config.sortAscending', true),
 
 	/**
 	 * Triggers a row sort order update. Observes the `sortAscending` property.
@@ -131,10 +126,10 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, {
 	/**
 	 * Allows row click actions to propagate.
 	 * @property {Boolean} enableRowClick
+	 * @optional
+	 * @default true
 	 */
-	enableRowClick: function () {
-		return this.get('config.enableRowClick') !== false;
-	}.property('config.enableRowClick'),
+	enableRowClick: defaultValue('config.enableRowClick', true),
 
 	/**
 	 * Destroy created objects.
