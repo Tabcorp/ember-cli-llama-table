@@ -1,11 +1,9 @@
 import Em from 'ember';
 import InboundActions from 'ember-component-inbound-actions/inbound-actions';
-import LlamaBodyCell from '../views/llama-body-cell';
-import LlamaNumberCell from '../views/llama-number-cell';
 import ResizeColumns from 'llama-table/mixins/resize-columns';
+import CellTypes from 'llama-table/mixins/cell-types';
 import Columns from 'llama-table/controllers/columns';
 import Rows from 'llama-table/controllers/rows';
-var get = Em.get;
 
 /**
  * Llama Table Ember component.
@@ -15,7 +13,7 @@ var get = Em.get;
  * @extends Ember.Component
  * @uses ResizeColumnsMixin
  */
-var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
+var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, {
 	classNames: 'llama-table-component',
 
 	/**
@@ -161,45 +159,6 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
 		var $cells = $column.find('.llama-body-cell');
 		var $cell = $cells.eq(row);
 		return $cell;
-	},
-
-	/**
-	 * Lookup a column type and get the cell constructor.
-	 * @method getCellType
-	 * @param {String} name Column type name
-	 * @return {Function} Cell constructor
-	 */
-	getCellType: function (name) {
-		return this.getConfigCellType(name) || this.getDefaultCellType(name);
-	},
-
-	/**
-	 * Lookup a column type in the table config and get the cell constructor.
-	 * @method getConfigCellType
-	 * @param {String} name Column type name
-	 * @return {Function} Cell constructor
-	 */
-	getConfigCellType: function (name) {
-		var types = this.get('config.types');
-		if (Em.isBlank(types)) return null;
-		var type = types.findBy('name', name);
-		if (Em.isBlank(type)) return null;
-		return get(type, 'view');
-	},
-
-	/**
-	 * Lookup a built in column type and get the cell constructor.
-	 * @method getDefaultCellType
-	 * @param {String} name Column type name
-	 * @return {Function} Cell constructor
-	 */
-	getDefaultCellType: function (name) {
-		switch (name) {
-			case 'number':
-				return LlamaNumberCell;
-			default:
-				return LlamaBodyCell;
-		}
 	},
 
 	actions: {
