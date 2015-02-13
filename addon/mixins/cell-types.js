@@ -1,6 +1,4 @@
 import Em from 'ember';
-import LlamaBodyCell from 'llama-table/views/llama-body-cell';
-import LlamaNumberCell from 'llama-table/views/llama-number-cell';
 var get = Em.get;
 var isBlank = Em.isBlank;
 
@@ -38,9 +36,9 @@ var CellTypesMixin = Em.Mixin.create({
 	getDefaultCellType: function (name) {
 		switch (name) {
 			case 'number':
-				return LlamaNumberCell;
+				return this.get('NumberCellView');
 			default:
-				return LlamaBodyCell;
+				return this.get('BodyCellView');
 		}
 	}
 });

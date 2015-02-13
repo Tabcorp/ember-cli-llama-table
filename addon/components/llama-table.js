@@ -2,6 +2,7 @@ import Em from 'ember';
 import InboundActions from 'ember-component-inbound-actions/inbound-actions';
 import ResizeColumns from 'llama-table/mixins/resize-columns';
 import CellTypes from 'llama-table/mixins/cell-types';
+import ViewConstructors from 'llama-table/mixins/view-constructors';
 import Columns from 'llama-table/controllers/columns';
 import Rows from 'llama-table/controllers/rows';
 import { defaultValue } from 'llama-table/computed';
@@ -14,7 +15,7 @@ import { defaultValue } from 'llama-table/computed';
  * @extends Ember.Component
  * @uses ResizeColumnsMixin
  */
-var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, {
+var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, ViewConstructors, {
 	classNames: 'llama-table-component',
 
 	/**
