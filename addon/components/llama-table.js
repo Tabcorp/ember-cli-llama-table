@@ -13,7 +13,10 @@ import { defaultValue } from 'llama-table/computed';
  * @class LlamaTable
  * @constructor
  * @extends Ember.Component
+ * @uses InboundActions
  * @uses ResizeColumnsMixin
+ * @uses CellTypesMixin
+ * @uses ViewConstructorsMixin
  */
 var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, ViewConstructors, {
 	classNames: 'llama-table-component',
