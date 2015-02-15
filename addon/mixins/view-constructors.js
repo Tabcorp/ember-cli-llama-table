@@ -1,4 +1,5 @@
 import Em from 'ember';
+import LlamaTable from 'llama-table/views/llama-table';
 import LlamaHeader from 'llama-table/views/llama-header';
 import LlamaHeaderColumngroup from 'llama-table/views/llama-header-columngroup';
 import LlamaHeaderColumn from 'llama-table/views/llama-header-column';
@@ -11,6 +12,7 @@ import LlamaNumberCell from 'llama-table/views/llama-number-cell';
 import { defaultValue } from 'llama-table/computed';
 
 var ViewConstructorsMixin = Em.Mixin.create({
+	TableView: defaultValue('config.TableView', LlamaTable),
 	HeaderView: defaultValue('config.HeaderView', LlamaHeader),
 	HeaderColumngroupView: defaultValue('config.HeaderColumngroupView', LlamaHeaderColumngroup),
 	HeaderColumnView: defaultValue('config.HeaderColumnView', LlamaHeaderColumn),
