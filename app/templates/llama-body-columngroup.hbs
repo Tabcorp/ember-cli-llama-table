@@ -1,1 +1,5 @@
-{{#each column in view.columns}}{{#unless column.isHidden}}{{view controller.BodyColumnView column=column}}{{/unless}}{{/each}}
+{{#each column in view.columns}}
+	{{#unless column.isHidden}}
+		{{view controller.BodyColumnView column=column}}
+	{{/unless}}
+{{/each}}
