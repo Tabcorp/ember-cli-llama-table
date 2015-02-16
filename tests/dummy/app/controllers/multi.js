@@ -12,10 +12,10 @@ var data = [
 ];
 
 var MultiController = Em.Controller.extend({
-	colsA: copy(cols),
-	colsB: copy(cols),
-	rowsA: copy(data),
-	rowsB: copy(data)
+	colsA: copy(cols, true),
+	colsB: copy(cols, true),
+	rowsA: copy(data, true),
+	rowsB: copy(data, true)
 });
 
 export default MultiController;
