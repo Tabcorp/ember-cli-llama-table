@@ -54,6 +54,9 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 	getColumnIndex: function () {
 		var column = this.get('column');
 		var columns = this.get('controller.sortedColumns');
+		columns = columns.filter(function (column) {
+			return !column.get('isHidden');
+		});
 		return columns.indexOf(column);
 	},
 

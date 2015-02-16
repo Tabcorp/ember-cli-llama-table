@@ -148,6 +148,39 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	}.property(),
 
 	/**
+	 * Header container view.
+	 * @property {Ember.View} headerView
+	 */
+	headerView: Em.computed.alias('tableView.headerView'),
+
+	/**
+	 * Body container view.
+	 * @property {Ember.View} bodyView
+	 */
+	bodyView: Em.computed.alias('tableView.bodyView'),
+
+	/**
+	 * Columngroup views in body container.
+	 * @property {Ember.View} bodyColumngroupViews
+	 */
+	bodyColumngroupViews: Em.computed.alias('bodyView.columngroupViews'),
+
+	/**
+	 * Get an array of visible column views from all body columngroups.
+	 * @method getBodyColumnViews
+	 * @return {Ember.View[]} Array of column views
+	 */
+	getBodyColumnViews: function () {
+		var columngroupViews = this.get('bodyColumngroupViews');
+		var columns = Em.A();
+		columngroupViews.forEach(function (view) {
+			var columnViews = view.get('columnViews').filterBy('isVisible');
+			columns.pushObjects(columnViews);
+		});
+		return columns;
+	},
+
+	/**
 	 * Custom render function which appends table view to component element.
 	 * @method render
 	 */
@@ -170,37 +203,55 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	/**
 	 * Returns the cell at a given row/column position.
 	 * @method findCellAtPosition
-	 * @param {Object} row Reference to row data
-	 * @param {Object} col Reference to column definition
+	 * @param {Number} rowIndex
+	 * @param {Number} colIndex
 	 * @return {jQuery} Cell at row/column position
 	 */
-	findCellAtPosition: function (row, col) {
-		var $columns = this.$('.llama-body-column');
-		var $column = $columns.eq(col);
-		var $cells = $column.find('.llama-body-cell');
-		var $cell = $cells.eq(row);
-		return $cell;
+	findCellAtPosition: function (rowIndex, colIndex) {
+		var columns, column, cells, cell;
+		columns = this.getBodyColumnViews();
+		if (colIndex < 0 || colIndex >= columns.get('length')) {
+			return null;
+		}
+		column = columns.objectAt(colIndex);
+		cells = column.get('childViews');
+		if (rowIndex < 0 || rowIndex >= cells.get('length')) {
+			return null;
+		}
+		cell = cells.objectAt(rowIndex);
+		return cell;
+	},
+
+	/**
+	 * Move focus to the given cell view.
+	 * @method focusCell
+	 * @param {Ember.View} cellView Cell view to focus
+	 */
+	focusCell: function (cellView) {
+		if (cellView) {
+			cellView.$().focus();
+		}
 	},
 
 	actions: {
 		scrollX: function (pos) {
-			this.$('.llama-header').css('marginLeft', -pos);
+			this.get('headerView').$().css('marginLeft', -pos);
 		},
 		focusLeft: function (row, col) {
-			var $cell = this.findCellAtPosition(row, col - 1);
-			$cell.focus();
+			var cell = this.findCellAtPosition(row, col - 1);
+			this.focusCell(cell);
 		},
 		focusUp: function (row, col) {
-			var $cell = this.findCellAtPosition(row - 1, col);
-			$cell.focus();
+			var cell = this.findCellAtPosition(row - 1, col);
+			this.focusCell(cell);
 		},
 		focusRight: function (row, col) {
-			var $cell = this.findCellAtPosition(row, col + 1);
-			$cell.focus();
+			var cell = this.findCellAtPosition(row, col + 1);
+			this.focusCell(cell);
 		},
 		focusDown: function (row, col) {
-			var $cell = this.findCellAtPosition(row + 1, col);
-			$cell.focus();
+			var cell = this.findCellAtPosition(row + 1, col);
+			this.focusCell(cell);
 		},
 		sortBy: function (column) {
 			var sortedRows = this.get('sortedRows');

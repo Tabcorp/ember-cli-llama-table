@@ -9,6 +9,7 @@ var LlamaBody = Em.CollectionView.extend(ScrollXYMixin, {
 
 	content: Em.computed.alias('controller.columngroups'),
 	itemViewClass: Em.computed.alias('controller.BodyColumngroupView'),
+	columngroupViews: Em.computed.alias('childViews'),
 
 	createChildView: function (View, attrs) {
 		var columns = get(attrs, 'content');

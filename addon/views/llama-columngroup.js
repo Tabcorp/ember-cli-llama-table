@@ -4,6 +4,7 @@ var get = Em.get;
 var LlamaColumngroup = Em.View.extend({
 	classNames: 'llama-columngroup',
 	columns: null,
+	columnViews: Em.computed.alias('childViews'),
 
 	width: function () {
 		var total = 0;
