@@ -8,7 +8,12 @@ export var defaultValue = function (watchKey, defaultValue) {
 	return computed(watchKey, function (setKey, value) {
 		// setter
 		if (arguments.length > 1) {
-			set(this, watchKey, value);
+			try {
+				set(this, watchKey, value);
+			}
+			catch (e) {
+				// swallow
+			}
 			return value;
 		}
 		// getter
