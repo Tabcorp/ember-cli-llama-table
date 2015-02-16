@@ -136,12 +136,34 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	enableRowClick: defaultValue('config.enableRowClick', true),
 
 	/**
+	 * Table view. Contains header and footer.
+	 * @property {Ember.View} tableView
+	 */
+	tableView: function () {
+		var TableView = this.get('TableView');
+		return this.createChildView(TableView, {
+			columns: this.get('columns'),
+			rows: this.get('rows')
+		});
+	}.property(),
+
+	/**
+	 * Custom render function which appends table view to component element.
+	 * @method render
+	 */
+	render: function () {
+		this._super.apply(this, arguments);
+		this.appendChild(this.get('tableView'));
+	},
+
+	/**
 	 * Destroy created objects.
 	 * @method willDestroy
 	 */
 	willDestroy: function () {
 		this.get('sortedColumns').destroy();
 		this.get('sortedRows').destroy();
+		this.get('tableView').destroy();
 		this._super();
 	},
 
