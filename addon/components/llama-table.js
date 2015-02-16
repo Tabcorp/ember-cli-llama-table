@@ -40,6 +40,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * Component configuration
 	 * @property {Object} config
 	 * @public
+	 * @optional
 	 * @see https://github.com/luxbet/ember-cli-llama-table/wiki/Table-configuration
 	 */
 	config: null,
