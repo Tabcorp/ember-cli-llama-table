@@ -1,10 +1,21 @@
 import Em from 'ember';
 import ScrollXYMixin from 'llama-table/mixins/scroll-xy';
 import CopyController from 'llama-table/controllers/copy';
+var get = Em.get;
+var set = Em.set;
 
-var LlamaBody = Em.View.extend(ScrollXYMixin, {
-	templateName: 'llama-body',
+var LlamaBody = Em.CollectionView.extend(ScrollXYMixin, {
 	classNames: 'llama-body',
+
+	content: Em.computed.alias('controller.columngroups'),
+	itemViewClass: Em.computed.alias('controller.BodyColumngroupView'),
+	columngroupViews: Em.computed.alias('childViews'),
+
+	createChildView: function (View, attrs) {
+		var columns = get(attrs, 'content');
+		set(attrs, 'columns', columns);
+		return this._super(View, attrs);
+	},
 
 	copyController: function () {
 		return CopyController.create();

@@ -1,5 +1,5 @@
 import Em from 'ember';
-import ResizeController from 'llama-table/controllers/resize-controller';
+import ResizeController from 'llama-table/controllers/resize';
 var get = Em.get;
 var set = Em.set;
 var isEmpty = Em.isEmpty;

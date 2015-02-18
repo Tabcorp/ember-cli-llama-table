@@ -1,11 +1,11 @@
 import Em from 'ember';
 import InboundActions from 'ember-component-inbound-actions/inbound-actions';
-import LlamaBodyCell from '../views/llama-body-cell';
-import LlamaNumberCell from '../views/llama-number-cell';
 import ResizeColumns from 'llama-table/mixins/resize-columns';
+import CellTypes from 'llama-table/mixins/cell-types';
+import ViewConstructors from 'llama-table/mixins/view-constructors';
 import Columns from 'llama-table/controllers/columns';
 import Rows from 'llama-table/controllers/rows';
-var get = Em.get;
+import { defaultValue } from 'llama-table/computed';
 
 /**
  * Llama Table Ember component.
@@ -13,9 +13,12 @@ var get = Em.get;
  * @class LlamaTable
  * @constructor
  * @extends Ember.Component
+ * @uses InboundActions
  * @uses ResizeColumnsMixin
+ * @uses CellTypesMixin
+ * @uses ViewConstructorsMixin
  */
-var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
+var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, ViewConstructors, {
 	classNames: 'llama-table-component',
 
 	/**
@@ -37,6 +40,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
 	 * Component configuration
 	 * @property {Object} config
 	 * @public
+	 * @optional
 	 * @see https://github.com/luxbet/ember-cli-llama-table/wiki/Table-configuration
 	 */
 	config: null,
@@ -82,9 +86,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
 	 * @optional
 	 * @default true
 	 */
-	isSortable: function () {
-		return this.get('config.isSortable') !== false;
-	}.property('config.isSortable'),
+	isSortable: defaultValue('config.isSortable', true),
 
 	/**
 	 * Enables resizing columns by dragging header boundaries.
@@ -92,9 +94,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
 	 * @optional
 	 * @default true
 	 */
-	isResizable: function () {
-		return this.get('config.isResizable') !== false;
-	}.property('config.isResizable'),
+	isResizable: defaultValue('config.isResizable', true),
 
 	/**
 	 * Column names to sort table by.
@@ -108,9 +108,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
 	 * @optional
 	 * @default true
 	 */
-	sortAscending: function () {
-		return this.get('config.sortAscending') !== false;
-	}.property('config.sortAscending'),
+	sortAscending: defaultValue('config.sortAscending', true),
 
 	/**
 	 * Triggers a row sort order update. Observes the `sortAscending` property.
@@ -133,10 +131,64 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
 	/**
 	 * Allows row click actions to propagate.
 	 * @property {Boolean} enableRowClick
+	 * @optional
+	 * @default true
 	 */
-	enableRowClick: function () {
-		return this.get('config.enableRowClick') !== false;
-	}.property('config.enableRowClick'),
+	enableRowClick: defaultValue('config.enableRowClick', true),
+
+	/**
+	 * Table view. Contains header and footer.
+	 * @property {Ember.View} tableView
+	 */
+	tableView: function () {
+		var TableView = this.get('TableView');
+		return this.createChildView(TableView, {
+			columns: this.get('columns'),
+			rows: this.get('rows')
+		});
+	}.property(),
+
+	/**
+	 * Header container view.
+	 * @property {Ember.View} headerView
+	 */
+	headerView: Em.computed.alias('tableView.headerView'),
+
+	/**
+	 * Body container view.
+	 * @property {Ember.View} bodyView
+	 */
+	bodyView: Em.computed.alias('tableView.bodyView'),
+
+	/**
+	 * Columngroup views in body container.
+	 * @property {Ember.View} bodyColumngroupViews
+	 */
+	bodyColumngroupViews: Em.computed.alias('bodyView.columngroupViews'),
+
+	/**
+	 * Get an array of visible column views from all body columngroups.
+	 * @method getBodyColumnViews
+	 * @return {Ember.View[]} Array of column views
+	 */
+	getBodyColumnViews: function () {
+		var columngroupViews = this.get('bodyColumngroupViews');
+		var columns = Em.A();
+		columngroupViews.forEach(function (view) {
+			var columnViews = view.get('columnViews').filterBy('isVisible');
+			columns.pushObjects(columnViews);
+		});
+		return columns;
+	},
+
+	/**
+	 * Custom render function which appends table view to component element.
+	 * @method render
+	 */
+	render: function () {
+		this._super.apply(this, arguments);
+		this.appendChild(this.get('tableView'));
+	},
 
 	/**
 	 * Destroy created objects.
@@ -145,82 +197,62 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, {
 	willDestroy: function () {
 		this.get('sortedColumns').destroy();
 		this.get('sortedRows').destroy();
+		this.get('tableView').destroy();
 		this._super();
 	},
 
 	/**
 	 * Returns the cell at a given row/column position.
 	 * @method findCellAtPosition
-	 * @param {Object} row Reference to row data
-	 * @param {Object} col Reference to column definition
+	 * @param {Number} rowIndex
+	 * @param {Number} colIndex
 	 * @return {jQuery} Cell at row/column position
 	 */
-	findCellAtPosition: function (row, col) {
-		var $columns = this.$('.llama-body-column');
-		var $column = $columns.eq(col);
-		var $cells = $column.find('.llama-body-cell');
-		var $cell = $cells.eq(row);
-		return $cell;
+	findCellAtPosition: function (rowIndex, colIndex) {
+		var columns, column, cells, cell;
+		columns = this.getBodyColumnViews();
+		if (colIndex < 0 || colIndex >= columns.get('length')) {
+			return null;
+		}
+		column = columns.objectAt(colIndex);
+		cells = column.get('childViews');
+		if (rowIndex < 0 || rowIndex >= cells.get('length')) {
+			return null;
+		}
+		cell = cells.objectAt(rowIndex);
+		return cell;
 	},
 
 	/**
-	 * Lookup a column type and get the cell constructor.
-	 * @method getCellType
-	 * @param {String} name Column type name
-	 * @return {Function} Cell constructor
+	 * Move focus to the given cell view.
+	 * @method focusCell
+	 * @param {Ember.View} cellView Cell view to focus
 	 */
-	getCellType: function (name) {
-		return this.getConfigCellType(name) || this.getDefaultCellType(name);
-	},
-
-	/**
-	 * Lookup a column type in the table config and get the cell constructor.
-	 * @method getConfigCellType
-	 * @param {String} name Column type name
-	 * @return {Function} Cell constructor
-	 */
-	getConfigCellType: function (name) {
-		var types = this.get('config.types');
-		if (Em.isBlank(types)) return null;
-		var type = types.findBy('name', name);
-		if (Em.isBlank(type)) return null;
-		return get(type, 'view');
-	},
-
-	/**
-	 * Lookup a built in column type and get the cell constructor.
-	 * @method getDefaultCellType
-	 * @param {String} name Column type name
-	 * @return {Function} Cell constructor
-	 */
-	getDefaultCellType: function (name) {
-		switch (name) {
-			case 'number':
-				return LlamaNumberCell;
-			default:
-				return LlamaBodyCell;
+	focusCell: function (cellView) {
+		if (cellView) {
+			cellView.$().focus();
 		}
 	},
 
 	actions: {
 		scrollX: function (pos) {
-			this.$('.llama-header').css('marginLeft', -pos);
+			this.get('headerView').$().css('marginLeft', -pos);
 		},
 		focusLeft: function (row, col) {
-			var $cell = this.findCellAtPosition(row, col - 1);
-			$cell.focus();
+			var cell = this.findCellAtPosition(row, col - 1);
+			this.focusCell(cell);
 		},
 		focusUp: function (row, col) {
-			var $cell = this.findCellAtPosition(row - 1, col);
-			$cell.focus();
+			var cell = this.findCellAtPosition(row - 1, col);
+			this.focusCell(cell);
 		},
 		focusRight: function (row, col) {
-			var $cell = this.findCellAtPosition(row, col + 1);
-			$cell.focus();
+			var cell = this.findCellAtPosition(row, col + 1);
+			this.focusCell(cell);
 		},
 		focusDown: function (row, col) {
-			var $cell = this.findCellAtPosition(row + 1, col);
-			$cell.focus();
+			var cell = this.findCellAtPosition(row + 1, col);
+			this.focusCell(cell);
 		},
 		sortBy: function (column) {
 			var sortedRows = this.get('sortedRows');

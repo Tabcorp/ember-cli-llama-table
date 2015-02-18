@@ -1,5 +1,6 @@
 import Em from 'ember';
 import LlamaCell from './llama-cell';
+import { defaultValue } from 'llama-table/computed';
 
 var LlamaHeaderCell = LlamaCell.extend({
 	templateName: 'llama-header-cell',
@@ -8,13 +9,8 @@ var LlamaHeaderCell = LlamaCell.extend({
 	attributeBindings: ['title'],
 	title: Em.computed.alias('column.label'),
 
-	isSortable: function () {
-		return this.get('controller.isSortable') && this.get('column.isSortable') !== false;
-	}.property('column.isSortable'),
-
-	isResizable: function () {
-		return this.get('controller.isResizable') && this.get('column.isResizable') !== false;
-	}.property('column.isResizable'),
+	isSortable: defaultValue('column.isSortable', true),
+	isResizable: defaultValue('column.isResizable', true),
 
 	// column definition
 	column: null,

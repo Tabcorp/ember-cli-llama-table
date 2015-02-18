@@ -1,6 +1,5 @@
 import Em from 'ember';
 import LlamaColumn from './llama-column';
-import LlamaHeaderCell from './llama-header-cell';
 var set = Em.set;
 
 var LlamaHeaderColumn = LlamaColumn.extend({
@@ -10,7 +9,7 @@ var LlamaHeaderColumn = LlamaColumn.extend({
 		return [this.get('column')];
 	}.property(),
 
-	itemViewClass: LlamaHeaderCell,
+	itemViewClass: Em.computed.alias('controller.HeaderCellView'),
 
 	createChildView: function (View, attrs) {
 		var column = this.get('column');
