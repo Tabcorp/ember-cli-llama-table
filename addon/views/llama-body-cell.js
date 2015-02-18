@@ -8,7 +8,7 @@ var ESC = 27;
 var LlamaBodyCell = LlamaCell.extend({
 	templateName: 'llama-body-cell',
 	classNames: 'llama-body-cell',
-	classNameBindings: ['hover', 'columnIsClickable', 'rowIsClickable', 'isClickable'],
+	classNameBindings: ['hover', 'columnIsClickable', 'rowIsClickable', 'isClickable', 'isEmpty'],
 	attributeBindings: ['tabindex'],
 	tabindex: 0,
 	hover: false,
@@ -19,6 +19,8 @@ var LlamaBodyCell = LlamaCell.extend({
 
 	column: null,
 	row: null,
+
+	isEmpty: Em.computed.empty('value'),
 
 	// only calculated once
 	observedFields: function () {
