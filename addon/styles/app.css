@@ -47,6 +47,10 @@
 	border-bottom-width: 0;
 }
 
+.cell-clickable {
+	cursor: pointer;
+}
+
 .llama-body {
 	overflow: auto;
 	min-height: 30px;
