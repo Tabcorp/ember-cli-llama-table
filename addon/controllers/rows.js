@@ -1,8 +1,7 @@
 import Em from 'ember';
-var ArrayProxy = Em.ArrayProxy;
-var Sortable = Em.SortableMixin;
+var ArrayController = Em.ArrayController;
 
-var Rows = ArrayProxy.extend(Sortable, {
+var Rows = ArrayController.extend({
 
 });
 

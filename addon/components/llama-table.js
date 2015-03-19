@@ -51,6 +51,8 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 */
 	sortedColumns: function () {
 		return Columns.create({
+			parentController: this,
+			container: this.get('container'),
 			sortProperties: ['order'],
 			sortAscending: true,
 			content: this.get('columns')
@@ -63,6 +65,9 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 */
 	sortedRows: function () {
 		var options = {
+			parentController: this,
+			itemController: this.get('itemController'),
+			container: this.get('container'),
 			sortProperties: this.get('sortProperties'),
 			sortAscending: this.get('sortAscending'),
 			content: this.get('rows')
@@ -135,6 +140,13 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * @default true
 	 */
 	enableRowClick: defaultValue('config.enableRowClick', true),
+
+	/**
+	 * Optional controller for each row. Can define computed properties.
+	 * @property {String} itemController
+	 * @optional
+	 */
+	itemController: Em.computed.alias('config.itemController'),
 
 	/**
 	 * Table view. Contains header and footer.
