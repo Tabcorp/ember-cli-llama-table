@@ -250,6 +250,9 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		scrollX: function (pos) {
 			this.get('headerView').$().css('marginLeft', -pos);
 		},
+		scrollY: function () {
+			// no-op
+		},
 		focusLeft: function (row, col) {
 			var cell = this.findCellAtPosition(row, col - 1);
 			this.focusCell(cell);
