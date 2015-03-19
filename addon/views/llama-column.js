@@ -7,7 +7,9 @@ var LlamaColumn = Em.CollectionView.extend({
 	setWidth: function () {
 		var width = this.get('width');
 		this.$().width(width);
-	}.observes('width').on('didInsertElement')
+	}.observes('width').on('didInsertElement'),
+
+	cellViews: Em.computed.alias('childViews')
 });
 
 export default LlamaColumn;

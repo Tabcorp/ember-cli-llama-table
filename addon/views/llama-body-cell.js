@@ -8,9 +8,11 @@ var removeObserver = Em.removeObserver;
 var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 	templateName: 'llama-body-cell',
 	classNames: 'llama-body-cell',
-	classNameBindings: ['column.isClickable'],
+	classNameBindings: ['hover', 'isClickable'],
 	attributeBindings: ['tabindex'],
 	tabindex: 0,
+	hover: false,
+	isClickable: Em.computed.alias('column.isClickable'),
 
 	// column definition
 	column: null,
@@ -67,37 +69,30 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 		return rows.indexOf(row);
 	},
 
-	mouseEnter: function () {
-		var $this = this.$();
-		var $body = $this.closest('.llama-body');
-		var $columns = $body.find('.llama-column');
-		var index = $this.index();
-		$columns.each(function () {
-			var $column = Em.$(this);
-			var $cells = $column.find('.llama-cell');
-			var $cell = $cells.eq(index);
-			$cell.addClass('hover');
+	updateHoverState: function () {
+		var hover = this.get('hover');
+		var rowIndex = this.getRowIndex();
+		var columns = this.get('controller').getBodyColumnViews();
+		columns.forEach(function (column) {
+			column.get('cellViews')
+				.objectAt(rowIndex)
+				.set('hover', hover);
 		});
+	}.observes('hover'),
+
+	mouseEnter: function () {
+		this.set('hover', true);
 	},
 
 	mouseLeave: function () {
-		var $this = this.$();
-		var $body = $this.closest('.llama-body');
-		var $columns = $body.find('.llama-column');
-		var index = $this.index();
-		$columns.each(function () {
-			var $column = Em.$(this);
-			var $cells = $column.find('.llama-cell');
-			var $cell = $cells.eq(index);
-			$cell.removeClass('hover');
-		});
+		this.set('hover', false);
 	},
 
 	click: function () {
 		var controller = this.get('controller');
 		var row = this.get('row');
 		var column = this.get('column');
-		if (this.get('column.isClickable')) {
+		if (this.get('isClickable')) {
 			controller.sendAction('cellClick', row, column);
 		}
 		if (controller.get('enableRowClick')) {
