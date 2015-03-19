@@ -139,7 +139,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * @optional
 	 * @default true
 	 */
-	enableRowClick: defaultValue('config.enableRowClick', true),
+	enableRowClick: defaultValue('config.enableRowClick', false),
 
 	/**
 	 * Optional controller for each row. Can define computed properties.

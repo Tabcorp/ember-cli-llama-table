@@ -8,11 +8,13 @@ var removeObserver = Em.removeObserver;
 var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 	templateName: 'llama-body-cell',
 	classNames: 'llama-body-cell',
-	classNameBindings: ['hover', 'isClickable'],
+	classNameBindings: ['hover', 'columnIsClickable', 'rowIsClickable', 'isClickable'],
 	attributeBindings: ['tabindex'],
 	tabindex: 0,
 	hover: false,
-	isClickable: Em.computed.alias('column.isClickable'),
+	columnIsClickable: Em.computed.alias('column.isClickable'),
+	rowIsClickable: Em.computed.alias('controller.enableRowClick'),
+	isClickable: Em.computed.or('columnIsClickable', 'rowIsClickable'),
 
 	// column definition
 	column: null,
@@ -57,9 +59,7 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 	getColumnIndex: function () {
 		var column = this.get('column');
 		var columns = this.get('controller.sortedColumns');
-		columns = columns.filter(function (column) {
-			return !column.get('isHidden');
-		});
+		columns = columns.rejectBy('isHidden');
 		return columns.indexOf(column);
 	},
 
