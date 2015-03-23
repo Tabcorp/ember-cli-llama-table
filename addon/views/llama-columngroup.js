@@ -7,12 +7,10 @@ var LlamaColumngroup = Em.View.extend({
 	columnViews: Em.computed.alias('childViews'),
 
 	width: function () {
-		var total = 0;
-		this.get('columns').forEach(function (column) {
-			if (!get(column, 'isHidden')) {
-				total += get(column, 'width');
-			}
-		});
+		var widths = this.get('columns').rejectBy('isHidden').mapBy('width');
+		var total = widths.reduce(function (total, val) {
+			return total + val;
+		}, 0);
 		return total;
 	}.property('columns.@each.width', 'columns.@each.isHidden'),
 
