@@ -12,6 +12,7 @@ var LlamaBodyCell = LlamaCell.extend({
 	attributeBindings: ['tabindex'],
 	tabindex: 0,
 	hover: false,
+	height: Em.computed.alias('controller.rowHeight'),
 	columnIsClickable: Em.computed.alias('column.isClickable'),
 	rowIsClickable: Em.computed.alias('controller.enableRowClick'),
 	isClickable: Em.computed.or('columnIsClickable', 'rowIsClickable'),
@@ -30,6 +31,7 @@ var LlamaBodyCell = LlamaCell.extend({
 	}.property(),
 
 	didInsertElement: function () {
+		this._super();
 		var row = this.get('row');
 		var observes = this.get('observedFields');
 		addObserver(row, observes, this, 'updateValue');
@@ -39,7 +41,15 @@ var LlamaBodyCell = LlamaCell.extend({
 		var row = this.get('row');
 		var observes = this.get('observedFields');
 		removeObserver(row, observes, this, 'updateValue');
+		this._super();
 	},
+
+	setHeight: function () {
+		var $cell = this.$();
+		if ($cell) {
+			$cell.css('height', this.get('height'));
+		}
+	}.on('didInsertElement').observes('height'),
 
 	getValue: function () {
 		var id = this.get('column.name');

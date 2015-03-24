@@ -87,6 +87,14 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	}.property(),
 
 	/**
+	 * Fixed height of each row.
+	 * @property {Number} rowHeight
+	 * @optional
+	 * @default 30
+	 */
+	rowHeight: defaultValue('config.rowHeight', 30),
+
+	/**
 	 * Enables sorting columns by clicking headers.
 	 * @property {Boolean} isSortable
 	 * @optional
