@@ -56,6 +56,10 @@
 	min-height: 30px;
 }
 
+.llama-body-columngroup {
+	min-height: 30px;
+}
+
 .llama-header-cell .column-label {
 	position: absolute;
 	left: 0;
