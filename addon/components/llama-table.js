@@ -242,6 +242,45 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		}
 	},
 
+	/**
+	 * Highlights the cells representing the given row.
+	 * @method highlightRow
+	 * @param {Object} row Row object to highlight
+	 */
+	highlightRow: function (row) {
+		var rows = this.get('sortedRows.arrangedContent');
+		var index = rows.indexOf(row);
+		this.highlightRowIndex(index);
+	},
+
+	/**
+	 * Highlights the cells at the given 0-based row index.
+	 * @method highlightRowIndex
+	 * @param {Number} index Row index to highlight (0-based)
+	 */
+	highlightRowIndex: function (index) {
+		var bodyColumngroupViews = this.get('bodyColumngroupViews');
+		bodyColumngroupViews.forEach(function (columngroupView) {
+			var columnViews = columngroupView.get('columnViews');
+			columnViews.forEach(function (columnView) {
+				var cellViews = columnView.get('cellViews');
+				var toHover = cellViews.objectAt(index);
+				cellViews.setEach('hover', false);
+				if (toHover) {
+					toHover.set('hover', true);
+				}
+			});
+		});
+	},
+
+	/**
+	 * Remove highlighting from all rows.
+	 * @method stopHighlightingRows
+	 */
+	stopHighlightingRows: function () {
+		this.highlightRowIndex(-1);
+	},
+
 	actions: {
 		scrollX: function (pos) {
 			this.get('headerView').$().css('marginLeft', -pos);
@@ -275,6 +314,12 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 				this.set('sortAscending', true);
 				sortedRows.set('sortProperties', [column]);
 			}
+		},
+		stopHighlightingRows: function () {
+			this.stopHighlightingRows();
+		},
+		highlightRow: function (row) {
+			this.highlightRow(row);
 		}
 	}
 });

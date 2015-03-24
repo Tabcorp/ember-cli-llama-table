@@ -69,23 +69,13 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 		return rows.indexOf(row);
 	},
 
-	updateHoverState: function () {
-		var hover = this.get('hover');
-		var rowIndex = this.getRowIndex();
-		var columns = this.get('controller').getBodyColumnViews();
-		columns.forEach(function (column) {
-			column.get('cellViews')
-				.objectAt(rowIndex)
-				.set('hover', hover);
-		});
-	}.observes('hover'),
-
 	mouseEnter: function () {
-		this.set('hover', true);
+		var row = this.get('row.model');
+		this.get('controller').send('highlightRow', row);
 	},
 
 	mouseLeave: function () {
-		this.set('hover', false);
+		this.get('controller').send('stopHighlightingRows');
 	},
 
 	click: function () {
