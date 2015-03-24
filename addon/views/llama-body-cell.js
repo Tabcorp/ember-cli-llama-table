@@ -3,6 +3,7 @@ import LlamaCell from './llama-cell';
 var get = Em.get;
 var addObserver = Em.addObserver;
 var removeObserver = Em.removeObserver;
+var ESC = 27;
 
 var LlamaBodyCell = LlamaCell.extend({
 	templateName: 'llama-body-cell',
@@ -79,6 +80,15 @@ var LlamaBodyCell = LlamaCell.extend({
 		var column = this.get('column');
 		controller.send('focusCell', row, column);
 		return false;
+	},
+
+	keyDown: function (e) {
+		if (e.which === ESC) {
+			this.$().blur();
+		}
+		else {
+			this._super(e);
+		}
 	}
 });
 
