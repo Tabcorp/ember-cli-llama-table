@@ -95,6 +95,12 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	rowHeight: defaultValue('config.rowHeight', 30),
 
 	/**
+	 * Maximum height of table before introducing vertical scrollbars.
+	 * @property {Number} maxHeight
+	 */
+	maxHeight: Em.computed.alias('config.maxHeight'),
+
+	/**
 	 * Enables sorting columns by clicking headers.
 	 * @property {Boolean} isSortable
 	 * @optional

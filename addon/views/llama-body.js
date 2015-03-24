@@ -71,6 +71,13 @@ var LlamaBody = Em.CollectionView.extend(ScrollXYMixin, ArrowKeysMixin, {
 		this.get('controller').send('focusCurrentCell');
 	},
 
+	setHeight: function () {
+		var $body = this.$();
+		if ($body) {
+			$body.css('maxHeight', this.get('controller.maxHeight'));
+		}
+	}.on('didInsertElement').observes('controller.maxHeight'),
+
 	actions: {
 		scrollX: function (pos) {
 			this.get('controller').send('scrollX', pos);

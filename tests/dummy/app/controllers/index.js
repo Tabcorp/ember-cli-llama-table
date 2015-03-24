@@ -148,6 +148,7 @@ var IndexController = Em.Controller.extend({
 		}
 	],
 	config: {
+		maxHeight: 200,
 		sortProperties: ['episode'],
 		itemController: 'episode',
 		types: [
