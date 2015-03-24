@@ -53,19 +53,6 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 		this.set('value', value);
 	}.on('init').observes('column'),
 
-	getColumnIndex: function () {
-		var column = this.get('column');
-		var columns = this.get('controller.sortedColumns');
-		columns = columns.rejectBy('isHidden');
-		return columns.indexOf(column);
-	},
-
-	getRowIndex: function () {
-		var row = this.get('row');
-		var rows = this.get('controller.sortedRows');
-		return rows.indexOf(row);
-	},
-
 	mouseEnter: function () {
 		var row = this.get('row.model');
 		this.get('controller').send('highlightRow', row);
@@ -87,26 +74,25 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 		}
 	},
 
+	focusIn: function () {
+		var controller = this.get('controller');
+		var row = this.get('row');
+		var column = this.get('column');
+		controller.send('focusCell', row, column);
+	},
+
 	actions: {
 		keyLeft: function () {
-			var row = this.getRowIndex();
-			var col = this.getColumnIndex();
-			this.get('controller').send('focusLeft', row, col);
+			this.get('controller').send('focusLeft');
 		},
 		keyUp: function () {
-			var row = this.getRowIndex();
-			var col = this.getColumnIndex();
-			this.get('controller').send('focusUp', row, col);
+			this.get('controller').send('focusUp');
 		},
 		keyRight: function () {
-			var row = this.getRowIndex();
-			var col = this.getColumnIndex();
-			this.get('controller').send('focusRight', row, col);
+			this.get('controller').send('focusRight');
 		},
 		keyDown: function () {
-			var row = this.getRowIndex();
-			var col = this.getColumnIndex();
-			this.get('controller').send('focusDown', row, col);
+			this.get('controller').send('focusDown');
 		}
 	}
 });

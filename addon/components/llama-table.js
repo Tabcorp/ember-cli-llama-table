@@ -3,6 +3,7 @@ import InboundActions from 'ember-component-inbound-actions/inbound-actions';
 import ResizeColumns from 'llama-table/mixins/resize-columns';
 import CellTypes from 'llama-table/mixins/cell-types';
 import ViewConstructors from 'llama-table/mixins/view-constructors';
+import FocusPosition from 'llama-table/mixins/focus-position';
 import Columns from 'llama-table/controllers/columns';
 import Rows from 'llama-table/controllers/rows';
 import { defaultValue } from 'llama-table/computed';
@@ -18,7 +19,7 @@ import { defaultValue } from 'llama-table/computed';
  * @uses CellTypesMixin
  * @uses ViewConstructorsMixin
  */
-var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, ViewConstructors, {
+var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, ViewConstructors, FocusPosition, {
 	classNames: 'llama-table-component',
 
 	/**
@@ -210,39 +211,6 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	},
 
 	/**
-	 * Returns the cell at a given row/column position.
-	 * @method findCellAtPosition
-	 * @param {Number} rowIndex
-	 * @param {Number} colIndex
-	 * @return {jQuery} Cell at row/column position
-	 */
-	findCellAtPosition: function (rowIndex, colIndex) {
-		var columns, column, cells, cell;
-		columns = this.getBodyColumnViews();
-		if (colIndex < 0 || colIndex >= columns.get('length')) {
-			return null;
-		}
-		column = columns.objectAt(colIndex);
-		cells = column.get('childViews');
-		if (rowIndex < 0 || rowIndex >= cells.get('length')) {
-			return null;
-		}
-		cell = cells.objectAt(rowIndex);
-		return cell;
-	},
-
-	/**
-	 * Move focus to the given cell view.
-	 * @method focusCell
-	 * @param {Ember.View} cellView Cell view to focus
-	 */
-	focusCell: function (cellView) {
-		if (cellView) {
-			cellView.$().focus();
-		}
-	},
-
-	/**
 	 * Highlights the cells representing the given row.
 	 * @method highlightRow
 	 * @param {Object} row Row object to highlight
@@ -287,22 +255,6 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		},
 		scrollY: function () {
 			// no-op
-		},
-		focusLeft: function (row, col) {
-			var cell = this.findCellAtPosition(row, col - 1);
-			this.focusCell(cell);
-		},
-		focusUp: function (row, col) {
-			var cell = this.findCellAtPosition(row - 1, col);
-			this.focusCell(cell);
-		},
-		focusRight: function (row, col) {
-			var cell = this.findCellAtPosition(row, col + 1);
-			this.focusCell(cell);
-		},
-		focusDown: function (row, col) {
-			var cell = this.findCellAtPosition(row + 1, col);
-			this.focusCell(cell);
 		},
 		sortBy: function (column) {
 			var sortedRows = this.get('sortedRows');
