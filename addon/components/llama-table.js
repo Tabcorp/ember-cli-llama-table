@@ -127,11 +127,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * Column definitions grouped into sets.
 	 * @property {Object[][]} columngroups
 	 */
-	columngroups: function () {
-		var columns = this.get('sortedColumns');
-		// single group for now
-		return [columns];
-	}.property('sortedColumns'),
+	columngroups: Em.computed.collect('sortedColumns'),
 
 	/**
 	 * Allows row click actions to propagate.
