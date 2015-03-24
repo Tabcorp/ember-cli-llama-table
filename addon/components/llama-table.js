@@ -272,6 +272,18 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		},
 		highlightRow: function (row) {
 			this.highlightRow(row);
+		},
+		tabKey: function () {
+			this.send('focusRight');
+		},
+		reverseTabKey: function () {
+			this.send('focusLeft');
+		},
+		enterKey: function () {
+			this.send('focusDown');
+		},
+		reverseEnterKey: function () {
+			this.send('focusUp');
 		}
 	}
 });
