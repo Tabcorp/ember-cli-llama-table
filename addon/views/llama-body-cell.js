@@ -64,7 +64,7 @@ var LlamaBodyCell = LlamaCell.extend({
 	}.on('init').observes('column'),
 
 	mouseEnter: function () {
-		var row = this.get('row.model');
+		var row = this.get('row');
 		this.get('controller').send('highlightRow', row);
 	},
 

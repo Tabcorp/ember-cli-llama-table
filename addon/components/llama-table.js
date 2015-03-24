@@ -232,6 +232,12 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	highlightRow: function (row) {
 		var rows = this.get('sortedRows.arrangedContent');
 		var index = rows.indexOf(row);
+		if (index === -1) {
+			var model = row.get('model');
+			if (!Em.isBlank(model)) {
+				index = rows.indexOf(model);
+			}
+		}
 		this.highlightRowIndex(index);
 	},
 
