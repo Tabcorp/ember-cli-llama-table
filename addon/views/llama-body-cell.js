@@ -16,10 +16,7 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 	rowIsClickable: Em.computed.alias('controller.enableRowClick'),
 	isClickable: Em.computed.or('columnIsClickable', 'rowIsClickable'),
 
-	// column definition
 	column: null,
-
-	// table definition
 	row: null,
 
 	// only calculated once

@@ -6,16 +6,12 @@ var set = Em.set;
 
 var LlamaBody = Em.CollectionView.extend(ScrollXYMixin, {
 	classNames: 'llama-body',
-
-	content: Em.computed.alias('controller.columngroups'),
 	itemViewClass: Em.computed.alias('controller.BodyColumngroupView'),
 	columngroupViews: Em.computed.alias('childViews'),
 
-	createChildView: function (View, attrs) {
-		var columns = get(attrs, 'content');
-		set(attrs, 'columns', columns);
-		return this._super(View, attrs);
-	},
+	rows: null,
+	columngroups: null,
+	contentBinding: 'columngroups',
 
 	copyController: function () {
 		return CopyController.create();
@@ -24,6 +20,14 @@ var LlamaBody = Em.CollectionView.extend(ScrollXYMixin, {
 	willDestroy: function () {
 		this.get('copyController').destroy();
 		this._super();
+	},
+
+	createChildView: function (View, attrs) {
+		var rows = this.get('rows');
+		var columns = get(attrs, 'content');
+		set(attrs, 'rows', rows);
+		set(attrs, 'columns', columns);
+		return this._super(View, attrs);
 	},
 
 	keyDown: function (e) {

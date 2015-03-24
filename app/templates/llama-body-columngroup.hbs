@@ -1,5 +1,8 @@
 {{#each column in view.columns}}
 	{{#unless column.isHidden}}
-		{{view controller.BodyColumnView column=column}}
+		{{view controller.BodyColumnView
+			column=column
+			rows=view.rows
+		}}
 	{{/unless}}
 {{/each}}

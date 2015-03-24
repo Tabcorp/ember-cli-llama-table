@@ -1,10 +1,12 @@
 import Em from 'ember';
 var get = Em.get;
+var set = Em.set;
 
 var LlamaColumngroup = Em.View.extend({
 	classNames: 'llama-columngroup',
-	columns: null,
 	columnViews: Em.computed.alias('childViews'),
+
+	columns: null,
 
 	width: function () {
 		var widths = this.get('columns').rejectBy('isHidden').mapBy('width');
@@ -17,7 +19,13 @@ var LlamaColumngroup = Em.View.extend({
 	setWidth: function () {
 		var width = this.get('width');
 		this.$().width(width);
-	}.observes('width').on('didInsertElement')
+	}.observes('width').on('didInsertElement'),
+
+	createChildView: function (View, attrs) {
+		var columns = this.get('columns');
+		set(attrs, 'columns', columns);
+		return this._super(View, attrs);
+	}
 });
 
 export default LlamaColumngroup;
