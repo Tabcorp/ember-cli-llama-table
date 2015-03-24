@@ -13,14 +13,7 @@ var LlamaBody = Em.CollectionView.extend(ScrollXYMixin, {
 	columngroups: null,
 	contentBinding: 'columngroups',
 
-	copyController: function () {
-		return CopyController.create();
-	}.property(),
-
-	willDestroy: function () {
-		this.get('copyController').destroy();
-		this._super();
-	},
+	copyController: CopyController.create(),
 
 	createChildView: function (View, attrs) {
 		var rows = this.get('rows');
