@@ -54,6 +54,7 @@
 .llama-body {
 	overflow: auto;
 	min-height: 30px;
+	outline: none;
 }
 
 .llama-body-columngroup {
