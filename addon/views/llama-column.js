@@ -4,6 +4,7 @@ var set = Em.set;
 
 var LlamaColumn = Em.CollectionView.extend({
 	classNames: 'llama-column',
+	classNameBindings: ['textAlignClass'],
 	width: Em.computed.alias('column.width'),
 
 	rows: null,
@@ -32,13 +33,13 @@ var LlamaColumn = Em.CollectionView.extend({
 		return this._super(View, attrs);
 	},
 
-	setTextAlign: function () {
+	textAlignClass: function () {
 		var textAlign = this.get('column.textAlign');
-		var $column = this.$();
-		if ($column) {
-			$column.css('textAlign', textAlign);
+		switch (textAlign) {
+			case 'left': return 'text-left';
+			case 'right': return 'text-right';
 		}
-	}.observes('column.textAlign').on('didInsertElement')
+	}.property('column.textAlign')
 });
 
 export default LlamaColumn;
