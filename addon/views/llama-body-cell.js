@@ -1,11 +1,10 @@
 import Em from 'ember';
 import LlamaCell from './llama-cell';
-import ArrowKeysMixin from 'llama-table/mixins/arrow-keys';
 var get = Em.get;
 var addObserver = Em.addObserver;
 var removeObserver = Em.removeObserver;
 
-var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
+var LlamaBodyCell = LlamaCell.extend({
 	templateName: 'llama-body-cell',
 	classNames: 'llama-body-cell',
 	classNameBindings: ['hover', 'columnIsClickable', 'rowIsClickable', 'isClickable'],
@@ -79,21 +78,7 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 		var row = this.get('row');
 		var column = this.get('column');
 		controller.send('focusCell', row, column);
-	},
-
-	actions: {
-		keyLeft: function () {
-			this.get('controller').send('focusLeft');
-		},
-		keyUp: function () {
-			this.get('controller').send('focusUp');
-		},
-		keyRight: function () {
-			this.get('controller').send('focusRight');
-		},
-		keyDown: function () {
-			this.get('controller').send('focusDown');
-		}
+		return false;
 	}
 });
 
