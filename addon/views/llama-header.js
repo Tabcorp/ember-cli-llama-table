@@ -4,10 +4,11 @@ var set = Em.set;
 
 var LlamaHeader = Em.CollectionView.extend({
 	classNames: 'llama-header',
-
-	content: Em.computed.alias('controller.columngroups'),
 	itemViewClass: Em.computed.alias('controller.HeaderColumngroupView'),
 	columngroupViews: Em.computed.alias('childViews'),
+	contentBinding: 'columngroups',
+
+	columngroups: null,
 
 	createChildView: function (View, attrs) {
 		var columns = get(attrs, 'content');

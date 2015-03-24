@@ -1,25 +1,31 @@
 import Em from 'ember';
 var get = Em.get;
+var set = Em.set;
 
 var LlamaColumngroup = Em.View.extend({
 	classNames: 'llama-columngroup',
-	columns: null,
 	columnViews: Em.computed.alias('childViews'),
 
+	columns: null,
+
 	width: function () {
-		var total = 0;
-		this.get('columns').forEach(function (column) {
-			if (!get(column, 'isHidden')) {
-				total += get(column, 'width');
-			}
-		});
+		var widths = this.get('columns').rejectBy('isHidden').mapBy('width');
+		var total = widths.reduce(function (total, val) {
+			return total + val;
+		}, 0);
 		return total;
 	}.property('columns.@each.width', 'columns.@each.isHidden'),
 
 	setWidth: function () {
 		var width = this.get('width');
 		this.$().width(width);
-	}.observes('width').on('didInsertElement')
+	}.observes('width').on('didInsertElement'),
+
+	createChildView: function (View, attrs) {
+		var columns = this.get('columns');
+		set(attrs, 'columns', columns);
+		return this._super(View, attrs);
+	}
 });
 
 export default LlamaColumngroup;

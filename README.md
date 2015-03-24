@@ -52,20 +52,20 @@ For an example implementation, see [the project page][example].
 
 ## Properties
 
-**`columns`**:
+### `columns`
 
 Column configuration. Defines the appearance and behaviour of table columns.
 Will be monitored for changes, causing the component to update accordingly.
 
 [Wiki page on column definitions][columns].
 
-**`rows`**:
+### `rows`
 
 Table data as an array of objects. Each object has properties which map with
 column identifiers. Row additions, removals or edits will be reflected by the
 table.
 
-**`config`**
+### `config`
 
 Table configuration. Specifies additional properties as a single object.
 

@@ -14,6 +14,14 @@
 	display: inline-block;
 }
 
+.llama-column.text-left {
+	text-align: left;
+}
+
+.llama-column.text-right {
+	text-align: right;
+}
+
 .llama-cell {
 	box-sizing: border-box;
 	height: 30px;
@@ -53,6 +61,11 @@
 
 .llama-body {
 	overflow: auto;
+	min-height: 30px;
+	outline: none;
+}
+
+.llama-body-columngroup {
 	min-height: 30px;
 }
 

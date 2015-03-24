@@ -3,6 +3,7 @@ import InboundActions from 'ember-component-inbound-actions/inbound-actions';
 import ResizeColumns from 'llama-table/mixins/resize-columns';
 import CellTypes from 'llama-table/mixins/cell-types';
 import ViewConstructors from 'llama-table/mixins/view-constructors';
+import FocusPosition from 'llama-table/mixins/focus-position';
 import Columns from 'llama-table/controllers/columns';
 import Rows from 'llama-table/controllers/rows';
 import { defaultValue } from 'llama-table/computed';
@@ -18,7 +19,7 @@ import { defaultValue } from 'llama-table/computed';
  * @uses CellTypesMixin
  * @uses ViewConstructorsMixin
  */
-var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, ViewConstructors, {
+var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, ViewConstructors, FocusPosition, {
 	classNames: 'llama-table-component',
 
 	/**
@@ -51,6 +52,8 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 */
 	sortedColumns: function () {
 		return Columns.create({
+			parentController: this,
+			container: this.get('container'),
 			sortProperties: ['order'],
 			sortAscending: true,
 			content: this.get('columns')
@@ -63,6 +66,9 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 */
 	sortedRows: function () {
 		var options = {
+			parentController: this,
+			itemController: this.get('itemController'),
+			container: this.get('container'),
 			sortProperties: this.get('sortProperties'),
 			sortAscending: this.get('sortAscending'),
 			content: this.get('rows')
@@ -79,6 +85,20 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		}
 		return Rows.create(options);
 	}.property(),
+
+	/**
+	 * Fixed height of each row.
+	 * @property {Number} rowHeight
+	 * @optional
+	 * @default 30
+	 */
+	rowHeight: defaultValue('config.rowHeight', 30),
+
+	/**
+	 * Maximum height of table before introducing vertical scrollbars.
+	 * @property {Number} maxHeight
+	 */
+	maxHeight: Em.computed.alias('config.maxHeight'),
 
 	/**
 	 * Enables sorting columns by clicking headers.
@@ -122,11 +142,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * Column definitions grouped into sets.
 	 * @property {Object[][]} columngroups
 	 */
-	columngroups: function () {
-		var columns = this.get('sortedColumns');
-		// single group for now
-		return [columns];
-	}.property('sortedColumns'),
+	columngroups: Em.computed.collect('sortedColumns'),
 
 	/**
 	 * Allows row click actions to propagate.
@@ -134,7 +150,14 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * @optional
 	 * @default true
 	 */
-	enableRowClick: defaultValue('config.enableRowClick', true),
+	enableRowClick: defaultValue('config.enableRowClick', false),
+
+	/**
+	 * Optional controller for each row. Can define computed properties.
+	 * @property {String} itemController
+	 * @optional
+	 */
+	itemController: Em.computed.alias('config.itemController'),
 
 	/**
 	 * Table view. Contains header and footer.
@@ -143,8 +166,8 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	tableView: function () {
 		var TableView = this.get('TableView');
 		return this.createChildView(TableView, {
-			columns: this.get('columns'),
-			rows: this.get('rows')
+			columngroups: this.get('columngroups'),
+			rows: this.get('sortedRows')
 		});
 	}.property(),
 
@@ -202,57 +225,56 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	},
 
 	/**
-	 * Returns the cell at a given row/column position.
-	 * @method findCellAtPosition
-	 * @param {Number} rowIndex
-	 * @param {Number} colIndex
-	 * @return {jQuery} Cell at row/column position
+	 * Highlights the cells representing the given row.
+	 * @method highlightRow
+	 * @param {Object} row Row object to highlight
 	 */
-	findCellAtPosition: function (rowIndex, colIndex) {
-		var columns, column, cells, cell;
-		columns = this.getBodyColumnViews();
-		if (colIndex < 0 || colIndex >= columns.get('length')) {
-			return null;
+	highlightRow: function (row) {
+		var rows = this.get('sortedRows.arrangedContent');
+		var index = rows.indexOf(row);
+		if (index === -1) {
+			var model = row.get('model');
+			if (!Em.isBlank(model)) {
+				index = rows.indexOf(model);
+			}
 		}
-		column = columns.objectAt(colIndex);
-		cells = column.get('childViews');
-		if (rowIndex < 0 || rowIndex >= cells.get('length')) {
-			return null;
-		}
-		cell = cells.objectAt(rowIndex);
-		return cell;
+		this.highlightRowIndex(index);
 	},
 
 	/**
-	 * Move focus to the given cell view.
-	 * @method focusCell
-	 * @param {Ember.View} cellView Cell view to focus
+	 * Highlights the cells at the given 0-based row index.
+	 * @method highlightRowIndex
+	 * @param {Number} index Row index to highlight (0-based)
 	 */
-	focusCell: function (cellView) {
-		if (cellView) {
-			cellView.$().focus();
-		}
+	highlightRowIndex: function (index) {
+		var bodyColumngroupViews = this.get('bodyColumngroupViews');
+		bodyColumngroupViews.forEach(function (columngroupView) {
+			var columnViews = columngroupView.get('columnViews');
+			columnViews.forEach(function (columnView) {
+				var cellViews = columnView.get('cellViews');
+				var toHover = cellViews.objectAt(index);
+				cellViews.setEach('hover', false);
+				if (toHover) {
+					toHover.set('hover', true);
+				}
+			});
+		});
+	},
+
+	/**
+	 * Remove highlighting from all rows.
+	 * @method stopHighlightingRows
+	 */
+	stopHighlightingRows: function () {
+		this.highlightRowIndex(-1);
 	},
 
 	actions: {
 		scrollX: function (pos) {
 			this.get('headerView').$().css('marginLeft', -pos);
 		},
-		focusLeft: function (row, col) {
-			var cell = this.findCellAtPosition(row, col - 1);
-			this.focusCell(cell);
-		},
-		focusUp: function (row, col) {
-			var cell = this.findCellAtPosition(row - 1, col);
-			this.focusCell(cell);
-		},
-		focusRight: function (row, col) {
-			var cell = this.findCellAtPosition(row, col + 1);
-			this.focusCell(cell);
-		},
-		focusDown: function (row, col) {
-			var cell = this.findCellAtPosition(row + 1, col);
-			this.focusCell(cell);
+		scrollY: function () {
+			// no-op
 		},
 		sortBy: function (column) {
 			var sortedRows = this.get('sortedRows');
@@ -264,6 +286,24 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 				this.set('sortAscending', true);
 				sortedRows.set('sortProperties', [column]);
 			}
+		},
+		stopHighlightingRows: function () {
+			this.stopHighlightingRows();
+		},
+		highlightRow: function (row) {
+			this.highlightRow(row);
+		},
+		tabKey: function () {
+			this.send('focusRight');
+		},
+		reverseTabKey: function () {
+			this.send('focusLeft');
+		},
+		enterKey: function () {
+			this.send('focusDown');
+		},
+		reverseEnterKey: function () {
+			this.send('focusUp');
 		}
 	}
 });

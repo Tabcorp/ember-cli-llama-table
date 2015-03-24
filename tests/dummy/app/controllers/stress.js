@@ -43,6 +43,7 @@ var IndexController = Em.Controller.extend({
 	],
 	tableData: [],
 	tableConfig: {
+		maxHeight: 200,
 		isSortable: false,
 		isResizable: false
 	},

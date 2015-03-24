@@ -7,7 +7,10 @@ var set = Em.set;
 var LlamaBodyColumn = LlamaColumn.extend({
 	classNames: 'llama-body-column',
 
-	content: Em.computed.alias('controller.sortedRows'),
+	rows: null,
+	column: null,
+	contentBinding: 'rows',
+
 	itemViewClass: function () {
 		var controller = this.get('controller');
 		var column = this.get('column');
@@ -16,15 +19,10 @@ var LlamaBodyColumn = LlamaColumn.extend({
 	}.property(),
 
 	createChildView: function (View, attrs) {
-		var column = this.get('column');
 		var row = get(attrs, 'content');
-		set(attrs, 'column', column);
 		set(attrs, 'row', row);
 		return this._super(View, attrs);
-	},
-
-	// column definition
-	column: null
+	}
 });
 
 export default LlamaBodyColumn;
