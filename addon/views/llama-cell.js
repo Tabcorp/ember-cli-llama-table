@@ -6,15 +6,8 @@ var LlamaCell = Em.View.extend({
 	column: null,
 	row: null,
 
-	config: function () {
-		var types = this.get('controller.config.types');
-		if (!Em.isArray(types)) {
-			return null;
-		}
-		var name = this.get('column.name');
-		var type = types.findBy('name', name);
-		return type;
-	}.property('column.name', 'controller.config.types')
+	columnView: Em.computed.alias('parentView'),
+	config: Em.computed.alias('columnView.config')
 });
 
 export default LlamaCell;

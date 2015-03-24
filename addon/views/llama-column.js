@@ -9,6 +9,16 @@ var LlamaColumn = Em.CollectionView.extend({
 	rows: null,
 	column: null,
 
+	config: function () {
+		var types = this.get('controller.config.types');
+		if (!Em.isArray(types)) {
+			return null;
+		}
+		var name = this.get('column.name');
+		var type = types.findBy('name', name);
+		return type;
+	}.property('column.name', 'controller.config.types'),
+
 	setWidth: function () {
 		var width = this.get('width');
 		this.$().width(width);
@@ -20,7 +30,15 @@ var LlamaColumn = Em.CollectionView.extend({
 		var column = this.get('column');
 		set(attrs, 'column', column);
 		return this._super(View, attrs);
-	}
+	},
+
+	setTextAlign: function () {
+		var textAlign = this.get('column.textAlign');
+		var $column = this.$();
+		if ($column) {
+			$column.css('textAlign', textAlign);
+		}
+	}.observes('column.textAlign').on('didInsertElement')
 });
 
 export default LlamaColumn;
