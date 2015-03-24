@@ -12,11 +12,10 @@ var LlamaHeaderCell = LlamaCell.extend({
 
 	title: function () {
 		var label = this.get('column.label');
-		if (!Em.isBlank(label)) {
-			return label;
+		if (Em.isBlank(label)) {
+			label = this.get('column.name');
 		}
-		var name = this.get('column.name');
-		return name;
+		return label;
 	}.property('column.label'),
 
 	isSortable: defaultValue('column.isSortable', true),
