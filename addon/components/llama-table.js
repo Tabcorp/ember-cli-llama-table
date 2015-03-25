@@ -7,6 +7,7 @@ import FocusPosition from 'llama-table/mixins/focus-position';
 import Columns from 'llama-table/controllers/columns';
 import Rows from 'llama-table/controllers/rows';
 import { defaultValue } from 'llama-table/computed';
+var get = Em.get;
 
 /**
  * Llama Table Ember component.
@@ -233,9 +234,9 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		var rows = this.get('sortedRows.arrangedContent');
 		var index = rows.indexOf(row);
 		if (index === -1) {
-			var model = row.get('model');
-			if (!Em.isBlank(model)) {
-				index = rows.indexOf(model);
+			row = get(row, 'model') || get(row, 'content');
+			if (!Em.isBlank(row)) {
+				index = rows.indexOf(row);
 			}
 		}
 		this.highlightRowIndex(index);
