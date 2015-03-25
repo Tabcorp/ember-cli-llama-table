@@ -66,11 +66,6 @@ var LlamaBody = Em.CollectionView.extend(ScrollXYMixin, ArrowKeysMixin, {
 		}
 	},
 
-	focusIn: function (e) {
-		// TODO: prevents shift-tab escaping
-		this.get('controller').send('focusCurrentCell');
-	},
-
 	setHeight: function () {
 		var $body = this.$();
 		if ($body) {
