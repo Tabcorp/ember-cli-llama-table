@@ -7,17 +7,15 @@ var LlamaTable = Em.ContainerView.extend({
 	columngroups: null,
 
 	headerView: function () {
-		return this.get('controller.HeaderView').create({
-			container: this.get('container'),
-			controller: this.get('controller'),
+		var View = this.get('controller.HeaderView');
+		return this.createChildView(View, {
 			columngroups: this.get('columngroups')
 		});
 	}.property(),
 
 	bodyView: function () {
-		return this.get('controller.BodyView').create({
-			container: this.get('container'),
-			controller: this.get('controller'),
+		var View = this.get('controller.BodyView');
+		return this.createChildView(View, {
 			columngroups: this.get('columngroups'),
 			rows: this.get('rows')
 		});
