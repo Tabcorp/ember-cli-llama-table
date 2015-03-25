@@ -88,14 +88,6 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	}.property(),
 
 	/**
-	 * Fixed height of each row.
-	 * @property {Number} rowHeight
-	 * @optional
-	 * @default 30
-	 */
-	rowHeight: defaultValue('config.rowHeight', 30),
-
-	/**
 	 * Maximum height of table before introducing vertical scrollbars.
 	 * @property {Number} maxHeight
 	 */

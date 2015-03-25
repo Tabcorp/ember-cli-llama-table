@@ -12,7 +12,7 @@ var LlamaBodyCell = LlamaCell.extend({
 	attributeBindings: ['tabindex'],
 	tabindex: 0,
 	hover: false,
-	height: Em.computed.alias('controller.rowHeight'),
+	height: Em.computed.alias('row.height'),
 	columnIsClickable: Em.computed.alias('column.isClickable'),
 	rowIsClickable: Em.computed.alias('controller.enableRowClick'),
 	isClickable: Em.computed.or('columnIsClickable', 'rowIsClickable'),
@@ -31,6 +31,14 @@ var LlamaBodyCell = LlamaCell.extend({
 		var id = this.get('column.name');
 		return id;
 	}.property(),
+
+	marginBottom: function () {
+		var isExpanded = this.get('row.isExpanded');
+		if (isExpanded) {
+			return this.get('row.subcontentHeight');
+		}
+		return null;
+	}.property('row.isExpanded', 'row.subcontentHeight'),
 
 	didInsertElement: function () {
 		this._super();
@@ -52,6 +60,13 @@ var LlamaBodyCell = LlamaCell.extend({
 			$cell.css('height', this.get('height'));
 		}
 	}.on('didInsertElement').observes('height'),
+
+	setMarginBottom: function () {
+		var $cell = this.$();
+		if ($cell) {
+			$cell.css('marginBottom', this.get('marginBottom') || 0);
+		}
+	}.on('didInsertElement').observes('marginBottom'),
 
 	getValue: function () {
 		var id = this.get('column.name');
