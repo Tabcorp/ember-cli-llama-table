@@ -11,6 +11,7 @@ import LlamaBodyColumngroup from 'llama-table/views/llama-body-columngroup';
 import LlamaBodyColumn from 'llama-table/views/llama-body-column';
 import LlamaBodyCell from 'llama-table/views/llama-body-cell';
 import LlamaNumberCell from 'llama-table/views/llama-number-cell';
+import LlamaEmbed from 'llama-table/views/llama-embed';
 import { defaultValue } from 'llama-table/computed';
 
 var ViewConstructorsMixin = Em.Mixin.create({
@@ -25,7 +26,8 @@ var ViewConstructorsMixin = Em.Mixin.create({
 	BodyColumngroupView: defaultValue('config.BodyColumngroupView', LlamaBodyColumngroup),
 	BodyColumnView: defaultValue('config.BodyColumnView', LlamaBodyColumn),
 	BodyCellView: defaultValue('config.BodyCellView', LlamaBodyCell),
-	NumberCellView: defaultValue('config.NumberCellView', LlamaNumberCell)
+	NumberCellView: defaultValue('config.NumberCellView', LlamaNumberCell),
+	EmbedView: defaultValue('config.EmbedView', LlamaEmbed)
 });
 
 export default ViewConstructorsMixin;
