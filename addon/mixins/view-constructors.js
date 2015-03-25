@@ -4,6 +4,8 @@ import LlamaHeader from 'llama-table/views/llama-header';
 import LlamaHeaderColumngroup from 'llama-table/views/llama-header-columngroup';
 import LlamaHeaderColumn from 'llama-table/views/llama-header-column';
 import LlamaHeaderCell from 'llama-table/views/llama-header-cell';
+import LlamaContent from 'llama-table/views/llama-content';
+import LlamaSubcontent from 'llama-table/views/llama-subcontent';
 import LlamaBody from 'llama-table/views/llama-body';
 import LlamaBodyColumngroup from 'llama-table/views/llama-body-columngroup';
 import LlamaBodyColumn from 'llama-table/views/llama-body-column';
@@ -17,6 +19,8 @@ var ViewConstructorsMixin = Em.Mixin.create({
 	HeaderColumngroupView: defaultValue('config.HeaderColumngroupView', LlamaHeaderColumngroup),
 	HeaderColumnView: defaultValue('config.HeaderColumnView', LlamaHeaderColumn),
 	HeaderCellView: defaultValue('config.HeaderCellView', LlamaHeaderCell),
+	ContentView: defaultValue('config.ContentView', LlamaContent),
+	SubcontentView: defaultValue('config.SubcontentView', LlamaSubcontent),
 	BodyView: defaultValue('config.BodyView', LlamaBody),
 	BodyColumngroupView: defaultValue('config.BodyColumngroupView', LlamaBodyColumngroup),
 	BodyColumnView: defaultValue('config.BodyColumnView', LlamaBodyColumn),

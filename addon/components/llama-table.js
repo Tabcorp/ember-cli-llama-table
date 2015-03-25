@@ -149,9 +149,17 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * Allows row click actions to propagate.
 	 * @property {Boolean} enableRowClick
 	 * @optional
-	 * @default true
+	 * @default false
 	 */
 	enableRowClick: defaultValue('config.enableRowClick', false),
+
+	/**
+	 * Rows can be expanded to show additional content.
+	 * @property {Boolean} hasSubcontent
+	 * @optional
+	 * @default false
+	 */
+	hasSubcontent: defaultValue('config.hasSubcontent', false),
 
 	/**
 	 * Optional controller for each row. Can define computed properties.
@@ -182,7 +190,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * Body container view.
 	 * @property {Ember.View} bodyView
 	 */
-	bodyView: Em.computed.alias('tableView.bodyView'),
+	bodyView: Em.computed.alias('tableView.bodyView.contentView'),
 
 	/**
 	 * Columngroup views in body container.

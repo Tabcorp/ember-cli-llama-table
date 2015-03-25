@@ -7,6 +7,7 @@ var SubcontentController = Em.Controller.extend({
 		{ order: 3, name: 'family_name', label: 'Family Name' }
 	],
 	config: {
+		hasSubcontent: true,
 		enableRowClick: true,
 		sortProperties: ['family_name']
 	},
