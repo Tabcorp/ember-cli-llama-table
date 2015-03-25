@@ -8,7 +8,7 @@ var ESC = 27;
 var LlamaBodyCell = LlamaCell.extend({
 	templateName: 'llama-body-cell',
 	classNames: 'llama-body-cell',
-	classNameBindings: ['hover', 'columnIsClickable', 'rowIsClickable', 'isClickable', 'isEmpty'],
+	classNameBindings: ['hover', 'columnIsClickable', 'rowIsClickable', 'isClickable', 'isEmpty', 'showingSubcontent'],
 	attributeBindings: ['tabindex'],
 	tabindex: 0,
 	hover: false,
@@ -16,6 +16,7 @@ var LlamaBodyCell = LlamaCell.extend({
 	columnIsClickable: Em.computed.alias('column.isClickable'),
 	rowIsClickable: Em.computed.alias('controller.enableRowClick'),
 	isClickable: Em.computed.or('columnIsClickable', 'rowIsClickable'),
+	showingSubcontent: Em.computed.bool('row.isExpanded'),
 
 	column: null,
 	row: null,
@@ -33,12 +34,12 @@ var LlamaBodyCell = LlamaCell.extend({
 	}.property(),
 
 	marginBottom: function () {
-		var isExpanded = this.get('row.isExpanded');
+		var isExpanded = this.get('showingSubcontent');
 		if (isExpanded) {
 			return this.get('row.subcontentHeight');
 		}
 		return null;
-	}.property('row.isExpanded', 'row.subcontentHeight'),
+	}.property('showingSubcontent', 'row.subcontentHeight'),
 
 	didInsertElement: function () {
 		this._super();
