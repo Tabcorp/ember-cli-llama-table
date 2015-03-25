@@ -9,6 +9,11 @@ var SubcontentController = Em.Controller.extend({
 	config: {
 		enableRowClick: true,
 		sortProperties: ['family_name']
+	},
+	actions: {
+		rowClick: function (row) {
+			row.toggleProperty('isExpanded');
+		}
 	}
 });
 
