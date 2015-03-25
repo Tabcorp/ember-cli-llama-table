@@ -1,7 +1,7 @@
 import Em from 'ember';
 var get = Em.get;
 
-var LlamaEmbed = Em.View.extend({
+var LlamaEmbed = Em.ContainerView.extend({
 	classNames: 'llama-embed',
 	height: Em.computed.alias('row.subcontentHeight'),
 
@@ -43,7 +43,19 @@ var LlamaEmbed = Em.View.extend({
 		if ($embed) {
 			$embed.css('height', this.get('height'));
 		}
-	}.on('didInsertElement').observes('height')
+	}.on('didInsertElement').observes('height'),
+
+	subcontentView: function () {
+		var View = this.get('controller.config.subcontentView');
+		return this.createChildView(View, {
+			content: this.get('content')
+		});
+	}.property(),
+
+	init: function () {
+		this._super();
+		this.pushObject(this.get('subcontentView'));
+	}
 });
 
 export default LlamaEmbed;

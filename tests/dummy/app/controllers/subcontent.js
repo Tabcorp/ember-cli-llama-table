@@ -8,6 +8,7 @@ var SubcontentController = Em.Controller.extend({
 	],
 	config: {
 		hasSubcontent: true,
+		subcontentView: 'embedded',
 		enableRowClick: true,
 		sortProperties: ['family_name']
 	},
