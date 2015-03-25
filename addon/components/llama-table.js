@@ -158,7 +158,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * @property {String} itemController
 	 * @optional
 	 */
-	itemController: Em.computed.alias('config.itemController'),
+	itemController: defaultValue('config.itemController', 'llama-row'),
 
 	/**
 	 * Table view. Contains header and footer.
