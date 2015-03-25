@@ -8,6 +8,7 @@ var Router = Ember.Router.extend({
 Router.map(function () {
 	this.route('stress');
 	this.route('multi');
+	this.route('subcontent');
 });
 
 export default Router;
