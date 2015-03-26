@@ -2,9 +2,10 @@ import Em from 'ember';
 var get = Em.get;
 var set = Em.set;
 
-var LlamaColumngroup = Em.View.extend({
+var LlamaColumngroup = Em.CollectionView.extend({
 	classNames: 'llama-columngroup',
 	columnViews: Em.computed.alias('childViews'),
+	contentBinding: 'columns',
 
 	columns: null,
 
