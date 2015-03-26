@@ -116,6 +116,15 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	sortProperties: Em.computed.alias('config.sortProperties'),
 
 	/**
+	 * Triggers a row sort properties update. Observes the `sortProperties`
+	 *   property.
+	 * @method updateSortProperties
+	 */
+	updateSortProperties: function () {
+		this.set('sortedRows.sortProperties', this.get('sortProperties'));
+	}.observes('sortProperties'),
+
+	/**
 	 * Sort columns in ascending order.
 	 * @property {Boolean} sortAscending
 	 * @optional
@@ -278,14 +287,13 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 			// no-op
 		},
 		sortBy: function (column) {
-			var sortedRows = this.get('sortedRows');
-			var sortProperties = sortedRows.get('sortProperties');
+			var sortProperties = this.get('sortProperties');
 			if (Em.isArray(sortProperties) && column === sortProperties[0]) {
 				this.toggleProperty('sortAscending');
 			}
 			else {
 				this.set('sortAscending', true);
-				sortedRows.set('sortProperties', [column]);
+				this.set('sortProperties', [column]);
 			}
 		},
 		stopHighlightingRows: function () {

@@ -22,8 +22,8 @@ var LlamaHeaderCell = LlamaCell.extend({
 	isSortable: defaultValue('column.isSortable', true),
 	isResizable: defaultValue('column.isResizable', true),
 
-	sortProperties: Em.computed.alias('controller.sortedRows.sortProperties'),
-	sortAscending: Em.computed.alias('controller.sortedRows.sortAscending'),
+	sortProperties: Em.computed.alias('controller.sortProperties'),
+	sortAscending: Em.computed.alias('controller.sortAscending'),
 	sortDescending: Em.computed.not('sortAscending'),
 
 	sortByThis: function () {
@@ -31,7 +31,7 @@ var LlamaHeaderCell = LlamaCell.extend({
 		var thisColumn = this.get('column.name');
 		var contained = Em.isArray(sortProperties) && sortProperties.contains(thisColumn);
 		return contained;
-	}.property('sortProperties.firstObject', 'column.name'),
+	}.property('sortProperties', 'column.name'),
 
 	sortByThisAscending: Em.computed.and('sortByThis', 'sortAscending'),
 	sortByThisDescending: Em.computed.and('sortByThis', 'sortDescending'),
