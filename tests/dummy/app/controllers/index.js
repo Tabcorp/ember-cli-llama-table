@@ -150,13 +150,10 @@ var IndexController = Em.Controller.extend({
 	config: {
 		maxHeight: 200,
 		sortProperties: ['episode'],
-		itemController: 'episode',
+		itemController: 'rm-episode',
 		enableRowClick: true,
 		types: [
-			{
-				name: 'remove',
-				view: RemoveButton
-			}
+			{ name: 'remove', view: 'remove-button-cell' }
 		]
 	},
 	events: Em.A(),
