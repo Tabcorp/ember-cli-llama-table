@@ -19,8 +19,12 @@ var LlamaHeaderCell = LlamaCell.extend({
 		return label;
 	}.property('column.label'),
 
-	isSortable: defaultValue('column.isSortable', true),
-	isResizable: defaultValue('column.isResizable', true),
+	tableIsSortable: defaultValue('controller.isSortable', true),
+	columnIsSortable: defaultValue('column.isSortable', true),
+	isSortable: Em.computed.and('tableIsSortable', 'columnIsSortable'),
+	tableIsResizable: defaultValue('controller.isResizable', true),
+	columnIsResizable: defaultValue('column.isResizable', true),
+	isResizable: Em.computed.and('tableIsResizable', 'columnIsResizable'),
 
 	sortProperties: Em.computed.alias('controller.sortProperties'),
 	sortAscending: Em.computed.alias('controller.sortAscending'),
