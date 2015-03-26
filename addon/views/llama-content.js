@@ -1,5 +1,4 @@
 import Em from 'ember';
-import ScrollXYMixin from 'llama-table/mixins/scroll-xy';
 import ArrowKeysMixin from 'llama-table/mixins/arrow-keys';
 import CopyController from 'llama-table/controllers/copy';
 var get = Em.get;
@@ -7,7 +6,7 @@ var set = Em.set;
 var TAB = 9;
 var ENTER = 13;
 
-var LlamaContent = Em.CollectionView.extend(ScrollXYMixin, ArrowKeysMixin, {
+var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 	classNames: 'llama-content',
 	attributeBindings: ['tabindex'],
 	tabindex: 0,
@@ -74,12 +73,6 @@ var LlamaContent = Em.CollectionView.extend(ScrollXYMixin, ArrowKeysMixin, {
 	}.on('didInsertElement').observes('controller.maxHeight'),
 
 	actions: {
-		scrollX: function (pos) {
-			this.get('controller').send('scrollX', pos);
-		},
-		scrollY: function (pos) {
-			this.get('controller').send('scrollY', pos);
-		},
 		keyLeft: function () {
 			this.get('controller').send('focusLeft');
 		},

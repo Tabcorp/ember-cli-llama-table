@@ -1,6 +1,7 @@
 import Em from 'ember';
+import ScrollXYMixin from 'llama-table/mixins/scroll-xy';
 
-var LlamaBody = Em.ContainerView.extend({
+var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 	classNames: ['llama-body'],
 
 	columngroups: null,
@@ -34,7 +35,16 @@ var LlamaBody = Em.ContainerView.extend({
 		else {
 			this.removeObject(this.get('subcontentView'));
 		}
-	}.on('init').observes('controller.hasSubcontent')
+	}.on('init').observes('controller.hasSubcontent'),
+
+	actions: {
+		scrollX: function (pos) {
+			this.get('controller').send('scrollX', pos);
+		},
+		scrollY: function (pos) {
+			this.get('controller').send('scrollY', pos);
+		}
+	}
 });
 
 export default LlamaBody;
