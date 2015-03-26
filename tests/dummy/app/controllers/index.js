@@ -202,7 +202,7 @@ var IndexController = Em.Controller.extend({
 			var events = this.get('events');
 			var data = this.get('tableData');
 			var newEvent = {
-				index: data.indexOf(row),
+				index: data.indexOf(row.get('model')),
 				row: row,
 				column: column
 			};
