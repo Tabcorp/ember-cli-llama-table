@@ -6,7 +6,8 @@ var ExpandoCell = LlamaBodyCell.extend({
 	classNames: 'no-padding',
 	isExpanded: Em.computed.alias('content.isExpanded'),
 	actions: {
-		primaryAction: function () {
+		primaryAction: function (e) {
+			e.preventDefault();
 			this.send('toggle');
 		},
 		toggle: function () {

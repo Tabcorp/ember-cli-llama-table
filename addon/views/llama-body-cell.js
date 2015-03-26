@@ -121,6 +121,13 @@ var LlamaBodyCell = LlamaCell.extend({
 		else {
 			this._super(e);
 		}
+	},
+
+	actions: {
+		primaryAction: function (e) {
+			// cancel action by default
+			e.preventDefault();
+		}
 	}
 });
 
