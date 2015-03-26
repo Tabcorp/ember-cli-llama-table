@@ -6,6 +6,7 @@ var ColumnController = Em.ObjectProxy.extend({
 	width: defaultValue('content.width', 200),
 	minWidth: defaultValue('content.minWidth', 50),
 	isClickable: defaultValue('content.isClickable', false),
+	showLabel: defaultValue('content.showLabel', true),
 	textAlign: function () {
 		var value = this.get('content.textAlign');
 		if (!Em.isEmpty(value)) {

@@ -7,6 +7,7 @@ var LlamaHeaderCell = LlamaCell.extend({
 	classNames: 'llama-header-cell',
 	classNameBindings: ['sortByThis', 'sortByThisAscending', 'sortByThisDescending', 'isSortable'],
 	attributeBindings: ['title'],
+	showLabel: Em.computed.alias('column.showLabel'),
 
 	column: null,
 
