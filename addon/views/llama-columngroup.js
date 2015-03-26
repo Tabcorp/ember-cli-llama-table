@@ -23,7 +23,9 @@ var LlamaColumngroup = Em.View.extend({
 
 	createChildView: function (View, attrs) {
 		var columns = this.get('columns');
+		var column = get(attrs, 'content');
 		set(attrs, 'columns', columns);
+		set(attrs, 'column', column);
 		return this._super(View, attrs);
 	}
 });
