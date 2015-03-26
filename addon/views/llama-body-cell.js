@@ -4,6 +4,7 @@ var get = Em.get;
 var addObserver = Em.addObserver;
 var removeObserver = Em.removeObserver;
 var ESC = 27;
+var SPACE = 32;
 
 var LlamaBodyCell = LlamaCell.extend({
 	templateName: 'llama-body-cell',
@@ -113,6 +114,9 @@ var LlamaBodyCell = LlamaCell.extend({
 	keyDown: function (e) {
 		if (e.which === ESC) {
 			this.$().blur();
+		}
+		else if (e.which === SPACE) {
+			this.send('primaryAction', e);
 		}
 		else {
 			this._super(e);
