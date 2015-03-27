@@ -45,7 +45,9 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * @optional
 	 * @see https://github.com/luxbet/ember-cli-llama-table/wiki/Table-configuration
 	 */
-	config: null,
+	config: function () {
+		return {};
+	}.property(),
 
 	/**
 	 * Column definitions array with added sorting functionality.
