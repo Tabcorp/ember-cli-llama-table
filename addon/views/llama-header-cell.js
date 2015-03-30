@@ -7,6 +7,7 @@ var LlamaHeaderCell = LlamaCell.extend({
 	classNames: 'llama-header-cell',
 	classNameBindings: ['sortByThis', 'sortByThisAscending', 'sortByThisDescending', 'isSortable'],
 	attributeBindings: ['title'],
+	showLabel: Em.computed.alias('column.showLabel'),
 
 	column: null,
 
@@ -18,11 +19,15 @@ var LlamaHeaderCell = LlamaCell.extend({
 		return label;
 	}.property('column.label'),
 
-	isSortable: defaultValue('column.isSortable', true),
-	isResizable: defaultValue('column.isResizable', true),
+	tableIsSortable: defaultValue('controller.isSortable', true),
+	columnIsSortable: defaultValue('column.isSortable', true),
+	isSortable: Em.computed.and('tableIsSortable', 'columnIsSortable'),
+	tableIsResizable: defaultValue('controller.isResizable', true),
+	columnIsResizable: defaultValue('column.isResizable', true),
+	isResizable: Em.computed.and('tableIsResizable', 'columnIsResizable'),
 
-	sortProperties: Em.computed.alias('controller.sortedRows.sortProperties'),
-	sortAscending: Em.computed.alias('controller.sortedRows.sortAscending'),
+	sortProperties: Em.computed.alias('controller.sortProperties'),
+	sortAscending: Em.computed.alias('controller.sortAscending'),
 	sortDescending: Em.computed.not('sortAscending'),
 
 	sortByThis: function () {
@@ -30,7 +35,7 @@ var LlamaHeaderCell = LlamaCell.extend({
 		var thisColumn = this.get('column.name');
 		var contained = Em.isArray(sortProperties) && sortProperties.contains(thisColumn);
 		return contained;
-	}.property('sortProperties.firstObject', 'column.name'),
+	}.property('sortProperties', 'column.name'),
 
 	sortByThisAscending: Em.computed.and('sortByThis', 'sortAscending'),
 	sortByThisDescending: Em.computed.and('sortByThis', 'sortDescending'),

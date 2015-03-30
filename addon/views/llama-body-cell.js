@@ -4,18 +4,20 @@ var get = Em.get;
 var addObserver = Em.addObserver;
 var removeObserver = Em.removeObserver;
 var ESC = 27;
+var SPACE = 32;
 
 var LlamaBodyCell = LlamaCell.extend({
 	templateName: 'llama-body-cell',
 	classNames: 'llama-body-cell',
-	classNameBindings: ['hover', 'columnIsClickable', 'rowIsClickable', 'isClickable', 'isEmpty'],
+	classNameBindings: ['hover', 'columnIsClickable', 'rowIsClickable', 'isClickable', 'isEmpty', 'showingSubcontent'],
 	attributeBindings: ['tabindex'],
 	tabindex: 0,
 	hover: false,
-	height: Em.computed.alias('controller.rowHeight'),
+	height: Em.computed.alias('row.height'),
 	columnIsClickable: Em.computed.alias('column.isClickable'),
 	rowIsClickable: Em.computed.alias('controller.enableRowClick'),
 	isClickable: Em.computed.or('columnIsClickable', 'rowIsClickable'),
+	showingSubcontent: Em.computed.bool('row.isExpanded'),
 
 	column: null,
 	row: null,
@@ -31,6 +33,14 @@ var LlamaBodyCell = LlamaCell.extend({
 		var id = this.get('column.name');
 		return id;
 	}.property(),
+
+	marginBottom: function () {
+		var isExpanded = this.get('showingSubcontent');
+		if (isExpanded) {
+			return this.get('row.subcontentHeight');
+		}
+		return null;
+	}.property('showingSubcontent', 'row.subcontentHeight'),
 
 	didInsertElement: function () {
 		this._super();
@@ -52,6 +62,13 @@ var LlamaBodyCell = LlamaCell.extend({
 			$cell.css('height', this.get('height'));
 		}
 	}.on('didInsertElement').observes('height'),
+
+	setMarginBottom: function () {
+		var $cell = this.$();
+		if ($cell) {
+			$cell.css('marginBottom', this.get('marginBottom') || 0);
+		}
+	}.on('didInsertElement').observes('marginBottom'),
 
 	getValue: function () {
 		var id = this.get('column.name');
@@ -98,8 +115,18 @@ var LlamaBodyCell = LlamaCell.extend({
 		if (e.which === ESC) {
 			this.$().blur();
 		}
+		else if (e.which === SPACE) {
+			this.send('primaryAction', e);
+		}
 		else {
 			this._super(e);
+		}
+	},
+
+	actions: {
+		primaryAction: function (e) {
+			// cancel action by default
+			e.preventDefault();
 		}
 	}
 });

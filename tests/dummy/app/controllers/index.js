@@ -150,12 +150,10 @@ var IndexController = Em.Controller.extend({
 	config: {
 		maxHeight: 200,
 		sortProperties: ['episode'],
-		itemController: 'episode',
+		itemController: 'rm-episode',
+		enableRowClick: true,
 		types: [
-			{
-				name: 'remove',
-				view: RemoveButton
-			}
+			{ name: 'remove', view: 'remove-button-cell' }
 		]
 	},
 	events: Em.A(),
@@ -204,7 +202,7 @@ var IndexController = Em.Controller.extend({
 			var events = this.get('events');
 			var data = this.get('tableData');
 			var newEvent = {
-				index: data.indexOf(row),
+				index: data.indexOf(row.get('model')),
 				row: row,
 				column: column
 			};

@@ -1,0 +1,7 @@
+<button {{action "toggle" target="view"}} {{bind-attr class=":expando-toggle isExpanded"}}>
+	{{#if view.isExpanded}}
+		&#9660;
+	{{else}}
+		&#9658;
+	{{/if}}
+</button>

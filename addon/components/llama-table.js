@@ -7,6 +7,7 @@ import FocusPosition from 'llama-table/mixins/focus-position';
 import Columns from 'llama-table/controllers/columns';
 import Rows from 'llama-table/controllers/rows';
 import { defaultValue } from 'llama-table/computed';
+var get = Em.get;
 
 /**
  * Llama Table Ember component.
@@ -87,14 +88,6 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	}.property(),
 
 	/**
-	 * Fixed height of each row.
-	 * @property {Number} rowHeight
-	 * @optional
-	 * @default 30
-	 */
-	rowHeight: defaultValue('config.rowHeight', 30),
-
-	/**
 	 * Maximum height of table before introducing vertical scrollbars.
 	 * @property {Number} maxHeight
 	 */
@@ -123,6 +116,15 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	sortProperties: Em.computed.alias('config.sortProperties'),
 
 	/**
+	 * Triggers a row sort properties update. Observes the `sortProperties`
+	 *   property.
+	 * @method updateSortProperties
+	 */
+	updateSortProperties: function () {
+		this.set('sortedRows.sortProperties', this.get('sortProperties'));
+	}.observes('sortProperties'),
+
+	/**
 	 * Sort columns in ascending order.
 	 * @property {Boolean} sortAscending
 	 * @optional
@@ -148,16 +150,24 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * Allows row click actions to propagate.
 	 * @property {Boolean} enableRowClick
 	 * @optional
-	 * @default true
+	 * @default false
 	 */
 	enableRowClick: defaultValue('config.enableRowClick', false),
+
+	/**
+	 * Rows can be expanded to show additional content.
+	 * @property {Boolean} hasSubcontent
+	 * @optional
+	 * @default false
+	 */
+	hasSubcontent: defaultValue('config.hasSubcontent', false),
 
 	/**
 	 * Optional controller for each row. Can define computed properties.
 	 * @property {String} itemController
 	 * @optional
 	 */
-	itemController: Em.computed.alias('config.itemController'),
+	itemController: defaultValue('config.itemController', 'llama-row'),
 
 	/**
 	 * Table view. Contains header and footer.
@@ -181,7 +191,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * Body container view.
 	 * @property {Ember.View} bodyView
 	 */
-	bodyView: Em.computed.alias('tableView.bodyView'),
+	bodyView: Em.computed.alias('tableView.bodyView.contentView'),
 
 	/**
 	 * Columngroup views in body container.
@@ -233,9 +243,9 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		var rows = this.get('sortedRows.arrangedContent');
 		var index = rows.indexOf(row);
 		if (index === -1) {
-			var model = row.get('model');
-			if (!Em.isBlank(model)) {
-				index = rows.indexOf(model);
+			row = get(row, 'model') || get(row, 'content');
+			if (!Em.isBlank(row)) {
+				index = rows.indexOf(row);
 			}
 		}
 		this.highlightRowIndex(index);
@@ -277,14 +287,13 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 			// no-op
 		},
 		sortBy: function (column) {
-			var sortedRows = this.get('sortedRows');
-			var sortProperties = sortedRows.get('sortProperties');
+			var sortProperties = this.get('sortProperties');
 			if (Em.isArray(sortProperties) && column === sortProperties[0]) {
 				this.toggleProperty('sortAscending');
 			}
 			else {
 				this.set('sortAscending', true);
-				sortedRows.set('sortProperties', [column]);
+				this.set('sortProperties', [column]);
 			}
 		},
 		stopHighlightingRows: function () {

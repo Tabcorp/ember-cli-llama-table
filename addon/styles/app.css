@@ -48,11 +48,19 @@
 }
 
 .llama-body-cell {
-	border-width: 0 1px 1px 0;
+	border-width: 1px 1px 0 0;
+}
+
+.llama-body-cell:first-child {
+	border-top-width: 0;
 }
 
 .llama-body-cell:last-child {
 	border-bottom-width: 0;
+}
+
+.llama-body-cell.showing-subcontent {
+	border-bottom-width: 1px;
 }
 
 .llama-body-cell.is-clickable {
@@ -63,6 +71,7 @@
 	overflow: auto;
 	min-height: 30px;
 	outline: none;
+	position: relative;
 }
 
 .llama-body-columngroup {
@@ -113,4 +122,10 @@
 	bottom: 0;
 	width: 10px;
 	cursor: ew-resize;
+}
+
+.llama-embed {
+	position: absolute;
+	left: 0;
+	right: 0;
 }

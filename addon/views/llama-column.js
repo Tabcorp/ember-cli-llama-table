@@ -6,6 +6,7 @@ var LlamaColumn = Em.CollectionView.extend({
 	classNames: 'llama-column',
 	classNameBindings: ['textAlignClass'],
 	width: Em.computed.alias('column.width'),
+	isVisible: Em.computed.not('column.isHidden'),
 
 	rows: null,
 	column: null,

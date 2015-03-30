@@ -6,10 +6,10 @@ var set = Em.set;
 
 var LlamaBodyColumn = LlamaColumn.extend({
 	classNames: 'llama-body-column',
+	contentBinding: 'rows',
 
 	rows: null,
 	column: null,
-	contentBinding: 'rows',
 
 	itemViewClass: function () {
 		var controller = this.get('controller');
