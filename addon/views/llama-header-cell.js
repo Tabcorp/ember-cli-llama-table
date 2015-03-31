@@ -31,11 +31,10 @@ var LlamaHeaderCell = LlamaCell.extend({
 	sortDescending: Em.computed.not('sortAscending'),
 
 	sortByThis: function () {
-		var sortProperties = this.get('sortProperties');
+		var sortBy = this.get('sortProperties.firstObject');
 		var thisColumn = this.get('column.name');
-		var contained = Em.isArray(sortProperties) && sortProperties.contains(thisColumn);
-		return contained;
-	}.property('sortProperties', 'column.name'),
+		return sortBy === thisColumn;
+	}.property('sortProperties.firstObject', 'column.name'),
 
 	sortByThisAscending: Em.computed.and('sortByThis', 'sortAscending'),
 	sortByThisDescending: Em.computed.and('sortByThis', 'sortDescending'),

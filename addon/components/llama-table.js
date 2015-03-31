@@ -294,8 +294,8 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 			}
 			else {
 				this.set('sortAscending', true);
-				this.set('sortProperties', [column]);
 			}
+			this.set('sortProperties', [column]);
 		},
 		stopHighlightingRows: function () {
 			this.stopHighlightingRows();
