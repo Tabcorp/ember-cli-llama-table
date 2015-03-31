@@ -219,8 +219,9 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * @method render
 	 */
 	render: function () {
-		this._super.apply(this, arguments);
-		this.appendChild(this.get('tableView'));
+		var tableView = this.get('tableView');
+		this.appendChild(tableView);
+		tableView.render.apply(tableView, arguments);
 	},
 
 	/**
