@@ -33,7 +33,8 @@ var IndexController = Em.Controller.extend({
 			label: 'Length of description (in characters)',
 			order: 4,
 			type: 'number',
-			width: 50
+			width: 50,
+			classNames: 'custom-class'
 		},
 		{
 			name: 'million_viewers',

@@ -1,12 +1,17 @@
 import Em from 'ember';
+import { join } from 'llama-table/computed';
 var get = Em.get;
 var set = Em.set;
+var computed = Em.computed;
+var alias = computed.alias;
+var not = computed.not;
 
 var LlamaColumn = Em.CollectionView.extend({
 	classNames: 'llama-column',
-	classNameBindings: ['textAlignClass'],
-	width: Em.computed.alias('column.width'),
-	isVisible: Em.computed.not('column.isHidden'),
+	classNameBindings: ['textAlignClass', 'columnClassNames'],
+	width: alias('column.width'),
+	isVisible: not('column.isHidden'),
+	columnClassNames: join('column.classNames', ' '),
 
 	rows: null,
 	column: null,
@@ -26,7 +31,7 @@ var LlamaColumn = Em.CollectionView.extend({
 		this.$().width(width);
 	}.observes('width').on('didInsertElement'),
 
-	cellViews: Em.computed.alias('childViews'),
+	cellViews: alias('childViews'),
 
 	createChildView: function (View, attrs) {
 		var column = this.get('column');

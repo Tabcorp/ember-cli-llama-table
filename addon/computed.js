@@ -22,6 +22,19 @@ export var defaultValue = function (watchKey, defaultValue) {
 	});
 };
 
+export var join = function (watchKey, separator) {
+	if (arguments.length < 2) {
+		separator = ',';
+	}
+	return computed(watchKey, function () {
+		var value = Em.makeArray(this.get(watchKey));
+		var strings = value.map(String);
+		var result = strings.join(separator);
+		return result;
+	});
+};
+
 export default {
-	defaultValue: defaultValue
+	defaultValue: defaultValue,
+	join: join
 };
