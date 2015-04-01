@@ -4,9 +4,16 @@ var set = Em.set;
 
 var LlamaHeaderColumn = LlamaColumn.extend({
 	classNames: 'llama-header-column',
-	itemViewClass: Em.computed.alias('controller.HeaderCellView'),
 
 	column: null,
+
+	itemViewClass: function () {
+		var ViewClass = this.get('config.header');
+		if (Em.isEmpty(ViewClass)) {
+			ViewClass = this.get('controller.HeaderCellView');
+		}
+		return ViewClass;
+	}.property('config.header'),
 
 	init: function () {
 		// override default assignment of `content` property

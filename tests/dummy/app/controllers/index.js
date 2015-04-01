@@ -154,7 +154,7 @@ var IndexController = Em.Controller.extend({
 		itemController: 'rm-episode',
 		enableRowClick: true,
 		types: [
-			{ name: 'remove', view: 'remove-button-cell' }
+			{ name: 'remove', view: 'remove-button-cell', header: 'remove-button-header' }
 		]
 	},
 	events: Em.A(),
@@ -190,6 +190,9 @@ var IndexController = Em.Controller.extend({
 		},
 		removeRow: function (index) {
 			this.get('tableData').removeAt(index);
+		},
+		removeAll: function () {
+			this.get('tableData').clear();
 		},
 		toggleHidden: function () {
 			var columnName = 'screenshot';
