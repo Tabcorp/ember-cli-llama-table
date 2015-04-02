@@ -297,6 +297,10 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		scrollY: function () {
 			// no-op
 		},
+		syncScroll: function () {
+			var pos = this.get('tableView.bodyView').$().scrollLeft();
+			this.send('scrollX', pos);
+		},
 		sortBy: function (column) {
 			var sortProperties = this.get('sortProperties');
 			if (Em.isArray(sortProperties) && column === sortProperties[0]) {

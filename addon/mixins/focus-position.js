@@ -59,6 +59,7 @@ var FocusPositionMixin = Em.Mixin.create({
 		var $cell = cellView.$();
 		if (!$cell || $cell.length < 0) return;
 		$cell.focus();
+		this.send('syncScroll');
 	}.observes('focusRow', 'focusColumn'),
 
 	actions: {
