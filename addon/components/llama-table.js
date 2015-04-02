@@ -165,6 +165,14 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	hasSubcontent: defaultValue('config.hasSubcontent', false),
 
 	/**
+	 * Limit focus to editable cells only.
+	 * @property {Boolean} onlyFocusEditable
+	 * @optional
+	 * @default false
+	 */
+	onlyFocusEditable: defaultValue('config.onlyFocusEditable', false),
+
+	/**
 	 * Optional controller for each row. Can define computed properties.
 	 * @property {String} itemController
 	 * @optional

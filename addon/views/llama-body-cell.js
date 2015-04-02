@@ -9,20 +9,26 @@ var SPACE = 32;
 var LlamaBodyCell = LlamaCell.extend({
 	templateName: 'llama-body-cell',
 	classNames: 'llama-body-cell',
-	classNameBindings: ['hover', 'columnIsClickable', 'rowIsClickable', 'isClickable', 'isEmpty', 'showingSubcontent'],
+	classNameBindings: ['hover', 'columnIsClickable', 'rowIsClickable', 'isClickable', 'isEmpty', 'showingSubcontent', 'isEditable'],
 	attributeBindings: ['tabindex'],
-	tabindex: 0,
 	hover: false,
 	height: Em.computed.alias('row.height'),
 	columnIsClickable: Em.computed.alias('column.isClickable'),
 	rowIsClickable: Em.computed.alias('controller.enableRowClick'),
 	isClickable: Em.computed.or('columnIsClickable', 'rowIsClickable'),
 	showingSubcontent: Em.computed.bool('row.isExpanded'),
+	isEmpty: Em.computed.empty('value'),
+	isEditable: Em.computed.bool('column.isEditable'),
 
 	column: null,
 	row: null,
 
-	isEmpty: Em.computed.empty('value'),
+	tabindex: function () {
+		var onlyFocusEditable = this.get('controller.onlyFocusEditable');
+		var isEditable = this.get('isEditable');
+		var index = onlyFocusEditable && !isEditable ? null : 0;
+		return index;
+	}.property('isEditable'),
 
 	// only calculated once
 	observedFields: function () {
