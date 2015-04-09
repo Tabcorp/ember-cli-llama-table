@@ -32,7 +32,8 @@ var IndexController = Em.Controller.extend({
 			name: 'million_viewers',
 			label: 'Viewers (in millions)',
 			order: 4,
-			type: 'number'
+			type: 'number',
+			format: '0.000'
 		},
 		{
 			name: 'screenshot',
