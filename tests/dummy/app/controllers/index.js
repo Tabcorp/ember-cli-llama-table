@@ -20,7 +20,7 @@ var IndexController = Em.Controller.extend({
 		{
 			name: 'airdate',
 			label: 'Original airdate',
-			order: 6
+			order: 5
 		},
 		{
 			name: 'description',
@@ -29,29 +29,21 @@ var IndexController = Em.Controller.extend({
 			width: 400
 		},
 		{
-			name: 'description_length',
-			label: 'Length of description (in characters)',
-			order: 4,
-			type: 'number',
-			width: 50,
-			classNames: 'custom-class'
-		},
-		{
 			name: 'million_viewers',
 			label: 'Viewers (in millions)',
-			order: 5,
+			order: 4,
 			type: 'number'
 		},
 		{
 			name: 'screenshot',
 			label: 'Screenshot URL',
-			order: 8,
+			order: 6,
 			isHidden: true
 		},
 		{
 			name: 'remove',
 			label: 'Remove',
-			order: 9,
+			order: 7,
 			type: 'remove',
 			isSortable: false,
 			minWidth: 100,
@@ -151,7 +143,6 @@ var IndexController = Em.Controller.extend({
 	config: {
 		maxHeight: 200,
 		sortProperties: ['episode'],
-		itemController: 'rm-episode',
 		enableRowClick: true,
 		onlyFocusEditable: true,
 		types: [
