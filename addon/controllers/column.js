@@ -1,8 +1,9 @@
 import Em from 'ember';
 import { defaultValue } from 'llama-table/computed';
+var ControllerMixin = Em.ControllerMixin;
 var get = Em.get;
 
-var ColumnController = Em.ObjectProxy.extend({
+var ColumnController = Em.ObjectProxy.extend(ControllerMixin, {
 	width: defaultValue('content.width', 200),
 	minWidth: defaultValue('content.minWidth', 50),
 	isClickable: defaultValue('content.isClickable', false),
