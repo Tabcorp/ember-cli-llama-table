@@ -1,11 +1,14 @@
 import Em from 'ember';
 import { defaultValue } from 'llama-table/computed';
+var computed = Em.computed;
+var alias = computed.alias;
+var reads = computed.reads;
 
 var RowController = Em.ObjectProxy.extend({
-	content: Em.computed.alias('model'),
+	content: alias('model'),
 	isExpanded: false,
 	height: defaultValue('content.height', 30),
-	subcontentHeight: Em.computed.reads('height')
+	subcontentHeight: reads('height')
 });
 
 export default RowController;
