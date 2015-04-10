@@ -113,6 +113,12 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	isResizable: defaultValue('config.isResizable', true),
 
 	/**
+	 * Table is empty when there are no rows
+	 * @property {Boolean} isEmpty
+	 */
+	isEmpty: Em.computed.equal('rows.length', 0),
+
+	/**
 	 * Column names to sort table by.
 	 * @property {String[]} sortProperties
 	 */
@@ -172,6 +178,14 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * @default false
 	 */
 	onlyFocusEditable: defaultValue('config.onlyFocusEditable', false),
+
+	/**
+	 * Text to display when the table is empty.
+	 * @property {String} emptyText
+	 * @optional
+	 * @default "No records to display"
+	 */
+	emptyText: defaultValue('config.emptyText', 'No records to display'),
 
 	/**
 	 * Table view. Contains header and footer.

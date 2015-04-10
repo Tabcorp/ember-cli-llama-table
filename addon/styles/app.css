@@ -74,8 +74,10 @@
 	position: relative;
 }
 
-.llama-body-columngroup {
+.llama-empty {
 	min-height: 30px;
+	line-height: 30px;
+	padding: 0 5px;
 }
 
 .llama-header-cell .column-label {

@@ -3,6 +3,7 @@ import ScrollXYMixin from 'llama-table/mixins/scroll-xy';
 
 var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 	classNames: ['llama-body'],
+	isEmpty: Em.computed.alias('controller.isEmpty'),
 
 	columngroups: null,
 	rows: null,
@@ -22,6 +23,11 @@ var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 		});
 	}.property(),
 
+	emptyView: function () {
+		var View = this.get('controller.EmptyView');
+		return this.createChildView(View, {});
+	}.property(),
+
 	init: function () {
 		this._super();
 		this.pushObject(this.get('contentView'));
@@ -36,6 +42,16 @@ var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 			this.removeObject(this.get('subcontentView'));
 		}
 	}.on('init').observes('controller.hasSubcontent'),
+
+	toggleEmpty: function () {
+		var isEmpty = this.get('isEmpty');
+		if (isEmpty) {
+			this.pushObject(this.get('emptyView'));
+		}
+		else {
+			this.removeObject(this.get('emptyView'));
+		}
+	}.on('init').observes('isEmpty'),
 
 	actions: {
 		scrollX: function (pos) {
