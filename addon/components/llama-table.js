@@ -22,7 +22,8 @@ var get = Em.get;
  * @uses ViewConstructorsMixin
  */
 var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, ViewConstructors, FocusPosition, {
-	classNames: 'llama-table-component',
+	classNames: ['llama-table-component'],
+	classNameBindings: ['isSortable', 'isResizable', 'isEmpty', 'hasSubcontent'],
 
 	/**
 	 * Column definitions array
