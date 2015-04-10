@@ -23,7 +23,7 @@ var get = Em.get;
  */
 var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, ViewConstructors, FocusPosition, {
 	classNames: ['llama-table-component'],
-	classNameBindings: ['isSortable', 'isResizable', 'isEmpty', 'hasSubcontent'],
+	classNameBindings: ['isSortable', 'isResizable', 'isEmpty', 'isLoading', 'hasSubcontent'],
 
 	/**
 	 * Column definitions array
@@ -120,6 +120,14 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	isEmpty: Em.computed.equal('rows.length', 0),
 
 	/**
+	 * Can show a loading state.
+	 * @property {Boolean} isLoading
+	 * @optional
+	 * @default false
+	 */
+	isLoading: defaultValue('config.isLoading', false),
+
+	/**
 	 * Column names to sort table by.
 	 * @property {String[]} sortProperties
 	 */
@@ -187,6 +195,14 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * @default "No records to display"
 	 */
 	emptyText: defaultValue('config.emptyText', 'No records to display'),
+
+	/**
+	 * Text to display when table data is loading.
+	 * @property {String} loadingText
+	 * @optional
+	 * @default "Loading..."
+	 */
+	loadingText: defaultValue('config.loadingText', 'Loading\u2026'),
 
 	/**
 	 * Table view. Contains header and footer.

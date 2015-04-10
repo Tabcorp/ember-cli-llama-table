@@ -7,6 +7,7 @@ import LlamaHeaderCell from 'llama-table/views/llama-header-cell';
 import LlamaContent from 'llama-table/views/llama-content';
 import LlamaSubcontent from 'llama-table/views/llama-subcontent';
 import LlamaEmpty from 'llama-table/views/llama-empty';
+import LlamaLoading from 'llama-table/views/llama-loading';
 import LlamaBody from 'llama-table/views/llama-body';
 import LlamaBodyColumngroup from 'llama-table/views/llama-body-columngroup';
 import LlamaBodyColumn from 'llama-table/views/llama-body-column';
@@ -24,6 +25,7 @@ var ViewConstructorsMixin = Em.Mixin.create({
 	ContentView: defaultValue('config.ContentView', LlamaContent),
 	SubcontentView: defaultValue('config.SubcontentView', LlamaSubcontent),
 	EmptyView: defaultValue('config.EmptyView', LlamaEmpty),
+	LoadingView: defaultValue('config.LoadingView', LlamaLoading),
 	BodyView: defaultValue('config.BodyView', LlamaBody),
 	BodyColumngroupView: defaultValue('config.BodyColumngroupView', LlamaBodyColumngroup),
 	BodyColumnView: defaultValue('config.BodyColumnView', LlamaBodyColumn),

@@ -195,6 +195,9 @@ var IndexController = Em.Controller.extend({
 				}
 			});
 		},
+		toggleLoading: function () {
+			this.toggleProperty('config.isLoading');
+		},
 		cellClick: function (row, column) {
 			var events = this.get('events');
 			var data = this.get('tableData');
