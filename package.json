@@ -43,7 +43,6 @@
     "glob": "^4.0.5"
   },
   "dependencies": {
-    "ember-cli-number-formatter": "^1.0.1",
     "ember-component-inbound-actions": "0.0.2"
   }
 }
