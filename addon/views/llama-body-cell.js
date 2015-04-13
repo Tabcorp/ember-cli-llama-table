@@ -1,8 +1,14 @@
 import Em from 'ember';
 import LlamaCell from './llama-cell';
 var get = Em.get;
+var observer = Em.observer;
 var addObserver = Em.addObserver;
 var removeObserver = Em.removeObserver;
+var computed = Em.computed;
+var alias = computed.alias;
+var or = computed.or;
+var bool = computed.bool;
+var empty = computed.empty;
 var ESC = 27;
 var SPACE = 32;
 
@@ -12,41 +18,41 @@ var LlamaBodyCell = LlamaCell.extend({
 	classNameBindings: ['hover', 'columnIsClickable', 'rowIsClickable', 'isClickable', 'isEmpty', 'showingSubcontent', 'isEditable'],
 	attributeBindings: ['tabindex'],
 	hover: false,
-	height: Em.computed.alias('row.height'),
-	columnIsClickable: Em.computed.alias('column.isClickable'),
-	rowIsClickable: Em.computed.alias('controller.enableRowClick'),
-	isClickable: Em.computed.or('columnIsClickable', 'rowIsClickable'),
-	showingSubcontent: Em.computed.bool('row.isExpanded'),
-	isEmpty: Em.computed.empty('value'),
-	isEditable: Em.computed.bool('column.isEditable'),
+	height: alias('row.height'),
+	columnIsClickable: alias('column.isClickable'),
+	rowIsClickable: alias('controller.enableRowClick'),
+	isClickable: or('columnIsClickable', 'rowIsClickable'),
+	showingSubcontent: bool('row.isExpanded'),
+	isEmpty: empty('value'),
+	isEditable: bool('column.isEditable'),
 
 	column: null,
 	row: null,
 
-	tabindex: function () {
+	tabindex: computed('isEditable', function () {
 		var onlyFocusEditable = this.get('controller.onlyFocusEditable');
 		var isEditable = this.get('isEditable');
 		var index = onlyFocusEditable && !isEditable ? null : 0;
 		return index;
-	}.property('isEditable'),
+	}),
 
 	// only calculated once
-	observedFields: function () {
+	observedFields: computed(function () {
 		var observes = this.get('column.observes');
 		if (!Em.isEmpty(observes)) {
 			return observes;
 		}
 		var id = this.get('column.name');
 		return id;
-	}.property(),
+	}),
 
-	marginBottom: function () {
+	marginBottom: computed('showingSubcontent', 'row.subcontentHeight', function () {
 		var isExpanded = this.get('showingSubcontent');
 		if (isExpanded) {
 			return this.get('row.subcontentHeight');
 		}
 		return null;
-	}.property('showingSubcontent', 'row.subcontentHeight'),
+	}),
 
 	didInsertElement: function () {
 		this._super();
@@ -62,19 +68,19 @@ var LlamaBodyCell = LlamaCell.extend({
 		this._super();
 	},
 
-	setHeight: function () {
+	setHeight: observer('height', function () {
 		var $cell = this.$();
 		if ($cell) {
 			$cell.css('height', this.get('height'));
 		}
-	}.on('didInsertElement').observes('height'),
+	}).on('didInsertElement'),
 
-	setMarginBottom: function () {
+	setMarginBottom: observer('marginBottom', function () {
 		var $cell = this.$();
 		if ($cell) {
 			$cell.css('marginBottom', this.get('marginBottom') || 0);
 		}
-	}.on('didInsertElement').observes('marginBottom'),
+	}).on('didInsertElement'),
 
 	getValue: function () {
 		var id = this.get('column.name');
@@ -83,10 +89,10 @@ var LlamaBodyCell = LlamaCell.extend({
 		return value;
 	},
 
-	updateValue: function () {
+	updateValue: observer('column', function () {
 		var value = this.getValue();
 		this.set('value', value);
-	}.on('init').observes('column'),
+	}).on('init'),
 
 	mouseEnter: function () {
 		var row = this.get('row');

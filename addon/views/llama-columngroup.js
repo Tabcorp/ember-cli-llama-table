@@ -1,26 +1,29 @@
 import Em from 'ember';
 var get = Em.get;
 var set = Em.set;
+var observer = Em.observer;
+var computed = Em.computed;
+var alias = computed.alias;
 
 var LlamaColumngroup = Em.CollectionView.extend({
 	classNames: 'llama-columngroup',
-	columnViews: Em.computed.alias('childViews'),
+	columnViews: alias('childViews'),
 	contentBinding: 'columns',
 
 	columns: null,
 
-	width: function () {
+	width: computed('columns.@each.width', 'columns.@each.isHidden', function () {
 		var widths = this.get('columns').rejectBy('isHidden').mapBy('width');
 		var total = widths.reduce(function (total, val) {
 			return total + val;
 		}, 0);
 		return total;
-	}.property('columns.@each.width', 'columns.@each.isHidden'),
+	}),
 
-	setWidth: function () {
+	setWidth: observer('width', function () {
 		var width = this.get('width');
 		this.$().width(width);
-	}.observes('width').on('didInsertElement'),
+	}).on('didInsertElement'),
 
 	createChildView: function (View, attrs) {
 		var columns = this.get('columns');

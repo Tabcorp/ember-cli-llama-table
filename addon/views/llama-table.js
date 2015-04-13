@@ -1,4 +1,5 @@
 import Em from 'ember';
+var computed = Em.computed;
 
 var LlamaTable = Em.ContainerView.extend({
 	classNames: 'llama-table',
@@ -6,20 +7,20 @@ var LlamaTable = Em.ContainerView.extend({
 	rows: null,
 	columngroups: null,
 
-	headerView: function () {
+	headerView: computed(function () {
 		var View = this.get('controller.HeaderView');
 		return this.createChildView(View, {
 			columngroups: this.get('columngroups')
 		});
-	}.property(),
+	}),
 
-	bodyView: function () {
+	bodyView: computed(function () {
 		var View = this.get('controller.BodyView');
 		return this.createChildView(View, {
 			columngroups: this.get('columngroups'),
 			rows: this.get('rows')
 		});
-	}.property(),
+	}),
 
 	init: function () {
 		this._super();

@@ -1,6 +1,9 @@
 import Em from 'ember';
 var get = Em.get;
 var set = Em.set;
+var computed = Em.computed;
+var alias = computed.alias;
+var filterBy = computed.filterBy;
 
 var LlamaSubcontent = Em.CollectionView.extend({
 	classNames: ['llama-subcontent'],
@@ -8,8 +11,8 @@ var LlamaSubcontent = Em.CollectionView.extend({
 
 	rows: null,
 
-	itemViewClass: Em.computed.alias('controller.EmbedView'),
-	expandedRows: Em.computed.filterBy('rows', 'isExpanded'),
+	itemViewClass: alias('controller.EmbedView'),
+	expandedRows: filterBy('rows', 'isExpanded'),
 
 	createChildView: function (View, attrs) {
 		var row = get(attrs, 'content');

@@ -3,6 +3,9 @@ import ArrowKeysMixin from 'llama-table/mixins/arrow-keys';
 import CopyController from 'llama-table/controllers/copy';
 var get = Em.get;
 var set = Em.set;
+var observer = Em.observer;
+var computed = Em.computed;
+var alias = computed.alias;
 var TAB = 9;
 var ENTER = 13;
 
@@ -10,8 +13,8 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 	classNames: 'llama-content',
 	attributeBindings: ['tabindex'],
 	tabindex: 0,
-	itemViewClass: Em.computed.alias('controller.BodyColumngroupView'),
-	columngroupViews: Em.computed.alias('childViews'),
+	itemViewClass: alias('controller.BodyColumngroupView'),
+	columngroupViews: alias('childViews'),
 
 	rows: null,
 	columngroups: null,
@@ -65,12 +68,12 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 		}
 	},
 
-	setHeight: function () {
+	setHeight: observer('controller.maxHeight', function () {
 		var $body = this.$();
 		if ($body) {
 			$body.css('maxHeight', this.get('controller.maxHeight'));
 		}
-	}.on('didInsertElement').observes('controller.maxHeight'),
+	}).on('didInsertElement'),
 
 	actions: {
 		keyLeft: function () {

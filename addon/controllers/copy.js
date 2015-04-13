@@ -1,5 +1,6 @@
 import Em from 'ember';
 var run = Em.run;
+var computed = Em.computed;
 
 var Copy = Em.Controller.extend({
 	/**
@@ -19,12 +20,12 @@ var Copy = Em.Controller.extend({
 	 *   highlighting.
 	 * @property {jQuery} $hide
 	 */
-	$hide: function () {
+	$hide: computed(function () {
 		var style = document.createElement('style');
 		var contents = '::selection { background: inherit; color: inherit; }';
 		style.appendChild(document.createTextNode(contents));
 		return Em.$(style);
-	}.property(),
+	}),
 
 	/**
 	 * Select an entire element and its contents

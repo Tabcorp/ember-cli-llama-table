@@ -9,6 +9,11 @@ import Rows from 'llama-table/controllers/rows';
 import RowController from 'llama-table/controllers/row';
 import { defaultValue } from 'llama-table/computed';
 var get = Em.get;
+var observer = Em.observer;
+var computed = Em.computed;
+var alias = computed.alias;
+var eq = computed.equal;
+var collect = computed.collect;
 
 /**
  * Llama Table Ember component.
@@ -47,15 +52,15 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * @optional
 	 * @see https://github.com/luxbet/ember-cli-llama-table/wiki/Table-configuration
 	 */
-	config: function () {
+	config: computed(function () {
 		return {};
-	}.property(),
+	}),
 
 	/**
 	 * Column definitions array with added sorting functionality.
 	 * @property {Ember.ArrayProxy} sortedColumns
 	 */
-	sortedColumns: function () {
+	sortedColumns: computed(function () {
 		return Columns.create({
 			parentController: this,
 			container: this.get('container'),
@@ -63,13 +68,13 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 			sortAscending: true,
 			content: this.get('columns')
 		});
-	}.property(),
+	}),
 
 	/**
 	 * Row values array with added sorting functionality.
 	 * @property {Ember.ArrayProxy} sortedRows
 	 */
-	sortedRows: function () {
+	sortedRows: computed(function () {
 		var options = {
 			parentController: this,
 			itemController: RowController,
@@ -89,13 +94,13 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 			options.orderBy = orderBy;
 		}
 		return Rows.create(options);
-	}.property(),
+	}),
 
 	/**
 	 * Maximum height of table before introducing vertical scrollbars.
 	 * @property {Number} maxHeight
 	 */
-	maxHeight: Em.computed.alias('config.maxHeight'),
+	maxHeight: alias('config.maxHeight'),
 
 	/**
 	 * Enables sorting columns by clicking headers.
@@ -117,7 +122,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * Table is empty when there are no rows
 	 * @property {Boolean} isEmpty
 	 */
-	isEmpty: Em.computed.equal('rows.length', 0),
+	isEmpty: eq('rows.length', 0),
 
 	/**
 	 * Can show a loading state.
@@ -131,16 +136,16 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * Column names to sort table by.
 	 * @property {String[]} sortProperties
 	 */
-	sortProperties: Em.computed.alias('config.sortProperties'),
+	sortProperties: alias('config.sortProperties'),
 
 	/**
 	 * Triggers a row sort properties update. Observes the `sortProperties`
 	 *   property.
 	 * @method updateSortProperties
 	 */
-	updateSortProperties: function () {
+	updateSortProperties: observer('sortProperties', function () {
 		this.set('sortedRows.sortProperties', this.get('sortProperties'));
-	}.observes('sortProperties'),
+	}),
 
 	/**
 	 * Sort columns in ascending order.
@@ -154,15 +159,15 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * Triggers a row sort order update. Observes the `sortAscending` property.
 	 * @method updateRowSortOrder
 	 */
-	updateRowSortOrder: function () {
+	updateRowSortOrder: observer('sortAscending', function () {
 		this.set('sortedRows.sortAscending', this.get('sortAscending'));
-	}.observes('sortAscending'),
+	}),
 
 	/**
 	 * Column definitions grouped into sets.
 	 * @property {Object[][]} columngroups
 	 */
-	columngroups: Em.computed.collect('sortedColumns'),
+	columngroups: collect('sortedColumns'),
 
 	/**
 	 * Allows row click actions to propagate.
@@ -208,31 +213,31 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * Table view. Contains header and footer.
 	 * @property {Ember.View} tableView
 	 */
-	tableView: function () {
+	tableView: computed(function () {
 		var TableView = this.get('TableView');
 		return this.createChildView(TableView, {
 			columngroups: this.get('columngroups'),
 			rows: this.get('sortedRows')
 		});
-	}.property(),
+	}),
 
 	/**
 	 * Header container view.
 	 * @property {Ember.View} headerView
 	 */
-	headerView: Em.computed.alias('tableView.headerView'),
+	headerView: alias('tableView.headerView'),
 
 	/**
 	 * Body container view.
 	 * @property {Ember.View} bodyView
 	 */
-	bodyView: Em.computed.alias('tableView.bodyView.contentView'),
+	bodyView: alias('tableView.bodyView.contentView'),
 
 	/**
 	 * Columngroup views in body container.
 	 * @property {Ember.View} bodyColumngroupViews
 	 */
-	bodyColumngroupViews: Em.computed.alias('bodyView.columngroupViews'),
+	bodyColumngroupViews: alias('bodyView.columngroupViews'),
 
 	/**
 	 * Get an array of visible column views from all body columngroups.

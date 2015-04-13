@@ -1,45 +1,48 @@
 import Em from 'ember';
 import ScrollXYMixin from 'llama-table/mixins/scroll-xy';
+var observer = Em.observer;
+var computed = Em.computed;
+var alias = computed.alias;
 
 var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 	classNames: ['llama-body'],
-	isEmpty: Em.computed.alias('controller.isEmpty'),
-	isLoading: Em.computed.alias('controller.isLoading'),
+	isEmpty: alias('controller.isEmpty'),
+	isLoading: alias('controller.isLoading'),
 
 	columngroups: null,
 	rows: null,
 
-	contentView: function () {
+	contentView: computed(function () {
 		var View = this.get('controller.ContentView');
 		return this.createChildView(View, {
 			columngroups: this.get('columngroups'),
 			rows: this.get('rows')
 		});
-	}.property(),
+	}),
 
-	subcontentView: function () {
+	subcontentView: computed(function () {
 		var View = this.get('controller.SubcontentView');
 		return this.createChildView(View, {
 			rows: this.get('rows')
 		});
-	}.property(),
+	}),
 
-	emptyView: function () {
+	emptyView: computed(function () {
 		var View = this.get('controller.EmptyView');
 		return this.createChildView(View, {});
-	}.property(),
+	}),
 
-	loadingView: function () {
+	loadingView: computed(function () {
 		var View = this.get('controller.LoadingView');
 		return this.createChildView(View, {});
-	}.property(),
+	}),
 
 	init: function () {
 		this._super();
 		this.pushObject(this.get('contentView'));
 	},
 
-	toggleSubcontent: function () {
+	toggleSubcontent: observer('controller.hasSubcontent', function () {
 		var hasSubcontent = this.get('controller.hasSubcontent');
 		if (hasSubcontent) {
 			this.pushObject(this.get('subcontentView'));
@@ -47,9 +50,9 @@ var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 		else {
 			this.removeObject(this.get('subcontentView'));
 		}
-	}.on('init').observes('controller.hasSubcontent'),
+	}).on('init'),
 
-	toggleEmpty: function () {
+	toggleEmpty: observer('isEmpty', 'isLoading', function () {
 		var isEmpty = this.get('isEmpty');
 		var isLoading = this.get('isLoading');
 		var emptyView = this.get('emptyView');
@@ -65,7 +68,7 @@ var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 			this.removeObject(loadingView);
 			this.pushObject(emptyView);
 		}
-	}.on('init').observes('isEmpty', 'isLoading'),
+	}).on('init'),
 
 	actions: {
 		scrollX: function (pos) {

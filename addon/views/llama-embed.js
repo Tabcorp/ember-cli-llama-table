@@ -1,13 +1,16 @@
 import Em from 'ember';
 var get = Em.get;
+var observer = Em.observer;
+var computed = Em.computed;
+var alias = computed.alias;
 
 var LlamaEmbed = Em.ContainerView.extend({
 	classNames: 'llama-embed',
-	height: Em.computed.alias('row.subcontentHeight'),
+	height: alias('row.subcontentHeight'),
 
 	row: null,
 
-	rows: Em.computed.alias('controller.sortedRows'),
+	rows: alias('controller.sortedRows'),
 
 	calculateRowHeight: function (row) {
 		var result = get(row, 'height');
@@ -17,7 +20,7 @@ var LlamaEmbed = Em.ContainerView.extend({
 		return result;
 	},
 
-	offsetTop: function () {
+	offsetTop: computed('rows.@each.isExpanded', 'rows.@each.height', 'rows.@each.subcontentHeight', function () {
 		var sortedRows = this.get('rows');
 		var row = this.get('row');
 		var index = sortedRows.indexOf(row);
@@ -29,28 +32,28 @@ var LlamaEmbed = Em.ContainerView.extend({
 		var thisHeight = get(row, 'height');
 		var offsetTop = previousHeight + thisHeight;
 		return offsetTop;
-	}.property('rows.@each.isExpanded', 'rows.@each.height', 'rows.@each.subcontentHeight'),
+	}),
 
-	updateOffsetTop: function () {
+	updateOffsetTop: observer('offsetTop', function () {
 		var $embed = this.$();
 		if ($embed) {
 			$embed.css('top', this.get('offsetTop'));
 		}
-	}.on('didInsertElement').observes('offsetTop'),
+	}).on('didInsertElement'),
 
-	updateHeight: function () {
+	updateHeight: observer('height', function () {
 		var $embed = this.$();
 		if ($embed) {
 			$embed.css('height', this.get('height'));
 		}
-	}.on('didInsertElement').observes('height'),
+	}).on('didInsertElement'),
 
-	subcontentView: function () {
+	subcontentView: computed(function () {
 		var View = this.get('controller.config.subcontentView');
 		return this.createChildView(View, {
 			content: this.get('content')
 		});
-	}.property(),
+	}),
 
 	init: function () {
 		this._super();

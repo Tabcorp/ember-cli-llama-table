@@ -1,9 +1,10 @@
 import Em from 'ember';
 import EmptyView from 'llama-table/views/llama-empty';
+var alias = Em.computed.alias;
 
 var LoadingView = EmptyView.extend({
 	classNames: ['llama-loading'],
-	content: Em.computed.alias('controller.loadingText')
+	content: alias('controller.loadingText')
 });
 
 export default LoadingView;

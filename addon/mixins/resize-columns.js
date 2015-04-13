@@ -3,21 +3,23 @@ import ResizeController from 'llama-table/controllers/resize';
 var get = Em.get;
 var set = Em.set;
 var isEmpty = Em.isEmpty;
+var computed = Em.computed;
+var observer = Em.observer;
 
 var ResizeColumns = Em.Mixin.create({
 	resizeColumn: null,
 	resizeBeginWidth: null,
 
-	resizeController: function () {
+	resizeController: computed(function () {
 		return ResizeController.create();
-	}.property(),
+	}),
 
 	willDestroy: function () {
 		this.get('resizeController').destroy();
 		this._super();
 	},
 
-	updateResize: function () {
+	updateResize: observer('resizeController.deltaX', function () {
 		var beginWidth = this.get('resizeBeginWidth');
 		var column = this.get('resizeColumn');
 		var maxWidth = get(column, 'maxWidth');
@@ -31,7 +33,7 @@ var ResizeColumns = Em.Mixin.create({
 			newWidth = Math.min(newWidth, maxWidth);
 		}
 		set(column, 'width', newWidth);
-	}.observes('resizeController.deltaX'),
+	}),
 
 	actions: {
 		startResize: function (e, column) {

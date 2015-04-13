@@ -1,15 +1,16 @@
 import Em from 'ember';
 import ScrollHandlerMixin from 'llama-table/mixins/scroll-handler';
+var computed = Em.computed;
 
 var ScrollXYMixin = Em.Mixin.create(ScrollHandlerMixin, {
 
-	_scrollLeft: function () {
+	_scrollLeft: computed(function () {
 		return this.$().scrollLeft();
-	}.property(),
+	}),
 
-	_scrollTop: function () {
+	_scrollTop: computed(function () {
 		return this.$().scrollTop();
-	}.property(),
+	}),
 
 	scroll: function (e) {
 		var oldScrollLeft = this.get('_scrollLeft');

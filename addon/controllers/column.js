@@ -2,13 +2,14 @@ import Em from 'ember';
 import { defaultValue } from 'llama-table/computed';
 var ControllerMixin = Em.ControllerMixin;
 var get = Em.get;
+var computed = Em.computed;
 
 var ColumnController = Em.ObjectProxy.extend(ControllerMixin, {
 	width: defaultValue('content.width', 200),
 	minWidth: defaultValue('content.minWidth', 50),
 	isClickable: defaultValue('content.isClickable', false),
 	showLabel: defaultValue('content.showLabel', true),
-	textAlign: function () {
+	textAlign: computed('content.textAlign', 'type', function () {
 		var value = this.get('content.textAlign');
 		if (!Em.isEmpty(value)) {
 			return value;
@@ -17,7 +18,7 @@ var ColumnController = Em.ObjectProxy.extend(ControllerMixin, {
 			return 'right';
 		}
 		return 'left';
-	}.property('content.textAlign', 'type')
+	})
 });
 
 export default ColumnController;

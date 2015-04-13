@@ -1,4 +1,6 @@
 import Em from 'ember';
+var computed = Em.computed;
+var alias = computed.alias;
 
 var LlamaCell = Em.View.extend({
 	classNames: 'llama-cell',
@@ -6,8 +8,8 @@ var LlamaCell = Em.View.extend({
 	column: null,
 	row: null,
 
-	columnView: Em.computed.alias('parentView'),
-	config: Em.computed.alias('columnView.config')
+	columnView: alias('parentView'),
+	config: alias('columnView.config')
 });
 
 export default LlamaCell;
