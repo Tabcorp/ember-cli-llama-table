@@ -5,12 +5,12 @@ var get = Em.get;
 var computed = Em.computed;
 
 var ColumnController = Em.ObjectProxy.extend(ControllerMixin, {
-	width: defaultValue('content.width', 200),
-	minWidth: defaultValue('content.minWidth', 50),
-	isClickable: defaultValue('content.isClickable', false),
-	showLabel: defaultValue('content.showLabel', true),
-	textAlign: computed('content.textAlign', 'type', function () {
-		var value = this.get('content.textAlign');
+	width: defaultValue('model.width', 200),
+	minWidth: defaultValue('model.minWidth', 50),
+	isClickable: defaultValue('model.isClickable', false),
+	showLabel: defaultValue('model.showLabel', true),
+	textAlign: computed('model.textAlign', 'type', function () {
+		var value = this.get('model.textAlign');
 		if (!Em.isEmpty(value)) {
 			return value;
 		}

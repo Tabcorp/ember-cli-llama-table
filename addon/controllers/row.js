@@ -7,7 +7,7 @@ var reads = computed.reads;
 var RowController = Em.ObjectProxy.extend({
 	content: alias('model'),
 	isExpanded: false,
-	height: defaultValue('content.height', 30),
+	height: defaultValue('model.height', 30),
 	subcontentHeight: reads('height')
 });
 
