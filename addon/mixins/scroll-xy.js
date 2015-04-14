@@ -2,6 +2,13 @@ import Em from 'ember';
 import ScrollHandlerMixin from 'llama-table/mixins/scroll-handler';
 var computed = Em.computed;
 
+/**
+ * Fires 'scrollX' and 'scrollY' events when each axis is scrolled.
+ * @module mixins
+ * @constructor
+ * @class ScrollXYMixin
+ * @extends Ember.Mixin
+ */
 var ScrollXYMixin = Em.Mixin.create(ScrollHandlerMixin, {
 
 	_scrollLeft: computed(function () {

@@ -16,6 +16,13 @@ import LlamaNumberCell from 'llama-table/views/llama-number-cell';
 import LlamaEmbed from 'llama-table/views/llama-embed';
 import { defaultValue } from 'llama-table/computed';
 
+/**
+ * Defines each view used by the component. All views can be overridden.
+ * @module mixins
+ * @constructor
+ * @class ViewConstructorsMixin
+ * @extends Ember.Mixin
+ */
 var ViewConstructorsMixin = Em.Mixin.create({
 	TableView: defaultValue('config.TableView', LlamaTable),
 	HeaderView: defaultValue('config.HeaderView', LlamaHeader),

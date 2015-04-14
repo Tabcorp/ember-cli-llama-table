@@ -1,6 +1,14 @@
 import Em from 'ember';
 
-var ResizeController = Em.Controller.extend(Em.Evented, {
+/**
+ * Used for starting and stopping resize events and monitoring the mouse
+ *   position in-between.
+ * @module controllers
+ * @constructor
+ * @class ResizeController
+ * @extends Ember.Controller
+ */
+var ResizeController = Em.Controller.extend({
 	eventBegin: null,
 	deltaX: 0,
 	deltaY: 0,

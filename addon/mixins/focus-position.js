@@ -3,6 +3,13 @@ var observer = Em.observer;
 var computed = Em.computed;
 var oneWay = computed.oneWay;
 
+/**
+ * Responsible for observing and maintaining the position of the focused cell.
+ * @module mixins
+ * @constructor
+ * @class FocusPositionMixin
+ * @extends Ember.Mixin
+ */
 var FocusPositionMixin = Em.Mixin.create({
 	focusRow: oneWay('sortedRows.firstObject'),
 	focusColumn: oneWay('sortedColumns.firstObject'),

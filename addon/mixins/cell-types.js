@@ -2,6 +2,13 @@ import Em from 'ember';
 var get = Em.get;
 var isBlank = Em.isBlank;
 
+/**
+ * Allows custom column cell type definitions.
+ * @module mixins
+ * @constructor
+ * @class CellTypesMixin
+ * @extends Ember.Mixin
+ */
 var CellTypesMixin = Em.Mixin.create({
 	/**
 	 * Lookup a column type and get the cell constructor.

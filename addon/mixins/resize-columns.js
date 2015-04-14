@@ -6,6 +6,13 @@ var isEmpty = Em.isEmpty;
 var computed = Em.computed;
 var observer = Em.observer;
 
+/**
+ * Utilizes the ResizeController to enable resizing of columns.
+ * @module mixins
+ * @constructor
+ * @class ResizeColumnsMixin
+ * @extends Ember.Mixin
+ */
 var ResizeColumns = Em.Mixin.create({
 	resizeColumn: null,
 	resizeBeginWidth: null,

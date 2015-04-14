@@ -2,6 +2,13 @@ import Em from 'ember';
 var run = Em.run;
 var computed = Em.computed;
 
+/**
+ * Facilitate copying cell content when cell is focused.
+ * @module controllers
+ * @constructor
+ * @class CopyController
+ * @extends Ember.Controller
+ */
 var Copy = Em.Controller.extend({
 	/**
 	 * Key code of copy key. By default this value is the key code for 'C'.

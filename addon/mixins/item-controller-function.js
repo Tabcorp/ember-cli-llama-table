@@ -2,6 +2,16 @@ import Em from 'ember';
 var EmberError = Em.Error;
 var get = Em.get;
 
+/**
+ * Allows array controllers to define their item controller as a constructor
+ *   rather than a string. Avoids using the container to lookup a class. Useful
+ *   for item controllers which are not added to the container such as those
+ *   defined by addons.
+ * @module mixins
+ * @constructor
+ * @class ItemControllerFunctionMixin
+ * @extends Ember.Mixin
+ */
 var ItemControllerFunctionMixin = Em.Mixin.create({
 	/**
 	 * Optional item controller.

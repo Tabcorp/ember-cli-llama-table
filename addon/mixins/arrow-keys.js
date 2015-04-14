@@ -5,6 +5,13 @@ var KEY_UP = 38;
 var KEY_RIGHT = 39;
 var KEY_DOWN = 40;
 
+/**
+ * Fires custom events on the implementor when arrow keys are pressed.
+ * @module mixins
+ * @constructor
+ * @class ArrowKeysMixin
+ * @extends Ember.Mixin
+ */
 var ArrowKeysMixin = Em.Mixin.create({
 	keyDown: function (e) {
 		switch (e.which) {
