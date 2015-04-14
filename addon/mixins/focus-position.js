@@ -1,8 +1,11 @@
 import Em from 'ember';
+var observer = Em.observer;
+var computed = Em.computed;
+var oneWay = computed.oneWay;
 
 var FocusPositionMixin = Em.Mixin.create({
-	focusRow: Em.computed.oneWay('sortedRows.firstObject'),
-	focusColumn: Em.computed.oneWay('sortedColumns.firstObject'),
+	focusRow: oneWay('sortedRows.firstObject'),
+	focusColumn: oneWay('sortedColumns.firstObject'),
 
 	getRowIndex: function (row) {
 		var sortedRows = this.get('sortedRows');
@@ -51,7 +54,7 @@ var FocusPositionMixin = Em.Mixin.create({
 		return cellView || null;
 	},
 
-	focusCell: function () {
+	focusCell: observer('focusRow', 'focusColumn', function () {
 		var row = this.get('focusRow');
 		var column = this.get('focusColumn');
 		var cellView = this.getCellFor(row, column);
@@ -60,7 +63,7 @@ var FocusPositionMixin = Em.Mixin.create({
 		if (!$cell || $cell.length < 0) return;
 		$cell.focus();
 		this.send('syncScroll');
-	}.observes('focusRow', 'focusColumn'),
+	}),
 
 	actions: {
 		focusCell: function (row, column) {
