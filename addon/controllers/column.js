@@ -4,6 +4,14 @@ var get = Em.get;
 var computed = Em.computed;
 var alias = computed.alias;
 
+/**
+ * Manages column attributes. All properties are JSON-encodable so that column
+ *   configuration and updates can be embedded or transferred between entities.
+ * @module controllers
+ * @constructor
+ * @class ColumnController
+ * @extends Ember.ObjectProxy
+ */
 var ColumnController = Em.ObjectProxy.extend({
 	/**
 	 * Column name. Should match with property name of record to display.
