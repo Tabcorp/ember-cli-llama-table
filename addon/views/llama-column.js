@@ -45,6 +45,8 @@ var LlamaColumn = Em.CollectionView.extend({
 		switch (textAlign) {
 			case 'left': return 'text-left';
 			case 'right': return 'text-right';
+			case 'center': return 'text-center';
+			case 'justify': return 'text-justify';
 		}
 	})
 });
