@@ -6,7 +6,6 @@ import ViewConstructors from 'llama-table/mixins/view-constructors';
 import FocusPosition from 'llama-table/mixins/focus-position';
 import Columns from 'llama-table/controllers/columns';
 import Rows from 'llama-table/controllers/rows';
-import RowController from 'llama-table/controllers/row';
 import { defaultValue } from 'llama-table/computed';
 var get = Em.get;
 var observer = Em.observer;
@@ -79,7 +78,6 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	sortedRows: computed(function () {
 		var options = {
 			parentController: this,
-			itemController: RowController,
 			container: this.get('container'),
 			sortProperties: this.get('sortProperties'),
 			sortAscending: this.get('sortAscending'),
