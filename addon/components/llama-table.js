@@ -210,6 +210,22 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	loadingText: defaultValue('config.loadingText', 'Loading\u2026'),
 
 	/**
+	 * Sync the horizontal scroll position of this table.
+	 * @property {Number} scrollLeft
+	 * @optional
+	 * @default 0
+	 */
+	scrollLeft: defaultValue('config.scrollLeft', 0),
+
+	/**
+	 * Sync the vertical scroll position of this table.
+	 * @property {Number} scrollTop
+	 * @optional
+	 * @default 0
+	 */
+	scrollTop: defaultValue('config.scrollTop', 0),
+
+	/**
 	 * Table view. Contains header and footer.
 	 * @property {Ember.View} tableView
 	 */
