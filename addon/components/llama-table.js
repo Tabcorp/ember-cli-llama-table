@@ -18,6 +18,7 @@ var collect = computed.collect;
 /**
  * Llama Table Ember component.
  * See https://github.com/luxbet/ember-cli-llama-table.
+ * @module components
  * @class LlamaTable
  * @constructor
  * @extends Ember.Component
@@ -25,6 +26,7 @@ var collect = computed.collect;
  * @uses ResizeColumnsMixin
  * @uses CellTypesMixin
  * @uses ViewConstructorsMixin
+ * @uses FocusPositionMixin
  */
 var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, ViewConstructors, FocusPosition, {
 	classNames: ['llama-table-component'],
