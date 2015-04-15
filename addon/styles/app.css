@@ -37,9 +37,17 @@
 
 .llama-header {
 	overflow: hidden;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
+	border-style: solid;
+	border-width: 1px 0;
 	min-height: 30px;
+}
+
+.llama-header:first-child {
+	border-top-width: 0;
+}
+
+.llama-header:last-child {
+	border-bottom-width: 0;
 }
 
 .llama-header-cell {
