@@ -2,10 +2,12 @@ import Em from 'ember';
 var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
+var collect = computed.collect;
 
 var LlamaTable = Em.ContainerView.extend({
 	classNames: 'llama-table',
 	dualHeaders: alias('controller.dualHeaders'),
+	childViews: collect('headerView', 'bodyView'),
 
 	rows: null,
 	columngroups: null,
@@ -31,12 +33,6 @@ var LlamaTable = Em.ContainerView.extend({
 			rows: this.get('rows')
 		});
 	}),
-
-	init: function () {
-		this._super();
-		this.pushObject(this.get('headerView'));
-		this.pushObject(this.get('bodyView'));
-	},
 
 	toggleDualHeader: observer('dualHeaders', function () {
 		var dualHeaders = this.get('dualHeaders');
