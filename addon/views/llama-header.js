@@ -1,6 +1,7 @@
 import Em from 'ember';
 var get = Em.get;
 var set = Em.set;
+var observer = Em.observer;
 var alias = Em.computed.alias;
 
 var LlamaHeader = Em.CollectionView.extend({
@@ -8,6 +9,7 @@ var LlamaHeader = Em.CollectionView.extend({
 	itemViewClass: alias('controller.HeaderColumngroupView'),
 	columngroupViews: alias('childViews'),
 	contentBinding: 'columngroups',
+	scrollLeft: alias('controller.scrollLeft'),
 
 	columngroups: null,
 
@@ -15,7 +17,14 @@ var LlamaHeader = Em.CollectionView.extend({
 		var columns = get(attrs, 'content');
 		set(attrs, 'columns', columns);
 		return this._super(View, attrs);
-	}
+	},
+
+	updateScrollPosition: observer('scrollLeft', function () {
+		var $header = this.$();
+		if ($header && $header.length > 0) {
+			$header.css('marginLeft', this.get('scrollLeft') * -1);
+		}
+	}).on('didInsertElement')
 });
 
 export default LlamaHeader;
