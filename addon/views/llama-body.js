@@ -8,6 +8,8 @@ var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 	classNames: ['llama-body'],
 	isEmpty: alias('controller.isEmpty'),
 	isLoading: alias('controller.isLoading'),
+	scrollLeft: alias('controller.scrollLeft'),
+	scrollTop: alias('controller.scrollTop'),
 
 	columngroups: null,
 	rows: null,
@@ -70,12 +72,20 @@ var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 		}
 	}).on('init'),
 
+	updateScrollPosition: observer('didInsertElement', function () {
+		var $el;
+		if ($el && $el.length > 0) {
+			$el.scrollLeft(this.get('scrollLeft'));
+			$el.scrollTop(this.get('scrollTop'));
+		}
+	}),
+
 	actions: {
 		scrollX: function (pos) {
-			this.get('controller').send('scrollX', pos);
+			this.set('scrollLeft', pos);
 		},
 		scrollY: function (pos) {
-			this.get('controller').send('scrollY', pos);
+			this.set('scrollTop', pos);
 		}
 	}
 });

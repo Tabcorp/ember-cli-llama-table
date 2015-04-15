@@ -338,14 +338,18 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 
 	actions: {
 		scrollX: function (pos) {
-			this.get('headerView').$().css('marginLeft', -pos);
+			this.set('scrollLeft', pos);
 		},
-		scrollY: function () {
-			// no-op
+		scrollY: function (pos) {
+			this.set('scrollTop', pos);
 		},
 		syncScroll: function () {
-			var pos = this.get('tableView.bodyView').$().scrollLeft();
-			this.send('scrollX', pos);
+			var body = this.get('tableView.bodyView');
+			var $body = body.$();
+			if ($body && $body.length > 0) {
+				this.set('scrollLeft', $body.scrollLeft());
+				this.set('scrollTop', $body.scrollTop());
+			}
 		},
 		sortBy: function (column) {
 			var sortProperties = this.get('sortProperties');
