@@ -19,7 +19,7 @@ var LlamaHeader = Em.CollectionView.extend({
 		return this._super(View, attrs);
 	},
 
-	updateScroll: observer('scrollLeft', function () {
+	updateScrollPosition: observer('scrollLeft', function () {
 		var $header = this.$();
 		if ($header && $header.length > 0) {
 			$header.css('marginLeft', this.get('scrollLeft') * -1);
