@@ -73,10 +73,10 @@ var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 	}).on('init'),
 
 	updateScrollPosition: observer('didInsertElement', function () {
-		var $el;
-		if ($el && $el.length > 0) {
-			$el.scrollLeft(this.get('scrollLeft'));
-			$el.scrollTop(this.get('scrollTop'));
+		var $body = this.$();
+		if ($body && $body.length > 0) {
+			$body.scrollLeft(this.get('scrollLeft'));
+			$body.scrollTop(this.get('scrollTop'));
 		}
 	}),
 
