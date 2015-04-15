@@ -244,6 +244,14 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	headerView: alias('tableView.headerView'),
 
 	/**
+	 * Show headers at the bottom of the table, too.
+	 * @property {Boolean} dualHeaders
+	 * @optional
+	 * @default false
+	 */
+	dualHeaders: defaultValue('config.dualHeaders', false),
+
+	/**
 	 * Body container view.
 	 * @property {Ember.View} bodyView
 	 */
