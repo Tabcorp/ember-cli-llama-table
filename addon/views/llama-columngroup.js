@@ -22,7 +22,10 @@ var LlamaColumngroup = Em.CollectionView.extend({
 
 	setWidth: observer('width', function () {
 		var width = this.get('width');
-		this.$().width(width);
+		var $columngroup = this.$();
+		if ($columngroup && $columngroup.length > 0) {
+			$columngroup.width(width);
+		}
 	}).on('didInsertElement'),
 
 	createChildView: function (View, attrs) {
