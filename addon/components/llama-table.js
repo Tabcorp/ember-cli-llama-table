@@ -252,6 +252,14 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	dualHeaders: defaultValue('config.dualHeaders', false),
 
 	/**
+	 * Show footer below body.
+	 * @property {Boolean} showFooter
+	 * @optional
+	 * @default false
+	 */
+	showFooter: defaultValue('config.showFooter', false),
+
+	/**
 	 * Body container view.
 	 * @property {Ember.View} bodyView
 	 */
