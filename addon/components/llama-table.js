@@ -260,6 +260,13 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	showFooter: defaultValue('config.showFooter', false),
 
 	/**
+	 * Controller to use for calculating footer values.
+	 * @property {Ember.Object} footerController
+	 * @optional
+	 */
+	footerController: alias('config.footerController'),
+
+	/**
 	 * Body container view.
 	 * @property {Ember.View} bodyView
 	 */
