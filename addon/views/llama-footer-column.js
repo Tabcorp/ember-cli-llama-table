@@ -23,6 +23,12 @@ var LlamaFooterColumn = LlamaColumn.extend({
 		var row = get(attrs, 'content');
 		set(attrs, 'row', row);
 		return this._super(View, attrs);
+	},
+
+	init: function () {
+		// override default assignment of `content` property
+		this.set('content', [this.get('column')]);
+		this._super();
 	}
 });
 

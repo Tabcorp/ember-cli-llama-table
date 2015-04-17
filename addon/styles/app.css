@@ -35,7 +35,8 @@
 	position: relative;
 }
 
-.llama-header {
+.llama-header,
+.llama-footer {
 	overflow: hidden;
 	border-style: solid;
 	border-width: 1px 0;
@@ -46,7 +47,8 @@
 	border-top-width: 0;
 }
 
-.llama-header:last-child {
+.llama-header:last-child,
+.llama-footer:last-child {
 	border-bottom-width: 0;
 }
 
