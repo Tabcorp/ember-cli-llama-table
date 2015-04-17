@@ -146,6 +146,7 @@ var IndexController = Em.Controller.extend({
 		sortProperties: ['episode'],
 		enableRowClick: true,
 		onlyFocusEditable: true,
+		showFooter: true,
 		types: [
 			{ name: 'remove', view: 'remove-button-cell', header: 'remove-button-header' }
 		]
