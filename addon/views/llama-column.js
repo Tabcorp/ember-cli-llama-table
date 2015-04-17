@@ -9,9 +9,10 @@ var not = computed.not;
 
 var LlamaColumn = Em.CollectionView.extend({
 	classNames: 'llama-column',
-	classNameBindings: ['textAlignClass', 'columnClassNames'],
+	classNameBindings: ['textAlignClass', 'columnClassNames', 'isVisible', 'isHidden'],
 	width: alias('column.width'),
-	isVisible: not('column.isHidden'),
+	isHidden: alias('column.isHidden'),
+	isVisible: not('isHidden'),
 	columnClassNames: join('column.classNames', ' '),
 
 	rows: null,
