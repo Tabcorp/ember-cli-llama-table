@@ -1,5 +1,6 @@
 import Em from 'ember';
 import { defaultValue } from 'llama-table/computed';
+var makeArray = Em.makeArray;
 var computed = Em.computed;
 var alias = computed.alias;
 var reads = computed.reads;
@@ -16,7 +17,7 @@ var RowController = Em.ObjectProxy.extend({
 	contentIndex: computed('parentController.@each', function () {
 		var array = this.get('parentController');
 		var content = this;
-		var index = array.indexOf(content);
+		var index = makeArray(array).indexOf(content);
 		return index;
 	}),
 	isExpanded: false,
