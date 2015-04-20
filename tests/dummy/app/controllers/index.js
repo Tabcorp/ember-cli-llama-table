@@ -205,10 +205,14 @@ var IndexController = Em.Controller.extend({
 			this.toggleProperty('config.showFooter');
 		},
 		cellClick: function (row, column) {
+			var index = row.get('contentIndex');
+			if (Em.isEmpty(index) || index < 0) {
+				return;
+			}
 			var events = this.get('events');
 			var data = this.get('tableData');
 			var newEvent = {
-				index: data.indexOf(row.get('model')),
+				index: index,
 				row: row,
 				column: column
 			};
