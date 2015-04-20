@@ -29,7 +29,7 @@ var collect = computed.collect;
  */
 var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, ViewConstructors, FocusPosition, {
 	classNames: ['llama-table-component'],
-	classNameBindings: ['isSortable', 'isResizable', 'isEmpty', 'isLoading', 'hasSubcontent'],
+	classNameBindings: ['isSortable', 'isResizable', 'isEmpty', 'isLoading', 'hasSubcontent', 'showHeader', 'showFooter'],
 
 	/**
 	 * Column definitions array
@@ -252,6 +252,33 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	dualHeaders: defaultValue('config.dualHeaders', false),
 
 	/**
+	 * Show header above body. Always true.
+	 * @property {Boolean} showHeader
+	 */
+	showHeader: true,
+
+	/**
+	 * Show footer below body.
+	 * @property {Boolean} showFooter
+	 * @optional
+	 * @default false
+	 */
+	showFooter: defaultValue('config.showFooter', false),
+
+	/**
+	 * Controller to use for calculating footer values.
+	 * @property {Ember.Object} footerController
+	 * @optional
+	 */
+	footerController: alias('config.footerController'),
+
+	/**
+	 * Footer view.
+	 * @property {Ember.View} footerView
+	 */
+	footerView: alias('tableView.footerView'),
+
+	/**
 	 * Body container view.
 	 * @property {Ember.View} bodyView
 	 */
@@ -352,11 +379,11 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 			this.set('scrollTop', pos);
 		},
 		syncScroll: function () {
-			var body = this.get('tableView.bodyView');
-			var $body = body.$();
-			if ($body && $body.length > 0) {
-				this.set('scrollLeft', $body.scrollLeft());
-				this.set('scrollTop', $body.scrollTop());
+			var table = this.get('tableView');
+			var $table = table.$();
+			if ($table && $table.length > 0) {
+				this.set('scrollLeft', $table.scrollLeft());
+				this.set('scrollTop', $table.scrollTop());
 			}
 		},
 		sortBy: function (column) {

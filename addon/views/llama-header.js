@@ -9,7 +9,7 @@ var LlamaHeader = Em.CollectionView.extend({
 	itemViewClass: alias('controller.HeaderColumngroupView'),
 	columngroupViews: alias('childViews'),
 	contentBinding: 'columngroups',
-	scrollLeft: alias('controller.scrollLeft'),
+	scrollTop: alias('controller.scrollTop'),
 
 	columngroups: null,
 
@@ -19,10 +19,10 @@ var LlamaHeader = Em.CollectionView.extend({
 		return this._super(View, attrs);
 	},
 
-	updateScrollPosition: observer('scrollLeft', function () {
+	updateScrollPosition: observer('scrollTop', function () {
 		var $header = this.$();
 		if ($header && $header.length > 0) {
-			$header.css('marginLeft', this.get('scrollLeft') * -1);
+			$header.css('marginTop', this.get('scrollTop'));
 		}
 	}).on('didInsertElement')
 });

@@ -7,8 +7,10 @@ var removeObserver = Em.removeObserver;
 var computed = Em.computed;
 var alias = computed.alias;
 var or = computed.or;
+var and = computed.and;
 var bool = computed.bool;
 var empty = computed.empty;
+var gt = computed.gt;
 var ESC = 27;
 var SPACE = 32;
 
@@ -20,7 +22,8 @@ var LlamaBodyCell = LlamaCell.extend({
 	hover: false,
 	height: alias('row.height'),
 	columnIsClickable: alias('column.isClickable'),
-	rowIsClickable: alias('controller.enableRowClick'),
+	rowIsBody: gt('row.contentIndex', -1),
+	rowIsClickable: and('controller.enableRowClick', 'rowIsBody'),
 	isClickable: or('columnIsClickable', 'rowIsClickable'),
 	showingSubcontent: bool('row.isExpanded'),
 	isEmpty: empty('value'),

@@ -3,22 +3,24 @@
 @hover-bg: #ffe;
 @empty-bg: #f5f5f5;
 
-.llama-table {
+.llama-table,
+.llama-header,
+.llama-footer,
+.llama-cell, {
 	border-color: @border-color;
 }
 
 .llama-cell {
-	border-color: @border-color;
 	cursor: default;
 }
 
-.llama-header {
+.llama-header,
+.llama-footer {
 	background: @header-bg;
-	border-color: @border-color;
+}
 
-	.llama-cell.is-sortable {
-		cursor: pointer;
-	}
+.llama-header-cell.is-sortable {
+	cursor: pointer;
 }
 
 .llama-body-cell.is-empty {

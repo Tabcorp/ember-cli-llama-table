@@ -1,5 +1,6 @@
 import Em from 'ember';
 import RemoveButton from '../views/remove-button-cell';
+import IndexFooterController from './index-footer';
 var set = Em.set;
 var get = Em.get;
 
@@ -142,10 +143,12 @@ var IndexController = Em.Controller.extend({
 		}
 	],
 	config: {
-		maxHeight: 200,
+		maxHeight: 300,
 		sortProperties: ['episode'],
 		enableRowClick: true,
 		onlyFocusEditable: true,
+		showFooter: true,
+		footerController: IndexFooterController,
 		types: [
 			{ name: 'remove', view: 'remove-button-cell', header: 'remove-button-header' }
 		]
@@ -198,11 +201,18 @@ var IndexController = Em.Controller.extend({
 		toggleLoading: function () {
 			this.toggleProperty('config.isLoading');
 		},
+		toggleFooter: function () {
+			this.toggleProperty('config.showFooter');
+		},
 		cellClick: function (row, column) {
+			var index = row.get('contentIndex');
+			if (Em.isEmpty(index) || index < 0) {
+				return;
+			}
 			var events = this.get('events');
 			var data = this.get('tableData');
 			var newEvent = {
-				index: data.indexOf(row.get('model')),
+				index: index,
 				row: row,
 				column: column
 			};

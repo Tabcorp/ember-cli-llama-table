@@ -1,6 +1,9 @@
+import Em from 'ember';
 import LlamaBodyCell from 'llama-table/views/llama-body-cell';
+var gt = Em.computed.gt;
 
 var ButtonCell = LlamaBodyCell.extend({
+	showButton: gt('row.contentIndex', -1),
 	layoutName: 'button-cell',
 	actions: {
 		click: function () {

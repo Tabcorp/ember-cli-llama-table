@@ -1,6 +1,7 @@
 import Em from 'ember';
 import ScrollHandlerMixin from 'llama-table/mixins/scroll-handler';
 var computed = Em.computed;
+var observer = Em.observer;
 
 /**
  * Fires 'scrollX' and 'scrollY' events when each axis is scrolled.
@@ -18,6 +19,11 @@ var ScrollXYMixin = Em.Mixin.create(ScrollHandlerMixin, {
 	_scrollTop: computed(function () {
 		return this.$().scrollTop();
 	}),
+
+	_updateScrollLeftAndTop: observer(function () {
+		this.get('_scrollLeft');
+		this.get('_scrollTop');
+	}).on('didInsertElement'),
 
 	scroll: function (e) {
 		var oldScrollLeft = this.get('_scrollLeft');

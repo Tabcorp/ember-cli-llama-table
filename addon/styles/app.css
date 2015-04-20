@@ -1,8 +1,9 @@
 .llama-table {
-	overflow: hidden;
+	overflow: auto;
 	width: 100%;
 	border-width: 1px;
 	border-style: solid;
+	position: relative;
 }
 
 .llama-columngroup {
@@ -35,18 +36,32 @@
 	position: relative;
 }
 
-.llama-header {
+.llama-header,
+.llama-footer {
 	overflow: hidden;
 	border-style: solid;
 	border-width: 1px 0;
 	min-height: 30px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	z-index: 2;
+}
+
+.llama-header {
+	top: 0;
+}
+
+.llama-footer {
+	bottom: 0;
 }
 
 .llama-header:first-child {
 	border-top-width: 0;
 }
 
-.llama-header:last-child {
+.llama-header:last-child,
+.llama-footer:last-child {
 	border-bottom-width: 0;
 }
 
@@ -76,16 +91,37 @@
 }
 
 .llama-body {
-	overflow: auto;
 	min-height: 30px;
 	outline: none;
-	position: relative;
+}
+
+.llama-content {
+	z-index: 1;
+}
+
+.llama-subcontent {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+.llama-table-component.show-header .llama-content,
+.llama-table-component.show-header .llama-subcontent {
+	margin-top: 30px;
+}
+
+.llama-table-component.show-footer .llama-content,
+.llama-table-component.show-footer .llama-subcontent {
+	margin-bottom: 30px;
 }
 
 .llama-empty {
 	min-height: 30px;
 	line-height: 30px;
 	padding: 0 5px;
+	position: absolute;
+	top: 30px;
 }
 
 .llama-header-cell .column-label {
