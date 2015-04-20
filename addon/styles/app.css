@@ -108,12 +108,12 @@
 
 .llama-table-component.show-header .llama-content,
 .llama-table-component.show-header .llama-subcontent {
-	margin-top: 31px;
+	margin-top: 30px;
 }
 
 .llama-table-component.show-footer .llama-content,
 .llama-table-component.show-footer .llama-subcontent {
-	margin-bottom: 31px;
+	margin-bottom: 30px;
 }
 
 .llama-empty {
