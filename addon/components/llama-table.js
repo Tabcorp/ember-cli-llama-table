@@ -267,6 +267,12 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	footerController: alias('config.footerController'),
 
 	/**
+	 * Footer view.
+	 * @property {Ember.View} footerView
+	 */
+	footerView: alias('tableView.footerView'),
+
+	/**
 	 * Body container view.
 	 * @property {Ember.View} bodyView
 	 */
