@@ -1,5 +1,6 @@
 import Em from 'ember';
 import RemoveButton from '../views/remove-button-cell';
+import IndexFooterController from './index-footer';
 var set = Em.set;
 var get = Em.get;
 
@@ -147,6 +148,7 @@ var IndexController = Em.Controller.extend({
 		enableRowClick: true,
 		onlyFocusEditable: true,
 		showFooter: true,
+		footerController: IndexFooterController,
 		types: [
 			{ name: 'remove', view: 'remove-button-cell', header: 'remove-button-header' }
 		]
