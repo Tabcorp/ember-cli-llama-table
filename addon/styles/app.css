@@ -94,9 +94,15 @@
 }
 
 .llama-content {
-	padding-top: 31px;
-	padding-bottom: 31px;
 	z-index: 1;
+}
+
+.llama-table-component.show-header .llama-content {
+	padding-top: 31px;
+}
+
+.llama-table-component.show-footer .llama-content {
+	padding-bottom: 31px;
 }
 
 .llama-empty {

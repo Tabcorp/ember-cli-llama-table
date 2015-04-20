@@ -29,7 +29,7 @@ var collect = computed.collect;
  */
 var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, ViewConstructors, FocusPosition, {
 	classNames: ['llama-table-component'],
-	classNameBindings: ['isSortable', 'isResizable', 'isEmpty', 'isLoading', 'hasSubcontent'],
+	classNameBindings: ['isSortable', 'isResizable', 'isEmpty', 'isLoading', 'hasSubcontent', 'showHeader', 'showFooter'],
 
 	/**
 	 * Column definitions array
@@ -250,6 +250,12 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * @default false
 	 */
 	dualHeaders: defaultValue('config.dualHeaders', false),
+
+	/**
+	 * Show header above body. Always true.
+	 * @property {Boolean} showHeader
+	 */
+	showHeader: true,
 
 	/**
 	 * Show footer below body.
