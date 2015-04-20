@@ -27,7 +27,7 @@ var MultiController = Em.Controller.extend({
 		var $allColumngroups = $columngroup.siblings().andSelf();
 		var columngroupIndex = $columngroup.index($allColumngroups);
 		var $other = up ?
-			$table.prevAll('.llama-table-component').last() :
+			$table.prevAll('.llama-table-component').first() :
 			$table.nextAll('.llama-table-component').first();
 		var $cells = $other
 			.find('.llama-body-columngroup').eq(columngroupIndex)
