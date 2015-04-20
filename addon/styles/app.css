@@ -120,6 +120,8 @@
 	min-height: 30px;
 	line-height: 30px;
 	padding: 0 5px;
+	position: absolute;
+	top: 30px;
 }
 
 .llama-header-cell .column-label {
