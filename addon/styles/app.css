@@ -43,6 +43,8 @@
 	border-width: 1px 0;
 	min-height: 30px;
 	position: absolute;
+	left: 0;
+	right: 0;
 	z-index: 2;
 }
 
