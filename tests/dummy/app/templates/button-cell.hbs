@@ -1,1 +1,3 @@
-<button {{action "click" target="view"}}>{{view.buttonText}}</button>
+{{#if view.showButton}}
+	<button {{action "click" target="view"}}>{{view.buttonText}}</button>
+{{/if}}
