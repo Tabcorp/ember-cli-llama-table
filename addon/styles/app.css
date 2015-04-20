@@ -41,7 +41,7 @@
 	overflow: hidden;
 	border-style: solid;
 	border-width: 1px 0;
-	min-height: 30px;
+	height: 29px;
 	position: absolute;
 	left: 0;
 	min-width: 100%;
