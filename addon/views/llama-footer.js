@@ -10,7 +10,7 @@ var LlamaFooter = Em.CollectionView.extend({
 	itemViewClass: alias('controller.FooterColumngroupView'),
 	columngroupViews: alias('childViews'),
 	contentBinding: 'columngroups',
-	scrollLeft: alias('controller.scrollLeft'),
+	scrollTop: alias('controller.scrollTop'),
 
 	columngroups: null,
 	rows: null,
@@ -37,10 +37,10 @@ var LlamaFooter = Em.CollectionView.extend({
 		return this._super(View, attrs);
 	},
 
-	updateScrollPosition: observer('scrollLeft', function () {
+	updateScrollPosition: observer('scrollTop', function () {
 		var $footer = this.$();
 		if ($footer && $footer.length > 0) {
-			$footer.css('marginLeft', this.get('scrollLeft') * -1);
+			$footer.css('marginBottom', this.get('scrollTop') * -1);
 		}
 	}).on('didInsertElement'),
 

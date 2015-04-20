@@ -373,11 +373,11 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 			this.set('scrollTop', pos);
 		},
 		syncScroll: function () {
-			var body = this.get('tableView.bodyView');
-			var $body = body.$();
-			if ($body && $body.length > 0) {
-				this.set('scrollLeft', $body.scrollLeft());
-				this.set('scrollTop', $body.scrollTop());
+			var table = this.get('tableView');
+			var $table = table.$();
+			if ($table && $table.length > 0) {
+				this.set('scrollLeft', $table.scrollLeft());
+				this.set('scrollTop', $table.scrollTop());
 			}
 		},
 		sortBy: function (column) {

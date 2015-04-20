@@ -1,16 +1,13 @@
 import Em from 'ember';
-import ScrollXYMixin from 'llama-table/mixins/scroll-xy';
 var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
 var collect = computed.collect;
 
-var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
+var LlamaBody = Em.ContainerView.extend({
 	classNames: ['llama-body'],
 	isEmpty: alias('controller.isEmpty'),
 	isLoading: alias('controller.isLoading'),
-	scrollLeft: alias('controller.scrollLeft'),
-	scrollTop: alias('controller.scrollTop'),
 	childViews: collect('contentView'),
 
 	columngroups: null,
@@ -67,24 +64,7 @@ var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 			this.removeObject(loadingView);
 			this.pushObject(emptyView);
 		}
-	}).on('init'),
-
-	updateScrollPosition: observer('didInsertElement', function () {
-		var $body = this.$();
-		if ($body && $body.length > 0) {
-			$body.scrollLeft(this.get('scrollLeft'));
-			$body.scrollTop(this.get('scrollTop'));
-		}
-	}),
-
-	actions: {
-		scrollX: function (pos) {
-			this.set('scrollLeft', pos);
-		},
-		scrollY: function (pos) {
-			this.set('scrollTop', pos);
-		}
-	}
+	}).on('init')
 });
 
 export default LlamaBody;
