@@ -1,15 +1,14 @@
 import Em from 'ember';
 import LlamaColumn from './llama-column';
-import LlamaFooterCell from './llama-footer-cell';
 var get = Em.get;
 var set = Em.set;
 var computed = Em.computed;
+var alias = computed.alias;
 
 var LlamaFooterColumn = LlamaColumn.extend({
 	classNames: 'llama-footer-column',
-	contentBinding: 'rows',
 
-	rows: null,
+	data: null,
 	column: null,
 
 	itemViewClass: computed(function () {
@@ -20,14 +19,16 @@ var LlamaFooterColumn = LlamaColumn.extend({
 	}),
 
 	createChildView: function (View, attrs) {
-		var row = get(attrs, 'content');
-		set(attrs, 'row', row);
+		var data = this.get('data');
+		var column = this.get('column');
+		set(attrs, 'row', data);
+		set(attrs, 'column', column);
 		return this._super(View, attrs);
 	},
 
 	init: function () {
 		// override default assignment of `content` property
-		this.set('content', [this.get('column')]);
+		this.set('content', [this.get('data')]);
 		this._super();
 	}
 });

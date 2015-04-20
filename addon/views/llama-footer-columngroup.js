@@ -1,18 +1,19 @@
 import Em from 'ember';
 import LlamaColumngroup from './llama-columngroup';
 var set = Em.set;
+var alias = Em.computed.alias;
 
 var LlamaFooterColumngroup = LlamaColumngroup.extend({
 	templateName: 'llama-footer-columngroup',
 	classNames: 'llama-footer-columngroup',
-	itemViewClass: Em.computed.alias('controller.FooterColumnView'),
+	itemViewClass: alias('controller.FooterColumnView'),
 
 	columns: null,
-	rows: null,
+	data: null,
 
 	createChildView: function (View, attrs) {
-		var rows = this.get('rows');
-		set(attrs, 'rows', rows);
+		var data = this.get('data');
+		set(attrs, 'data', data);
 		return this._super(View, attrs);
 	}
 });
