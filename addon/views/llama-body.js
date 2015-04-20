@@ -2,13 +2,11 @@ import Em from 'ember';
 var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
-var collect = computed.collect;
 
 var LlamaBody = Em.ContainerView.extend({
 	classNames: ['llama-body'],
 	isEmpty: alias('controller.isEmpty'),
 	isLoading: alias('controller.isLoading'),
-	childViews: collect('contentView'),
 
 	columngroups: null,
 	rows: null,
@@ -37,6 +35,11 @@ var LlamaBody = Em.ContainerView.extend({
 		var View = this.get('controller.LoadingView');
 		return this.createChildView(View, {});
 	}),
+
+	init: function () {
+		this._super();
+		this.pushObject(this.get('contentView'));
+	},
 
 	toggleSubcontent: observer('controller.hasSubcontent', function () {
 		var hasSubcontent = this.get('controller.hasSubcontent');

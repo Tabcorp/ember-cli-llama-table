@@ -3,13 +3,11 @@ import ScrollXYMixin from 'llama-table/mixins/scroll-xy';
 var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
-var collect = computed.collect;
 
 var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 	classNames: 'llama-table',
 	dualHeaders: alias('controller.dualHeaders'),
 	showFooter: alias('controller.showFooter'),
-	childViews: collect('headerView', 'bodyView'),
 	scrollLeft: alias('controller.scrollLeft'),
 	scrollTop: alias('controller.scrollTop'),
 
@@ -39,6 +37,12 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 	}),
 
 	footerView: null,
+
+	init: function () {
+		this._super();
+		this.pushObject(this.get('headerView'));
+		this.pushObject(this.get('bodyView'));
+	},
 
 	toggleDualHeader: observer('dualHeaders', function () {
 		var dualHeaders = this.get('dualHeaders');
