@@ -35,13 +35,7 @@ var LlamaTable = Em.ContainerView.extend({
 		});
 	}),
 
-	footerView: computed(function () {
-		var View = this.get('controller.FooterView');
-		return this.createChildView(View, {
-			columngroups: this.get('columngroups'),
-			rows: this.get('rows')
-		});
-	}),
+	footerView: null,
 
 	toggleDualHeader: observer('dualHeaders', function () {
 		var dualHeaders = this.get('dualHeaders');
@@ -55,11 +49,22 @@ var LlamaTable = Em.ContainerView.extend({
 
 	toggleFooter: observer('showFooter', function () {
 		var showFooter = this.get('showFooter');
+		var View, footerView;
 		if (showFooter) {
-			this.pushObject(this.get('footerView'));
+			// create and show footer
+			View = this.get('controller.FooterView');
+			footerView = this.createChildView(View, {
+				columngroups: this.get('columngroups'),
+				rows: this.get('rows')
+			});
+			this.set('footerView', footerView);
+			this.pushObject(footerView);
 		}
 		else {
-			this.removeObject(this.get('footerView'));
+			// remove and unset footer
+			footerView = this.get('footerView');
+			this.removeObject(footerView);
+			this.set('footerView', null);
 		}
 	}).on('didInsertElement')
 });
