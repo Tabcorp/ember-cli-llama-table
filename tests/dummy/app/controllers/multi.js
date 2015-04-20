@@ -11,11 +11,19 @@ var data = [
 	{ foo: 'a2', bar: 'b2' }
 ];
 
+var config = {};
+
 var MultiController = Em.Controller.extend({
 	colsA: copy(cols, true),
 	colsB: copy(cols, true),
+	colsC: cols,
+	colsD: cols,
 	rowsA: copy(data, true),
 	rowsB: copy(data, true),
+	rowsC: data,
+	rowsD: data,
+	configC: config,
+	configD: config,
 	tableMove: function (direction, table) {
 		var up = direction === 'up';
 		var $table = table.$();

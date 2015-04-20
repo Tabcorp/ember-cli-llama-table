@@ -1,3 +1,7 @@
+<h3>Unlinked</h3>
+
+<p>These tables are not linked in any way. They behave independently of eachother.</p>
+
 <h4>Table A</h4>
 
 {{llama-table rows=rowsA columns=colsA outOfBounds="outOfBounds"}}
@@ -5,3 +9,15 @@
 <h4>Table B</h4>
 
 {{llama-table rows=rowsB columns=colsB outOfBounds="outOfBounds"}}
+
+<h3>Linked</h3>
+
+<p>These tables share row, column and table configuration. They will mimic eachother's state.</p>
+
+<h4>Table C</h4>
+
+{{llama-table rows=rowsC columns=colsC config=configC outOfBounds="outOfBounds"}}
+
+<h4>Table D</h4>
+
+{{llama-table rows=rowsD columns=colsD config=configD outOfBounds="outOfBounds"}}
