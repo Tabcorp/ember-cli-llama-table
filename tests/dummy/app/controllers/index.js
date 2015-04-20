@@ -201,6 +201,9 @@ var IndexController = Em.Controller.extend({
 		toggleLoading: function () {
 			this.toggleProperty('config.isLoading');
 		},
+		toggleFooter: function () {
+			this.toggleProperty('config.showFooter');
+		},
 		cellClick: function (row, column) {
 			var events = this.get('events');
 			var data = this.get('tableData');
