@@ -68,13 +68,6 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 		}
 	},
 
-	setHeight: observer('controller.maxHeight', function () {
-		var $body = this.$();
-		if ($body) {
-			$body.css('maxHeight', this.get('controller.maxHeight'));
-		}
-	}).on('didInsertElement'),
-
 	actions: {
 		keyLeft: function () {
 			this.get('controller').send('focusLeft');

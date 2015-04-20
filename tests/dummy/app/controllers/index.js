@@ -143,7 +143,7 @@ var IndexController = Em.Controller.extend({
 		}
 	],
 	config: {
-		maxHeight: 200,
+		maxHeight: 300,
 		sortProperties: ['episode'],
 		enableRowClick: true,
 		onlyFocusEditable: true,

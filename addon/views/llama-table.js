@@ -71,13 +71,20 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 		}
 	}).on('didInsertElement'),
 
-	updateScrollPosition: observer('didInsertElement', function () {
+	updateScrollPosition: observer(function () {
 		var $table = this.$();
 		if ($table && $table.length > 0) {
 			$table.scrollLeft(this.get('scrollLeft'));
 			$table.scrollTop(this.get('scrollTop'));
 		}
-	}),
+	}).on('didInsertElement'),
+
+	setHeight: observer('controller.maxHeight', function () {
+		var $table = this.$();
+		if ($table && $table.length) {
+			$table.css('maxHeight', this.get('controller.maxHeight'));
+		}
+	}).on('didInsertElement'),
 
 	actions: {
 		scrollX: function (pos) {

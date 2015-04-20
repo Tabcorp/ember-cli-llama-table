@@ -25,7 +25,7 @@ var EmbeddedView = Em.View.extend({
 		}
 	],
 	tableConfig: {
-		maxHeight: 60
+		maxHeight: 91
 	},
 	setSubcontentHeight: function () {
 		var $el = this.$();
