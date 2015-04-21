@@ -1,9 +1,10 @@
 import Em from 'ember';
 import LlamaCell from './llama-cell';
 var get = Em.get;
+var set = Em.set;
+var defineProperty = Em.defineProperty;
+var deprecate = Em.deprecateFunc;
 var observer = Em.observer;
-var addObserver = Em.addObserver;
-var removeObserver = Em.removeObserver;
 var computed = Em.computed;
 var alias = computed.alias;
 var or = computed.or;
@@ -32,6 +33,9 @@ var LlamaBodyCell = LlamaCell.extend({
 	column: null,
 	row: null,
 
+	cell: null,
+	value: alias('cell'),
+
 	tabindex: computed('isEditable', function () {
 		var onlyFocusEditable = this.get('controller.onlyFocusEditable');
 		var isEditable = this.get('isEditable');
@@ -57,20 +61,6 @@ var LlamaBodyCell = LlamaCell.extend({
 		return null;
 	}),
 
-	didInsertElement: function () {
-		this._super();
-		var row = this.get('row');
-		var observes = this.get('observedFields');
-		addObserver(row, observes, this, 'updateValue');
-	},
-
-	willDestroyElement: function () {
-		var row = this.get('row');
-		var observes = this.get('observedFields');
-		removeObserver(row, observes, this, 'updateValue');
-		this._super();
-	},
-
 	setHeight: observer('height', function () {
 		var $cell = this.$();
 		if ($cell) {
@@ -85,16 +75,14 @@ var LlamaBodyCell = LlamaCell.extend({
 		}
 	}).on('didInsertElement'),
 
-	getValue: function () {
-		var id = this.get('column.name');
-		var row = this.get('row');
-		var value = get(row, id);
-		return value;
-	},
+	getValue: deprecate('Override `value` property instead', function () {}),
 
-	updateValue: observer('column', function () {
-		var value = this.getValue();
-		this.set('value', value);
+	updateValue: deprecate('Override `value` property instead', function () {}),
+
+	buildComputedValue: observer('column.name', function () {
+		var columnName = this.get('column.name');
+		var prop = alias('row.' + columnName);
+		defineProperty(this, 'cell', prop);
 	}).on('init'),
 
 	mouseEnter: function () {
