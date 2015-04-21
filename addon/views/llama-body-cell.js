@@ -35,6 +35,7 @@ var LlamaBodyCell = LlamaCell.extend({
 
 	cell: null,
 	value: alias('cell'),
+	formatted: alias('value'),
 
 	tabindex: computed('isEditable', function () {
 		var onlyFocusEditable = this.get('controller.onlyFocusEditable');
