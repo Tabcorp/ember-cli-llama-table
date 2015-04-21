@@ -1,7 +1,7 @@
 import ButtonCell from './button-cell';
 
 var RemoveButtonCell = ButtonCell.extend({
-	buttonText: 'Remove',
+	formatted: 'Remove',
 	actionName: 'removeRow'
 });
 
