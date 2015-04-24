@@ -38,10 +38,8 @@ var LlamaFooter = Em.CollectionView.extend({
 	},
 
 	updateScrollPosition: observer('scrollTop', function () {
-		var $footer = this.$();
-		if ($footer && $footer.length > 0) {
-			$footer.css('marginBottom', this.get('scrollTop') * -1);
-		}
+		var $footer = Em.$(this.$());
+		$footer.css('marginBottom', this.get('scrollTop') * -1);
 	}).on('didInsertElement'),
 
 	willDestroy: function () {

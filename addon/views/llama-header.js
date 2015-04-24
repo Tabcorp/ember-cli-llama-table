@@ -20,10 +20,8 @@ var LlamaHeader = Em.CollectionView.extend({
 	},
 
 	updateScrollPosition: observer('scrollTop', function () {
-		var $header = this.$();
-		if ($header && $header.length > 0) {
-			$header.css('marginTop', this.get('scrollTop'));
-		}
+		var $header = Em.$(this.$());
+		$header.css('marginTop', this.get('scrollTop'));
 	}).on('didInsertElement')
 });
 

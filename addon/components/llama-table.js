@@ -380,11 +380,9 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		},
 		syncScroll: function () {
 			var table = this.get('tableView');
-			var $table = table.$();
-			if ($table && $table.length > 0) {
-				this.set('scrollLeft', $table.scrollLeft());
-				this.set('scrollTop', $table.scrollTop());
-			}
+			var $table = Em.$(table.$());
+			this.set('scrollLeft', $table.scrollLeft());
+			this.set('scrollTop', $table.scrollTop());
 		},
 		sortBy: function (column) {
 			var sortProperties = this.get('sortProperties');

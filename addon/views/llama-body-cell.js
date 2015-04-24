@@ -63,17 +63,13 @@ var LlamaBodyCell = LlamaCell.extend({
 	}),
 
 	setHeight: observer('height', function () {
-		var $cell = this.$();
-		if ($cell) {
-			$cell.css('height', this.get('height'));
-		}
+		var $cell = Em.$(this.$());
+		$cell.css('height', this.get('height'));
 	}).on('didInsertElement'),
 
 	setMarginBottom: observer('marginBottom', function () {
-		var $cell = this.$();
-		if ($cell) {
-			$cell.css('marginBottom', this.get('marginBottom') || 0);
-		}
+		var $cell = Em.$(this.$());
+		$cell.css('marginBottom', this.get('marginBottom') || 0);
 	}).on('didInsertElement'),
 
 	getValue: deprecate('Override `value` property instead', function () {}),
