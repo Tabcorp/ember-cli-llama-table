@@ -9,6 +9,8 @@ var SubcontentController = Em.Controller.extend({
 	],
 	config: {
 		hasSubcontent: true,
+		wrapFocusHorizontal: true,
+		wrapFocusVertical: true,
 		subcontentView: 'embedded',
 		sortProperties: ['family_name'],
 		types: [
