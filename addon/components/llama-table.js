@@ -194,6 +194,26 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	onlyFocusEditable: defaultValue('config.onlyFocusEditable', false),
 
 	/**
+	 * When the leftmost cell is focused and a `focusLeft` action is triggered,
+	 *   focus the rightmost cell instead of firing an `outOfBounds` action,
+	 *   and vice-versa.
+	 * @property {Boolean} wrapFocusHorizontal
+	 * @optional
+	 * @default false
+	 */
+	wrapFocusHorizontal: defaultValue('config.wrapFocusHorizontal', false),
+
+	/**
+	 * When the topmost cell is focused and a `focusTop` action is triggered,
+	 *   focus the bottommost cell instead of firing an `outOfBounds` action,
+	 *   and vice-versa.
+	 * @property {Boolean} wrapFocusVertical
+	 * @optional
+	 * @default false
+	 */
+	wrapFocusVertical: defaultValue('config.wrapFocusVertical', false),
+
+	/**
 	 * Text to display when the table is empty.
 	 * @property {String} emptyText
 	 * @optional
@@ -380,11 +400,9 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		},
 		syncScroll: function () {
 			var table = this.get('tableView');
-			var $table = table.$();
-			if ($table && $table.length > 0) {
-				this.set('scrollLeft', $table.scrollLeft());
-				this.set('scrollTop', $table.scrollTop());
-			}
+			var $table = Em.$(table.$());
+			this.set('scrollLeft', $table.scrollLeft());
+			this.set('scrollTop', $table.scrollTop());
 		},
 		sortBy: function (column) {
 			var sortProperties = this.get('sortProperties');

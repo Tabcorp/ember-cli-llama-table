@@ -26,9 +26,13 @@ var FocusPositionMixin = Em.Mixin.create({
 		return rowIndex;
 	},
 
-	getVisibleRowAtIndex: function (rowIndex) {
+	getVisibleRowAtIndex: function (rowIndex, wrap) {
 		var visibleRows = this.get('sortedRows').rejectBy('isHidden');
-		var row = visibleRows.objectAt(rowIndex);
+		var row;
+		if (wrap && rowIndex < 0) {
+			rowIndex += visibleRows.length;
+		}
+		row = visibleRows.objectAt(rowIndex);
 		return row;
 	},
 
@@ -38,9 +42,13 @@ var FocusPositionMixin = Em.Mixin.create({
 		return columnIndex;
 	},
 
-	getVisibleColumnAtIndex: function (columnIndex) {
+	getVisibleColumnAtIndex: function (columnIndex, wrap) {
 		var visibleColumns = this.get('sortedColumns').rejectBy('isHidden');
-		var column = visibleColumns.objectAt(columnIndex);
+		var column;
+		if (wrap && columnIndex < 0) {
+			columnIndex += visibleColumns.length;
+		}
+		column = visibleColumns.objectAt(columnIndex);
 		return column;
 	},
 
@@ -83,9 +91,13 @@ var FocusPositionMixin = Em.Mixin.create({
 		focusLeft: function () {
 			var column = this.get('focusColumn');
 			var columnIndex = this.getVisibleColumnIndex(column);
-			var newColumn = this.getVisibleColumnAtIndex(columnIndex - 1);
+			var wrapFocusHorizontal = this.get('wrapFocusHorizontal');
+			var newColumn = this.getVisibleColumnAtIndex(columnIndex - 1, false);
 			if (newColumn) {
 				this.set('focusColumn', newColumn);
+			}
+			else if (wrapFocusHorizontal) {
+				this.send('focusHardRight');
 			}
 			else {
 				this.sendAction('outOfBounds', 'left', this);
@@ -94,9 +106,13 @@ var FocusPositionMixin = Em.Mixin.create({
 		focusUp: function () {
 			var row = this.get('focusRow');
 			var rowIndex = this.getVisibleRowIndex(row);
-			var newRow = this.getVisibleRowAtIndex(rowIndex - 1);
+			var wrapFocusVertical = this.get('wrapFocusVertical');
+			var newRow = this.getVisibleRowAtIndex(rowIndex - 1, false);
 			if (newRow) {
 				this.set('focusRow', newRow);
+			}
+			else if (wrapFocusVertical) {
+				this.send('focusHardDown');
 			}
 			else {
 				this.sendAction('outOfBounds', 'up', this);
@@ -105,9 +121,13 @@ var FocusPositionMixin = Em.Mixin.create({
 		focusRight: function () {
 			var column = this.get('focusColumn');
 			var columnIndex = this.getVisibleColumnIndex(column);
-			var newColumn = this.getVisibleColumnAtIndex(columnIndex + 1);
+			var wrapFocusHorizontal = this.get('wrapFocusHorizontal');
+			var newColumn = this.getVisibleColumnAtIndex(columnIndex + 1, false);
 			if (newColumn) {
 				this.set('focusColumn', newColumn);
+			}
+			else if (wrapFocusHorizontal) {
+				this.send('focusHardLeft');
 			}
 			else {
 				this.sendAction('outOfBounds', 'right', this);
@@ -116,12 +136,48 @@ var FocusPositionMixin = Em.Mixin.create({
 		focusDown: function () {
 			var row = this.get('focusRow');
 			var rowIndex = this.getVisibleRowIndex(row);
-			var newRow = this.getVisibleRowAtIndex(rowIndex + 1);
+			var wrapFocusVertical = this.get('wrapFocusVertical');
+			var newRow = this.getVisibleRowAtIndex(rowIndex + 1, false);
 			if (newRow) {
 				this.set('focusRow', newRow);
 			}
+			else if (wrapFocusVertical) {
+				this.send('focusHardUp');
+			}
 			else {
 				this.sendAction('outOfBounds', 'down', this);
+			}
+		},
+		focusHardLeft: function () {
+			var column = this.get('focusColumn');
+			var columnIndex = this.getVisibleColumnIndex(column);
+			var newColumn = this.getVisibleColumnAtIndex(0, true);
+			if (newColumn) {
+				this.set('focusColumn', newColumn);
+			}
+		},
+		focusHardUp: function () {
+			var row = this.get('focusRow');
+			var rowIndex = this.getVisibleRowIndex(row);
+			var newRow = this.getVisibleRowAtIndex(0, true);
+			if (newRow) {
+				this.set('focusRow', newRow);
+			}
+		},
+		focusHardRight: function () {
+			var column = this.get('focusColumn');
+			var columnIndex = this.getVisibleColumnIndex(column);
+			var newColumn = this.getVisibleColumnAtIndex(-1, true);
+			if (newColumn) {
+				this.set('focusColumn', newColumn);
+			}
+		},
+		focusHardDown: function () {
+			var row = this.get('focusRow');
+			var rowIndex = this.getVisibleRowIndex(row);
+			var newRow = this.getVisibleRowAtIndex(-1, true);
+			if (newRow) {
+				this.set('focusRow', newRow);
 			}
 		}
 	}

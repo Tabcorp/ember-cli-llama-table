@@ -35,17 +35,13 @@ var LlamaEmbed = Em.ContainerView.extend({
 	}),
 
 	updateOffsetTop: observer('offsetTop', function () {
-		var $embed = this.$();
-		if ($embed) {
-			$embed.css('top', this.get('offsetTop'));
-		}
+		var $embed = Em.$(this.$());
+		$embed.css('top', this.get('offsetTop'));
 	}).on('didInsertElement'),
 
 	updateHeight: observer('height', function () {
-		var $embed = this.$();
-		if ($embed) {
-			$embed.css('height', this.get('height'));
-		}
+		var $embed = Em.$(this.$());
+		$embed.css('height', this.get('height'));
 	}).on('didInsertElement'),
 
 	subcontentView: computed(function () {

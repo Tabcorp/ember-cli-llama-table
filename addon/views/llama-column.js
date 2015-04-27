@@ -30,10 +30,8 @@ var LlamaColumn = Em.CollectionView.extend({
 
 	setWidth: observer('width', function () {
 		var width = this.get('width');
-		var $column = this.$();
-		if ($column && $column.length > 0) {
-			$column.width(width);
-		}
+		var $column = Em.$(this.$());
+		$column.width(width);
 	}).on('didInsertElement'),
 
 	cellViews: alias('childViews'),

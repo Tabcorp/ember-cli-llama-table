@@ -13,11 +13,11 @@ var observer = Em.observer;
 var ScrollXYMixin = Em.Mixin.create(ScrollHandlerMixin, {
 
 	_scrollLeft: computed(function () {
-		return this.$().scrollLeft();
+		return Em.$(this.$()).scrollLeft();
 	}),
 
 	_scrollTop: computed(function () {
-		return this.$().scrollTop();
+		return Em.$(this.$()).scrollTop();
 	}),
 
 	_updateScrollLeftAndTop: observer(function () {
@@ -26,14 +26,15 @@ var ScrollXYMixin = Em.Mixin.create(ScrollHandlerMixin, {
 	}).on('didInsertElement'),
 
 	scroll: function (e) {
+		var $el = Em.$(this.$());
 		var oldScrollLeft = this.get('_scrollLeft');
-		var newScrollLeft = this.$().scrollLeft();
+		var newScrollLeft = $el.scrollLeft();
 		if (newScrollLeft !== oldScrollLeft) {
 			this.set('_scrollLeft', newScrollLeft);
 			this.send('scrollX', newScrollLeft);
 		}
 		var oldScrollTop = this.get('_scrollTop');
-		var newScrollTop = this.$().scrollTop();
+		var newScrollTop = $el.scrollTop();
 		if (newScrollTop !== oldScrollTop) {
 			this.set('_scrollTop', newScrollTop);
 			this.send('scrollY', newScrollTop);

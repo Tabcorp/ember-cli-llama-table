@@ -69,17 +69,41 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 	},
 
 	actions: {
-		keyLeft: function () {
-			this.get('controller').send('focusLeft');
+		keyLeft: function (e) {
+			var controller = this.get('controller');
+			if (e.shiftKey) {
+				controller.send('focusHardLeft');
+			}
+			else {
+				controller.send('focusLeft');
+			}
 		},
-		keyUp: function () {
-			this.get('controller').send('focusUp');
+		keyUp: function (e) {
+			var controller = this.get('controller');
+			if (e.shiftKey) {
+				controller.send('focusHardUp');
+			}
+			else {
+				controller.send('focusUp');
+			}
 		},
-		keyRight: function () {
-			this.get('controller').send('focusRight');
+		keyRight: function (e) {
+			var controller = this.get('controller');
+			if (e.shiftKey) {
+				controller.send('focusHardRight');
+			}
+			else {
+				controller.send('focusRight');
+			}
 		},
-		keyDown: function () {
-			this.get('controller').send('focusDown');
+		keyDown: function (e) {
+			var controller = this.get('controller');
+			if (e.shiftKey) {
+				controller.send('focusHardDown');
+			}
+			else {
+				controller.send('focusDown');
+			}
 		}
 	}
 });
