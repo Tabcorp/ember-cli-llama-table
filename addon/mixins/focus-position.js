@@ -28,7 +28,11 @@ var FocusPositionMixin = Em.Mixin.create({
 
 	getVisibleRowAtIndex: function (rowIndex) {
 		var visibleRows = this.get('sortedRows').rejectBy('isHidden');
-		var row = visibleRows.objectAt(rowIndex);
+		var row;
+		if (rowIndex < 0) {
+			rowIndex = visibleRows.length + rowIndex;
+		}
+		row = visibleRows.objectAt(rowIndex);
 		return row;
 	},
 
@@ -40,7 +44,11 @@ var FocusPositionMixin = Em.Mixin.create({
 
 	getVisibleColumnAtIndex: function (columnIndex) {
 		var visibleColumns = this.get('sortedColumns').rejectBy('isHidden');
-		var column = visibleColumns.objectAt(columnIndex);
+		var column;
+		if (columnIndex < 0) {
+			columnIndex = visibleColumns.length + columnIndex;
+		}
+		column = visibleColumns.objectAt(columnIndex);
 		return column;
 	},
 
