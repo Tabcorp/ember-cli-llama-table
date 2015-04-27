@@ -16,19 +16,19 @@ var ArrowKeysMixin = Em.Mixin.create({
 	keyDown: function (e) {
 		switch (e.which) {
 			case KEY_LEFT:
-				this.send('keyLeft');
+				this.send('keyLeft', e);
 				e.preventDefault();
 				break;
 			case KEY_UP:
-				this.send('keyUp');
+				this.send('keyUp', e);
 				e.preventDefault();
 				break;
 			case KEY_RIGHT:
-				this.send('keyRight');
+				this.send('keyRight', e);
 				e.preventDefault();
 				break;
 			case KEY_DOWN:
-				this.send('keyDown');
+				this.send('keyDown', e);
 				e.preventDefault();
 				break;
 		}
