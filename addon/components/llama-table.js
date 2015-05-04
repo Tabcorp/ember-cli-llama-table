@@ -431,6 +431,16 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		},
 		reverseEnterKey: function () {
 			this.send('focusUp');
+		},
+		cellClick: function () {
+			var args = Array.prototype.slice.call(arguments);
+			args.unshift('cellClick');
+			this.sendAction.apply(this, args);
+		},
+		rowClick: function () {
+			var args = Array.prototype.slice.call(arguments);
+			args.unshift('rowClick');
+			this.sendAction.apply(this, args);
 		}
 	}
 });
