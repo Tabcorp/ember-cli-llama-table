@@ -13,6 +13,10 @@ var computed = Em.computed;
 var alias = computed.alias;
 var eq = computed.equal;
 var collect = computed.collect;
+var throttle = Em.run.throttle;
+
+var SCROLL_INTERVAL = 1000 / 60; // 60 fps
+var SCROLL_IMMEDIATE = false; // invoke on trailing edge
 
 /**
  * Llama Table Ember component.
@@ -391,6 +395,20 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		this.highlightRowIndex(-1);
 	},
 
+	/**
+	 * Find the current scroll position of the table and synchronize with all
+	 *   views watching this position.
+	 * @method syncScroll
+	 */
+	syncScroll: function () {
+		var table = this.get('tableView');
+		var $table = Em.$(table.$());
+		this.setProperties({
+			scrollLeft: $table.scrollLeft(),
+			scrollTop: $table.scrollTop()
+		});
+	},
+
 	actions: {
 		scrollX: function (pos) {
 			this.set('scrollLeft', pos);
@@ -399,10 +417,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 			this.set('scrollTop', pos);
 		},
 		syncScroll: function () {
-			var table = this.get('tableView');
-			var $table = Em.$(table.$());
-			this.set('scrollLeft', $table.scrollLeft());
-			this.set('scrollTop', $table.scrollTop());
+			throttle(this, this.syncScroll, SCROLL_INTERVAL, SCROLL_IMMEDIATE);
 		},
 		sortBy: function (column) {
 			var sortProperties = this.get('sortProperties');
