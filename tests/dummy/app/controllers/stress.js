@@ -50,6 +50,7 @@ var IndexController = Em.Controller.extend({
 	actions: {
 		add: function (num) {
 			var label = 'Add %@ rows'.fmt(num);
+			console.profile('Adding rows');
 			console.time(label);
 			for (var i = 0; i < num; i++) {
 				this.get('tableData').pushObject({
@@ -66,13 +67,16 @@ var IndexController = Em.Controller.extend({
 			Em.run.next(function () {
 				console.timeEnd(label);
 			});
+			console.profileEnd();
 		},
 		clear: function () {
+			console.profile('Clearing rows');
 			var len = this.get('tableData.length');
 			var label = 'Clear %@ rows'.fmt(len);
 			console.time(label);
 			this.get('tableData').clear();
 			console.timeEnd(label);
+			console.profileEnd();
 		}
 	}
 });
