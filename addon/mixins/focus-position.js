@@ -68,7 +68,14 @@ var FocusPositionMixin = Em.Mixin.create({
 		return cellView || null;
 	},
 
-	focusCell: observer('focusRow', 'focusColumn', function () {
+	focusCell: function (row, column) {
+		this.setProperties({
+			focusRow: row,
+			focusColumn: column
+		});
+	},
+
+	focusCurrentCell: function () {
 		var row = this.get('focusRow');
 		var column = this.get('focusColumn');
 		var cellView = this.getCellFor(row, column);
@@ -77,17 +84,14 @@ var FocusPositionMixin = Em.Mixin.create({
 		if (!$cell || $cell.length < 0) return;
 		$cell.focus();
 		this.send('syncScroll');
-	}),
+	},
 
 	actions: {
 		focusCell: function (row, column) {
-			this.setProperties({
-				focusRow: row,
-				focusColumn: column
-			});
+			this.focusCell(row, column);
 		},
 		focusCurrentCell: function () {
-			this.focusCell();
+			this.focusCurrentCell();
 		},
 		focusLeft: function () {
 			var column = this.get('focusColumn');
@@ -96,9 +100,11 @@ var FocusPositionMixin = Em.Mixin.create({
 			var newColumn = this.getVisibleColumnAtIndex(columnIndex - 1, false);
 			if (newColumn) {
 				this.set('focusColumn', newColumn);
+				this.focusCurrentCell();
 			}
 			else if (wrapFocusHorizontal) {
 				this.send('focusHardRight');
+				this.focusCurrentCell();
 			}
 			else {
 				this.sendAction('outOfBounds', 'left', this);
@@ -111,9 +117,11 @@ var FocusPositionMixin = Em.Mixin.create({
 			var newRow = this.getVisibleRowAtIndex(rowIndex - 1, false);
 			if (newRow) {
 				this.set('focusRow', newRow);
+				this.focusCurrentCell();
 			}
 			else if (wrapFocusVertical) {
 				this.send('focusHardDown');
+				this.focusCurrentCell();
 			}
 			else {
 				this.sendAction('outOfBounds', 'up', this);
@@ -126,9 +134,11 @@ var FocusPositionMixin = Em.Mixin.create({
 			var newColumn = this.getVisibleColumnAtIndex(columnIndex + 1, false);
 			if (newColumn) {
 				this.set('focusColumn', newColumn);
+				this.focusCurrentCell();
 			}
 			else if (wrapFocusHorizontal) {
 				this.send('focusHardLeft');
+				this.focusCurrentCell();
 			}
 			else {
 				this.sendAction('outOfBounds', 'right', this);
@@ -141,9 +151,11 @@ var FocusPositionMixin = Em.Mixin.create({
 			var newRow = this.getVisibleRowAtIndex(rowIndex + 1, false);
 			if (newRow) {
 				this.set('focusRow', newRow);
+				this.focusCurrentCell();
 			}
 			else if (wrapFocusVertical) {
 				this.send('focusHardUp');
+				this.focusCurrentCell();
 			}
 			else {
 				this.sendAction('outOfBounds', 'down', this);
@@ -155,6 +167,7 @@ var FocusPositionMixin = Em.Mixin.create({
 			var newColumn = this.getVisibleColumnAtIndex(0, true);
 			if (newColumn) {
 				this.set('focusColumn', newColumn);
+				this.focusCurrentCell();
 			}
 		},
 		focusHardUp: function () {
@@ -163,6 +176,7 @@ var FocusPositionMixin = Em.Mixin.create({
 			var newRow = this.getVisibleRowAtIndex(0, true);
 			if (newRow) {
 				this.set('focusRow', newRow);
+				this.focusCurrentCell();
 			}
 		},
 		focusHardRight: function () {
@@ -171,6 +185,7 @@ var FocusPositionMixin = Em.Mixin.create({
 			var newColumn = this.getVisibleColumnAtIndex(-1, true);
 			if (newColumn) {
 				this.set('focusColumn', newColumn);
+				this.focusCurrentCell();
 			}
 		},
 		focusHardDown: function () {
@@ -179,6 +194,7 @@ var FocusPositionMixin = Em.Mixin.create({
 			var newRow = this.getVisibleRowAtIndex(-1, true);
 			if (newRow) {
 				this.set('focusRow', newRow);
+				this.focusCurrentCell();
 			}
 		}
 	}
