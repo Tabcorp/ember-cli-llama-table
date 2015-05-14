@@ -108,7 +108,6 @@ var FocusPositionMixin = Em.Mixin.create({
 			}
 			else if (wrapFocusHorizontal) {
 				this.send('focusHardRight');
-				this.focusCurrentCell();
 			}
 			else {
 				this.sendAction('outOfBounds', 'left', this);
@@ -125,7 +124,6 @@ var FocusPositionMixin = Em.Mixin.create({
 			}
 			else if (wrapFocusVertical) {
 				this.send('focusHardDown');
-				this.focusCurrentCell();
 			}
 			else {
 				this.sendAction('outOfBounds', 'up', this);
@@ -142,7 +140,6 @@ var FocusPositionMixin = Em.Mixin.create({
 			}
 			else if (wrapFocusHorizontal) {
 				this.send('focusHardLeft');
-				this.focusCurrentCell();
 			}
 			else {
 				this.sendAction('outOfBounds', 'right', this);
@@ -159,7 +156,6 @@ var FocusPositionMixin = Em.Mixin.create({
 			}
 			else if (wrapFocusVertical) {
 				this.send('focusHardUp');
-				this.focusCurrentCell();
 			}
 			else {
 				this.sendAction('outOfBounds', 'down', this);
