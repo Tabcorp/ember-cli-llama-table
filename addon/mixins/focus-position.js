@@ -68,6 +68,13 @@ var FocusPositionMixin = Em.Mixin.create({
 		return cellView || null;
 	},
 
+	focusView: function (view) {
+		var el = view.$();
+		var $el = Em.$(el);
+		$el.focus();
+		this.send('syncScroll');
+	},
+
 	focusCell: function (row, column) {
 		this.setProperties({
 			focusRow: row,
@@ -80,10 +87,7 @@ var FocusPositionMixin = Em.Mixin.create({
 		var column = this.get('focusColumn');
 		var cellView = this.getCellFor(row, column);
 		if (!cellView) return;
-		var $cell = cellView.$();
-		if (!$cell || $cell.length < 0) return;
-		$cell.focus();
-		this.send('syncScroll');
+		this.focusView(cellView);
 	},
 
 	actions: {
