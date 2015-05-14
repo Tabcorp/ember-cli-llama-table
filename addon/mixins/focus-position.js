@@ -81,8 +81,10 @@ var FocusPositionMixin = Em.Mixin.create({
 
 	actions: {
 		focusCell: function (row, column) {
-			this.set('focusRow', row);
-			this.set('focusColumn', column);
+			this.setProperties({
+				focusRow: row,
+				focusColumn: column
+			});
 		},
 		focusCurrentCell: function () {
 			this.focusCell();
