@@ -10,20 +10,23 @@ var not = computed.not;
 var LlamaColumn = Em.CollectionView.extend({
 	classNames: 'llama-column',
 	classNameBindings: ['textAlignClass', 'columnClassNames', 'isVisible', 'isHidden'],
+	attributeBindings: ['columnName:data-column-name', 'columnType:data-column-type'],
 	width: alias('column.width'),
 	isHidden: alias('column.isHidden'),
 	isVisible: not('isHidden'),
 	columnClassNames: join('column.classNames', ' '),
+	columnName: alias('column.name'),
+	columnType: alias('column.type'),
 
 	rows: null,
 	column: null,
 
-	config: computed('column.type', 'column.name', 'controller.config.types', function () {
+	config: computed('columnType', 'columnName', 'controller.config.types', function () {
 		var types = this.get('controller.config.types');
 		if (!Em.isArray(types)) {
 			return null;
 		}
-		var name = this.get('column.type') || this.get('column.name');
+		var name = this.get('columnType') || this.get('columnName');
 		var type = types.findBy('name', name);
 		return type;
 	}),
