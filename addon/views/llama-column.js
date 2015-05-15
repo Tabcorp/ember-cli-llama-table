@@ -18,12 +18,12 @@ var LlamaColumn = Em.CollectionView.extend({
 	rows: null,
 	column: null,
 
-	config: computed('column.name', 'controller.config.types', function () {
+	config: computed('column.type', 'column.name', 'controller.config.types', function () {
 		var types = this.get('controller.config.types');
 		if (!Em.isArray(types)) {
 			return null;
 		}
-		var name = this.get('column.name');
+		var name = this.get('column.type') || this.get('column.name');
 		var type = types.findBy('name', name);
 		return type;
 	}),
