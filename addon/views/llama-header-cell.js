@@ -3,6 +3,7 @@ import LlamaCell from './llama-cell';
 import { defaultValue } from 'llama-table/computed';
 var computed = Em.computed;
 var alias = computed.alias;
+var bool = computed.bool;
 var and = computed.and;
 var not = computed.not;
 
@@ -11,7 +12,7 @@ var LlamaHeaderCell = LlamaCell.extend({
 	classNames: 'llama-header-cell',
 	classNameBindings: ['sortByThis', 'sortByThisAscending', 'sortByThisDescending', 'isSortable'],
 	attributeBindings: ['title'],
-	showLabel: alias('column.showLabel'),
+	showLabel: bool('column.showLabel'),
 
 	column: null,
 
@@ -31,7 +32,7 @@ var LlamaHeaderCell = LlamaCell.extend({
 	isResizable: and('tableIsResizable', 'columnIsResizable'),
 
 	sortProperties: alias('controller.sortProperties'),
-	sortAscending: alias('controller.sortAscending'),
+	sortAscending: bool('controller.sortAscending'),
 	sortDescending: not('sortAscending'),
 
 	sortByThis: computed('sortProperties.firstObject', 'column.name', function () {

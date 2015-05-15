@@ -3,11 +3,12 @@ import ScrollXYMixin from 'llama-table/mixins/scroll-xy';
 var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
+var bool = computed.bool;
 
 var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 	classNames: 'llama-table',
-	dualHeaders: alias('controller.dualHeaders'),
-	showFooter: alias('controller.showFooter'),
+	dualHeaders: bool('controller.dualHeaders'),
+	showFooter: bool('controller.showFooter'),
 	scrollLeft: alias('controller.scrollLeft'),
 	scrollTop: alias('controller.scrollTop'),
 

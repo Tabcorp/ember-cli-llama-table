@@ -5,6 +5,7 @@ var set = Em.set;
 var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
+var bool = computed.bool;
 var not = computed.not;
 
 var LlamaColumn = Em.CollectionView.extend({
@@ -12,7 +13,7 @@ var LlamaColumn = Em.CollectionView.extend({
 	classNameBindings: ['textAlignClass', 'columnClassNames', 'isVisible', 'isHidden'],
 	attributeBindings: ['columnName:data-column-name', 'columnType:data-column-type'],
 	width: alias('column.width'),
-	isHidden: alias('column.isHidden'),
+	isHidden: bool('column.isHidden'),
 	isVisible: not('isHidden'),
 	columnClassNames: join('column.classNames', ' '),
 	columnName: alias('column.name'),
