@@ -14,7 +14,7 @@ var reads = computed.reads;
  */
 var RowController = Em.ObjectProxy.extend({
 	content: alias('model'),
-	contentIndex: computed('parentController.@each', function () {
+	contentIndex: computed('parentController.[]', function () {
 		var array = this.get('parentController');
 		var content = this;
 		var index = makeArray(array).indexOf(content);
