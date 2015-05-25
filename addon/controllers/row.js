@@ -13,6 +13,7 @@ var reads = computed.reads;
  * @extends Ember.ObjectProxy
  */
 var RowController = Em.ObjectProxy.extend({
+	content: alias('model'),
 	contentIndex: computed('parentController.[]', function () {
 		var array = this.get('parentController');
 		var content = this;
