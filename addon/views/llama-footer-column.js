@@ -23,6 +23,7 @@ var LlamaFooterColumn = LlamaColumn.extend({
 		var column = this.get('column');
 		set(attrs, 'row', data);
 		set(attrs, 'column', column);
+		set(attrs, 'isFooter', true);
 		return this._super(View, attrs);
 	},
 

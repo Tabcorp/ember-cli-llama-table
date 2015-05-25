@@ -29,6 +29,7 @@ var LlamaBodyCell = LlamaCell.extend({
 	showingSubcontent: bool('row.isExpanded'),
 	isEmpty: empty('value'),
 	isEditable: bool('column.isEditable'),
+	isFooter: false,
 
 	column: null,
 	row: null,
