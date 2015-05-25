@@ -11,7 +11,7 @@ var or = computed.or;
 var and = computed.and;
 var bool = computed.bool;
 var empty = computed.empty;
-var gt = computed.gt;
+var not = computed.not;
 var ESC = 27;
 var SPACE = 32;
 
@@ -23,7 +23,7 @@ var LlamaBodyCell = LlamaCell.extend({
 	hover: false,
 	height: alias('row.height'),
 	columnIsClickable: alias('column.isClickable'),
-	rowIsBody: gt('row.contentIndex', -1),
+	rowIsBody: not('isFooter'),
 	rowIsClickable: and('controller.enableRowClick', 'rowIsBody'),
 	isClickable: or('columnIsClickable', 'rowIsClickable'),
 	showingSubcontent: bool('row.isExpanded'),

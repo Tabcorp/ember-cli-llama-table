@@ -205,7 +205,8 @@ var IndexController = Em.Controller.extend({
 			this.toggleProperty('config.showFooter');
 		},
 		cellClick: function (row, column) {
-			var index = row.get('contentIndex');
+			var rows = this.get('tableData');
+			var index = rows.indexOf(row);
 			if (Em.isEmpty(index) || index < 0) {
 				return;
 			}
