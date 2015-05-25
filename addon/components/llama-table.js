@@ -76,7 +76,9 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	}),
 
 	/**
-	 * Row values array with added sorting functionality.
+	 * Row values array with added sorting functionality. Uses a custom
+	 *   'RowsController' if table has subcontent. Does not construct this
+	 *   custom controller if it is not necessary.
 	 * @property {Ember.ArrayProxy} sortedRows
 	 */
 	sortedRows: computed(function () {
@@ -97,7 +99,11 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		if (typeof orderBy === 'function') {
 			options.orderBy = orderBy;
 		}
-		return Rows.create(options);
+		var Controller = Em.ArrayController;
+		if (this.get('hasSubcontent')) {
+			Controller = Rows;
+		}
+		return Controller.create(options);
 	}),
 
 	/**
