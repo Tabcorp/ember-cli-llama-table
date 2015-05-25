@@ -9,6 +9,7 @@ Router.map(function () {
 	this.route('stress');
 	this.route('multi');
 	this.route('subcontent');
+	this.route('switch');
 });
 
 export default Router;

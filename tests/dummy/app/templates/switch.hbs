@@ -1,0 +1,18 @@
+<h3>Switch content</h3>
+
+{{llama-table
+	columns=columns
+	rows=rows
+}}
+
+<h4>Actions</h4>
+
+<div>
+
+	<button {{action 'switchDataset' 'datasets.dataset1'}}>Use data set 1</button>
+	<button {{action 'switchDataset' 'datasets.dataset2'}}>Use data set 2</button>
+
+	<button {{action 'switchColumnset' 'columnsets.columnset1'}}>Use column set 1</button>
+	<button {{action 'switchColumnset' 'columnsets.columnset2'}}>Use column set 2</button>
+
+</div>
