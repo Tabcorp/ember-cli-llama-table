@@ -15,6 +15,8 @@ var eq = computed.equal;
 var collect = computed.collect;
 var throttle = Em.run.throttle;
 
+var SortedController = Em.ArrayProxy.extend(Em.SortableMixin);
+
 var SCROLL_INTERVAL = 1000 / 60; // 60 fps
 var SCROLL_IMMEDIATE = false; // invoke on trailing edge
 
@@ -99,7 +101,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		if (typeof orderBy === 'function') {
 			options.orderBy = orderBy;
 		}
-		var Controller = Em.ArrayController;
+		var Controller = SortedController;
 		if (this.get('hasSubcontent')) {
 			Controller = Rows;
 		}
