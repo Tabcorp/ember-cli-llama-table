@@ -52,8 +52,9 @@ var IndexController = Em.Controller.extend({
 			var label = 'Add %@ rows'.fmt(num);
 			console.profile('Adding rows');
 			console.time(label);
+			var data = [];
 			for (var i = 0; i < num; i++) {
-				this.get('tableData').pushObject({
+				data.push({
 					a: Math.random(),
 					b: Math.random(),
 					c: Math.random(),
@@ -61,6 +62,7 @@ var IndexController = Em.Controller.extend({
 					e: Math.random()
 				});
 			}
+			this.get('tableData').pushObjects(data);
 			console.timeEnd(label);
 			label = 'Render %@ rows'.fmt(num);
 			console.time(label);
