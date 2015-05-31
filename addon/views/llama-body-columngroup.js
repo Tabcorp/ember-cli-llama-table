@@ -3,7 +3,6 @@ import LlamaColumngroup from './llama-columngroup';
 var set = Em.set;
 
 var LlamaBodyColumngroup = LlamaColumngroup.extend({
-	templateName: 'llama-body-columngroup',
 	classNames: 'llama-body-columngroup',
 	itemViewClass: Em.computed.alias('controller.BodyColumnView'),
 

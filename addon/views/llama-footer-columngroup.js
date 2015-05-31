@@ -4,7 +4,6 @@ var set = Em.set;
 var alias = Em.computed.alias;
 
 var LlamaFooterColumngroup = LlamaColumngroup.extend({
-	templateName: 'llama-footer-columngroup',
 	classNames: 'llama-footer-columngroup',
 	itemViewClass: alias('controller.FooterColumnView'),
 
