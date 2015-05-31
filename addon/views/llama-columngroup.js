@@ -4,6 +4,9 @@ var set = Em.set;
 var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
+var setDiff = computed.setDiff;
+var filterBy = computed.filterBy;
+var mapBy = computed.mapBy;
 
 var LlamaColumngroup = Em.CollectionView.extend({
 	classNames: 'llama-columngroup',
@@ -12,8 +15,12 @@ var LlamaColumngroup = Em.CollectionView.extend({
 
 	columns: null,
 
-	width: computed('columns.@each.width', 'columns.@each.isHidden', function () {
-		var widths = this.get('columns').rejectBy('isHidden').mapBy('width');
+	hiddenColumns: filterBy('columns', 'isHidden'),
+	visibleColumns: setDiff('columns', 'hiddenColumns'),
+	visibleColumnWidths: mapBy('visibleColumns', 'width'),
+
+	width: computed('visibleColumnWidths.[]', function () {
+		var widths = this.get('visibleColumnWidths');
 		var total = widths.reduce(function (total, val) {
 			return total + val;
 		}, 0);
