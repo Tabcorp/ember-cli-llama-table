@@ -204,6 +204,11 @@ var IndexController = Em.Controller.extend({
 		toggleFooter: function () {
 			this.toggleProperty('config.showFooter');
 		},
+		toggleMaxHeight: function () {
+			var currentHeight = this.get('config.maxHeight');
+			var isInitial = currentHeight === 'initial';
+			this.set('config.maxHeight', isInitial ? 300 : 'initial');
+		},
 		cellClick: function (row, column) {
 			var rows = this.get('tableData');
 			var index = rows.indexOf(row);
