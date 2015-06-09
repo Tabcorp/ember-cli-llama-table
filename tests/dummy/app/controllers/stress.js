@@ -45,7 +45,8 @@ var IndexController = Em.Controller.extend({
 	tableConfig: {
 		maxHeight: 200,
 		isSortable: false,
-		isResizable: false
+		isResizable: false,
+		onlyFocusEditable: true
 	},
 	actions: {
 		add: function (num) {
