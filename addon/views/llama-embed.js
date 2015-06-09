@@ -12,6 +12,12 @@ var LlamaEmbed = Em.ContainerView.extend({
 
 	rows: alias('controller.sortedRows'),
 
+	didInsertElement: function () {
+		this._super();
+		this.updateOffsetTop();
+		this.updateHeight();
+	},
+
 	calculateRowHeight: function (row) {
 		var result = get(row, 'height');
 		if (get(row, 'isExpanded')) {
@@ -37,12 +43,12 @@ var LlamaEmbed = Em.ContainerView.extend({
 	updateOffsetTop: observer('offsetTop', function () {
 		var $embed = Em.$(this.$());
 		$embed.css('top', this.get('offsetTop'));
-	}).on('didInsertElement'),
+	}),
 
 	updateHeight: observer('height', function () {
 		var $embed = Em.$(this.$());
 		$embed.css('height', this.get('height'));
-	}).on('didInsertElement'),
+	}),
 
 	subcontentView: computed(function () {
 		var View = this.get('controller.config.subcontentView');

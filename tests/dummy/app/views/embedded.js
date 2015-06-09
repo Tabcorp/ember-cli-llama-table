@@ -27,13 +27,17 @@ var EmbeddedView = Em.View.extend({
 	tableConfig: {
 		maxHeight: 90
 	},
+	didInsertElement: function () {
+		this._super();
+		this.setSubcontentHeight();
+	},
 	setSubcontentHeight: function () {
 		var $el = this.$();
 		if ($el) {
 			var height = $el.outerHeight();
 			this.set('content.subcontentHeight', height + 20);
 		}
-	}.on('didInsertElement')
+	}
 });
 
 export default EmbeddedView;

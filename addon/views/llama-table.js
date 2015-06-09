@@ -45,6 +45,14 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 		this.pushObject(this.get('bodyView'));
 	},
 
+	didInsertElement: function () {
+		this._super();
+		this.toggleDualHeader();
+		this.toggleFooter();
+		this.setHeight();
+		this.updateScrollPosition();
+	},
+
 	toggleDualHeader: observer('dualHeaders', function () {
 		var dualHeaders = this.get('dualHeaders');
 		if (dualHeaders) {
@@ -53,7 +61,7 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 		else {
 			this.removeObject(this.get('dualHeaderView'));
 		}
-	}).on('didInsertElement'),
+	}),
 
 	toggleFooter: observer('showFooter', function () {
 		var showFooter = this.get('showFooter');
@@ -74,18 +82,18 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 			this.removeObject(footerView);
 			this.set('footerView', null);
 		}
-	}).on('didInsertElement'),
+	}),
 
 	updateScrollPosition: observer('scrollLeft', 'scrollTop', function () {
 		var $table = Em.$(this.$());
 		$table.scrollLeft(this.get('scrollLeft'));
 		$table.scrollTop(this.get('scrollTop'));
-	}).on('didInsertElement'),
+	}),
 
 	setHeight: observer('controller.maxHeight', function () {
 		var $table = Em.$(this.$());
 		$table.css('maxHeight', this.get('controller.maxHeight'));
-	}).on('didInsertElement'),
+	}),
 
 	actions: {
 		scrollX: function (pos) {

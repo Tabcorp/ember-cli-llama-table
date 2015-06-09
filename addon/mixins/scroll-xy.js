@@ -23,7 +23,12 @@ var ScrollXYMixin = Em.Mixin.create(ScrollHandlerMixin, {
 	_updateScrollLeftAndTop: observer(function () {
 		this.get('_scrollLeft');
 		this.get('_scrollTop');
-	}).on('didInsertElement'),
+	}),
+
+	didInsertElement: function () {
+		this._super();
+		this._updateScrollLeftAndTop();
+	},
 
 	scroll: function (e) {
 		var $el = Em.$(this.$());

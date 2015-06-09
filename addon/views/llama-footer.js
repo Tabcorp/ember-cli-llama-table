@@ -29,6 +29,11 @@ var LlamaFooter = Em.CollectionView.extend({
 		return instance;
 	}),
 
+	didInsertElement: function () {
+		this._super();
+		this.updateScrollPosition();
+	},
+
 	createChildView: function (View, attrs) {
 		var data = this.get('data');
 		var columns = get(attrs, 'content');
@@ -40,7 +45,7 @@ var LlamaFooter = Em.CollectionView.extend({
 	updateScrollPosition: observer('scrollTop', function () {
 		var $footer = Em.$(this.$());
 		$footer.css('marginBottom', this.get('scrollTop') * -1);
-	}).on('didInsertElement'),
+	}),
 
 	willDestroy: function () {
 		this.get('data').destroy();

@@ -13,6 +13,11 @@ var LlamaHeader = Em.CollectionView.extend({
 
 	columngroups: null,
 
+	didInsertElement: function () {
+		this._super();
+		this.updateScrollPosition();
+	},
+
 	createChildView: function (View, attrs) {
 		var columns = get(attrs, 'content');
 		set(attrs, 'columns', columns);
@@ -22,7 +27,7 @@ var LlamaHeader = Em.CollectionView.extend({
 	updateScrollPosition: observer('scrollTop', function () {
 		var $header = Em.$(this.$());
 		$header.css('marginTop', this.get('scrollTop'));
-	}).on('didInsertElement')
+	})
 });
 
 export default LlamaHeader;
