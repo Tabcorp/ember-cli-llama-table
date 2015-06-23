@@ -46,8 +46,8 @@ var LlamaColumn = Em.CollectionView.extend({
 		return this._super(View, attrs);
 	},
 
-	textAlignClass: computed('column.textAlign', function () {
-		var textAlign = this.get('column.textAlign');
+	textAlignClass: computed('config.textAlign', 'column.textAlign', function () {
+		var textAlign = this.get('config.textAlign') || this.get('column.textAlign');
 		switch (textAlign) {
 			case 'left': return 'text-left';
 			case 'right': return 'text-right';
