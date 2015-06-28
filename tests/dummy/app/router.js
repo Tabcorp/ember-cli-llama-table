@@ -10,6 +10,7 @@ Router.map(function () {
 	this.route('multi');
 	this.route('subcontent');
 	this.route('switch');
+	this.route('row-heights');
 });
 
 export default Router;
