@@ -17,10 +17,9 @@ var LlamaColumngroup = Em.CollectionView.extend({
 
 	hiddenColumns: filterBy('columns', 'isHidden'),
 	visibleColumns: setDiff('columns', 'hiddenColumns'),
-	visibleColumnWidths: mapBy('visibleColumns', 'width'),
 
-	width: computed('visibleColumnWidths.[]', function () {
-		var widths = this.get('visibleColumnWidths');
+	width: computed('visibleColumns.@each.width', function () {
+		var widths = this.get('visibleColumns').mapBy('width');
 		var total = widths.reduce(function (total, val) {
 			return total + val;
 		}, 0);
