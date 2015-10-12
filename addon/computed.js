@@ -5,9 +5,8 @@ var set = Em.set;
 var isBlank = Em.isBlank;
 
 export var defaultValue = function (watchKey, defaultValue) {
-	return computed(watchKey, function (setKey, value) {
-		// setter
-		if (arguments.length > 1) {
+	return computed(watchKey, {
+		set: function(setKey, value) {
 			try {
 				set(this, watchKey, value);
 			}
@@ -15,10 +14,12 @@ export var defaultValue = function (watchKey, defaultValue) {
 				// swallow
 			}
 			return value;
+		},
+		get: function(value) {
+			// getter
+			value = get(this, watchKey);
+			return isBlank(value) ? defaultValue : value;
 		}
-		// getter
-		value = get(this, watchKey);
-		return isBlank(value) ? defaultValue : value;
 	});
 };
 
