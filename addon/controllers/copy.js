@@ -27,11 +27,13 @@ var Copy = Em.Controller.extend({
 	 *   highlighting.
 	 * @property {jQuery} $hide
 	 */
-	$hide: computed(function () {
-		var style = document.createElement('style');
-		var contents = '::selection { background: inherit; color: inherit; }';
-		style.appendChild(document.createTextNode(contents));
-		return Em.$(style);
+	$hide: computed({
+		get: function () {
+			var style = document.createElement('style');
+			var contents = '::selection { background: inherit; color: inherit; }';
+			style.appendChild(document.createTextNode(contents));
+			return Em.$(style);
+		}
 	}),
 
 	/**

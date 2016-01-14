@@ -1,0 +1,25 @@
+{{component root.HeaderView
+	root=root
+	columngroups=columngroups
+}}
+
+{{component root.BodyView
+	root=root
+	columngroups=columngroups
+	rows=rows
+}}
+
+{{#if showFooter}}
+	{{component root.FooterView
+		root=root
+		columngroups=columngroups
+		rows=rows
+	}}
+{{/if}}
+
+{{#if showDualHeaders}}
+	{{component root.HeaderView
+		root=root
+		columngroups=columngroups
+	}}
+{{/if}}

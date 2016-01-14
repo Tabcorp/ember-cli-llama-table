@@ -14,11 +14,13 @@ var reads = computed.reads;
  */
 var RowController = Em.ObjectProxy.extend({
 	content: alias('model'),
-	contentIndex: computed('parentController.[]', function () {
-		var array = this.get('parentController');
-		var content = this;
-		var index = makeArray(array).indexOf(content);
-		return index;
+	contentIndex: computed('parentController.[]', {
+		get: function () {
+			var array = this.get('parentController');
+			var content = this;
+			var index = makeArray(array).indexOf(content);
+			return index;
+		}
 	}),
 	isExpanded: false,
 	height: defaultValue('content.height', 30),

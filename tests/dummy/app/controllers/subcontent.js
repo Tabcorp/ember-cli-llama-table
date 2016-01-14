@@ -11,7 +11,7 @@ var SubcontentController = Em.Controller.extend({
 		hasSubcontent: true,
 		wrapFocusHorizontal: true,
 		wrapFocusVertical: true,
-		subcontentView: 'embedded',
+		subcontentView: 'embedded-content',
 		sortProperties: ['family_name'],
 		types: [
 			{ name: 'expando', view: 'expando-cell' }

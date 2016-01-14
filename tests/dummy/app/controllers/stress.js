@@ -1,5 +1,4 @@
 import Em from 'ember';
-import RemoveButton from '../views/remove-button-cell';
 var set = Em.set;
 var get = Em.get;
 
@@ -41,7 +40,7 @@ var IndexController = Em.Controller.extend({
 			width: 80
 		}
 	],
-	tableData: [],
+	tableData: Em.A(),
 	tableConfig: {
 		maxHeight: 200,
 		isSortable: false,
@@ -50,7 +49,7 @@ var IndexController = Em.Controller.extend({
 	},
 	actions: {
 		add: function (num) {
-			var label = 'Add %@ rows'.fmt(num);
+			var label = `Add ${num} rows`;
 			console.profile('Adding rows');
 			console.time(label);
 			var data = [];
@@ -65,7 +64,7 @@ var IndexController = Em.Controller.extend({
 			}
 			this.get('tableData').pushObjects(data);
 			console.timeEnd(label);
-			label = 'Render %@ rows'.fmt(num);
+			label = `Render ${num} rows`;
 			console.time(label);
 			Em.run.next(function () {
 				console.timeEnd(label);
@@ -75,7 +74,7 @@ var IndexController = Em.Controller.extend({
 		clear: function () {
 			console.profile('Clearing rows');
 			var len = this.get('tableData.length');
-			var label = 'Clear %@ rows'.fmt(len);
+			var label = `Clear ${len} rows`;
 			console.time(label);
 			this.get('tableData').clear();
 			console.timeEnd(label);

@@ -12,12 +12,16 @@ var observer = Em.observer;
  */
 var ScrollXYMixin = Em.Mixin.create(ScrollHandlerMixin, {
 
-	_scrollLeft: computed(function () {
-		return Em.$(this.$()).scrollLeft();
+	_scrollLeft: computed({
+		get: function () {
+			return Em.$(this.$()).scrollLeft();
+		}
 	}),
 
-	_scrollTop: computed(function () {
-		return Em.$(this.$()).scrollTop();
+	_scrollTop: computed({
+		get: function () {
+			return Em.$(this.$()).scrollTop();
+		}
 	}),
 
 	_updateScrollLeftAndTop: observer(function () {

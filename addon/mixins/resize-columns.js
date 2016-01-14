@@ -17,8 +17,10 @@ var ResizeColumns = Em.Mixin.create({
 	resizeColumn: null,
 	resizeBeginWidth: null,
 
-	resizeController: computed(function () {
-		return ResizeController.create();
+	resizeController: computed({
+		get: function () {
+			return ResizeController.create();
+		}
 	}),
 
 	willDestroy: function () {

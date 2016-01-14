@@ -1,0 +1,26 @@
+{{#if renderContent}}
+	{{component root.ContentView
+		root=root
+		columngroups=columngroups
+		rows=rows
+	}}
+{{/if}}
+
+{{#if renderSubcontent}}
+	{{component root.SubcontentView
+		root=root
+		rows=rows
+	}}
+{{/if}}
+
+{{#if renderEmpty}}
+	{{component root.EmptyView
+		root=root
+	}}
+{{/if}}
+
+{{#if renderLoading}}
+	{{component root.LoadingView
+		root=root
+	}}
+{{/if}}

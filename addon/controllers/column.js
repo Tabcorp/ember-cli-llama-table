@@ -131,15 +131,17 @@ var ColumnController = Em.ObjectProxy.extend({
 	 * @optional
 	 * @default "left"
 	 */
-	textAlign: computed('model.textAlign', 'type', function () {
-		var value = this.get('model.textAlign');
-		if (!Em.isEmpty(value)) {
-			return value;
+	textAlign: computed('model.textAlign', 'type', {
+		get: function () {
+			var value = this.get('model.textAlign');
+			if (!Em.isEmpty(value)) {
+				return value;
+			}
+			if (this.get('type') === 'number') {
+				return 'right';
+			}
+			return 'left';
 		}
-		if (this.get('type') === 'number') {
-			return 'right';
-		}
-		return 'left';
 	}),
 
 	/**

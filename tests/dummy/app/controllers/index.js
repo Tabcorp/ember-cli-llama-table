@@ -1,11 +1,10 @@
 import Em from 'ember';
-import RemoveButton from '../views/remove-button-cell';
 import IndexFooterController from './index-footer';
 var set = Em.set;
 var get = Em.get;
 
 var IndexController = Em.Controller.extend({
-	tableColumns: [
+	tableColumns: Em.A([
 		{
 			name: 'episode',
 			label: 'Episode',
@@ -51,8 +50,8 @@ var IndexController = Em.Controller.extend({
 			minWidth: 100,
 			maxWidth: 250
 		}
-	],
-	tableData: [
+	]),
+	tableData: Em.A([
 		{
 			screenshot: 'http://i.imgur.com/r3WXxQ8.jpg',
 			episode: 1,
@@ -141,7 +140,7 @@ var IndexController = Em.Controller.extend({
 			million_viewers: 1.823,
 			description: 'Rick hosts a party while Beth and Jerry are away.'
 		}
-	],
+	]),
 	config: {
 		maxHeight: 300,
 		sortProperties: ['episode'],
