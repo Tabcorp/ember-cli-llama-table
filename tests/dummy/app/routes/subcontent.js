@@ -2,7 +2,7 @@ import Em from 'ember';
 
 var SubcontentRoute = Em.Route.extend({
 	model: function () {
-		return Em.A([
+		return [
 			{
 				id: 0,
 				given_name: 'Bob',
@@ -48,7 +48,7 @@ var SubcontentRoute = Em.Route.extend({
 				given_name: 'Ollie',
 				family_name: 'Pesto'
 			}
-		]);
+		];
 	}
 });
 
