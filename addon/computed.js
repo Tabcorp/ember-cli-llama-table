@@ -43,7 +43,7 @@ export function makeArray (watchKey) {
 }
 
 export default {
-	defaultValue: defaultValue,
-	join: join,
-	makeArray: makeArray,
+	defaultValue,
+	join,
+	makeArray,
 };
