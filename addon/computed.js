@@ -4,7 +4,7 @@ var get = Em.get;
 var set = Em.set;
 var isBlank = Em.isBlank;
 
-export var defaultValue = function (watchKey, defaultValue) {
+export function defaultValue (watchKey, defaultValue) {
 	return computed(watchKey, {
 		set: function (setKey, value) {
 			try {
@@ -21,9 +21,9 @@ export var defaultValue = function (watchKey, defaultValue) {
 			return isBlank(value) ? defaultValue : value;
 		}
 	});
-};
+}
 
-export var join = function (watchKey, separator = ',') {
+export function join (watchKey, separator = ',') {
 	return computed(watchKey, {
 		get: function () {
 			var value = Em.makeArray(this.get(watchKey));
@@ -32,15 +32,15 @@ export var join = function (watchKey, separator = ',') {
 			return result;
 		}
 	});
-};
+}
 
-export var makeArray = function (watchKey) {
+export function makeArray (watchKey) {
 	return computed(watchKey, {
 		get: function () {
 			return Em.A(this.get(watchKey));
 		}
 	});
-};
+}
 
 export default {
 	defaultValue: defaultValue,
