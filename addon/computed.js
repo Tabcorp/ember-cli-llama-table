@@ -23,6 +23,14 @@ export function defaultValue (watchKey, defaultValue) {
 	});
 }
 
+export function eq (left, right) {
+	return computed(left, right, {
+		get: function () {
+			return this.get(left) === this.get(right);
+		},
+	});
+}
+
 export function join (watchKey, separator = ',') {
 	return computed(watchKey, {
 		get: function () {
@@ -44,6 +52,7 @@ export function makeArray (watchKey) {
 
 export default {
 	defaultValue,
+	eq,
 	join,
 	makeArray,
 };

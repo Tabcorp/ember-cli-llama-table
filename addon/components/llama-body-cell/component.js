@@ -1,5 +1,6 @@
 import Em from 'ember';
 import LlamaCell from 'llama-table/components/llama-cell/component';
+import { eq } from 'llama-table/computed';
 import layout from './template';
 var get = Em.get;
 var set = Em.set;
@@ -15,14 +16,6 @@ var empty = computed.empty;
 var not = computed.not;
 var ESC = 27;
 var SPACE = 32;
-
-function eq (left, right) {
-	return computed(left, right, {
-		get: function () {
-			return this.get(left) === this.get(right);
-		},
-	});
-}
 
 var LlamaBodyCell = LlamaCell.extend({
 	layout: layout,
