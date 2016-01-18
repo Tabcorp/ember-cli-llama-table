@@ -4,7 +4,6 @@ import layout from './template';
 var get = Em.get;
 var set = Em.set;
 var computed = Em.computed;
-var alias = computed.alias;
 
 var LlamaFooterColumn = LlamaColumn.extend({
 	layout: layout,

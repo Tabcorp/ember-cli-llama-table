@@ -1,7 +1,5 @@
 import Em from 'ember';
 import layout from './template';
-var on = Em.on;
-var observer = Em.observer;
 var computed = Em.computed;
 var bool = computed.bool;
 var not = computed.not;

@@ -28,9 +28,13 @@ var CellTypesMixin = Em.Mixin.create({
 	 */
 	getConfigCellType: function (name) {
 		var types = this.get('config.types');
-		if (isBlank(types)) return null;
+		if (isBlank(types)) {
+			return null;
+		}
 		var type = types.findBy('name', name);
-		if (isBlank(type)) return null;
+		if (isBlank(type)) {
+			return null;
+		}
 		return get(type, 'view');
 	},
 

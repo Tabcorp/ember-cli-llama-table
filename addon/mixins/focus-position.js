@@ -1,6 +1,4 @@
 import Em from 'ember';
-var observer = Em.observer;
-var computed = Em.computed;
 var deprecate = Em.deprecateFunc;
 
 /**
@@ -133,32 +131,24 @@ var FocusPositionMixin = Em.Mixin.create({
 			}
 		},
 		focusHardLeft: function () {
-			var column = this.get('focusColumn');
-			var columnIndex = this.getVisibleColumnIndex(column);
 			var newColumn = this.getVisibleColumnAtIndex(0, true);
 			if (newColumn) {
 				this.set('focusColumn', newColumn);
 			}
 		},
 		focusHardUp: function () {
-			var row = this.get('focusRow');
-			var rowIndex = this.getVisibleRowIndex(row);
 			var newRow = this.getVisibleRowAtIndex(0, true);
 			if (newRow) {
 				this.set('focusRow', newRow);
 			}
 		},
 		focusHardRight: function () {
-			var column = this.get('focusColumn');
-			var columnIndex = this.getVisibleColumnIndex(column);
 			var newColumn = this.getVisibleColumnAtIndex(-1, true);
 			if (newColumn) {
 				this.set('focusColumn', newColumn);
 			}
 		},
 		focusHardDown: function () {
-			var row = this.get('focusRow');
-			var rowIndex = this.getVisibleRowIndex(row);
 			var newRow = this.getVisibleRowAtIndex(-1, true);
 			if (newRow) {
 				this.set('focusRow', newRow);

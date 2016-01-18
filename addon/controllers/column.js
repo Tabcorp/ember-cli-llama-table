@@ -1,6 +1,5 @@
 import Em from 'ember';
 import { defaultValue } from 'llama-table/computed';
-var get = Em.get;
 var computed = Em.computed;
 var alias = computed.alias;
 

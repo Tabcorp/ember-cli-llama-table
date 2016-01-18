@@ -4,7 +4,7 @@ var get = Em.get;
 var set = Em.set;
 var isBlank = Em.isBlank;
 
-export function defaultValue (watchKey, defaultValue) {
+export function defaultValue (watchKey, defValue) {
 	return computed(watchKey, {
 		set: function (setKey, value) {
 			try {
@@ -18,7 +18,7 @@ export function defaultValue (watchKey, defaultValue) {
 		get: function (value) {
 			// getter
 			value = get(this, watchKey);
-			return isBlank(value) ? defaultValue : value;
+			return isBlank(value) ? defValue : value;
 		},
 	});
 }

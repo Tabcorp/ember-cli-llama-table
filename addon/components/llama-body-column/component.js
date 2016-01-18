@@ -1,9 +1,7 @@
 import Em from 'ember';
 import LlamaColumn from 'llama-table/components/llama-column/component';
-import LlamaBodyCell from 'llama-table/components/llama-body-cell/component';
 import layout from './template';
 var get = Em.get;
-var set = Em.set;
 var computed = Em.computed;
 
 var LlamaBodyColumn = LlamaColumn.extend({

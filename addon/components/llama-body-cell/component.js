@@ -2,8 +2,6 @@ import Em from 'ember';
 import LlamaCell from 'llama-table/components/llama-cell/component';
 import { eq } from 'llama-table/computed';
 import layout from './template';
-var get = Em.get;
-var set = Em.set;
 var defineProperty = Em.defineProperty;
 var deprecate = Em.deprecateFunc;
 var observer = Em.observer;

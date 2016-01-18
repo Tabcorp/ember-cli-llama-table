@@ -5,17 +5,13 @@ import ViewConstructors from 'llama-table/mixins/view-constructors';
 import FocusPosition from 'llama-table/mixins/focus-position';
 import SortedColumns from 'llama-table/mixins/sorted-columns';
 import SortedRows from 'llama-table/mixins/sorted-rows';
-import { defaultValue, makeArray } from 'llama-table/computed';
+import { defaultValue } from 'llama-table/computed';
 import layout from './template';
-var get = Em.get;
 var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
 var eq = computed.equal;
 var collect = computed.collect;
-var map = computed.map;
-var sort = computed.sort;
-var reads = computed.reads;
 var throttle = Em.run.throttle;
 
 var SCROLL_INTERVAL = 1000 / 60; // 60 fps

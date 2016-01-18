@@ -34,7 +34,7 @@ var ScrollXYMixin = Em.Mixin.create(ScrollHandlerMixin, {
 		this._updateScrollLeftAndTop();
 	},
 
-	scroll: function (e) {
+	scroll: function () {
 		var $el = Em.$(this.$());
 		var oldScrollLeft = this.get('_scrollLeft');
 		var newScrollLeft = $el.scrollLeft();

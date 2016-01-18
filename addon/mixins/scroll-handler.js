@@ -1,6 +1,4 @@
 import Em from 'ember';
-var get = Em.get;
-var run = Em.run;
 
 /**
  * Enables custom 'scroll' event.

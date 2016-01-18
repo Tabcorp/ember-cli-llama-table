@@ -1,7 +1,5 @@
 import Em from 'ember';
 import { join } from 'llama-table/computed';
-var get = Em.get;
-var set = Em.set;
 var on = Em.on;
 var observer = Em.observer;
 var computed = Em.computed;

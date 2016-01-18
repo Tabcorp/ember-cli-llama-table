@@ -29,7 +29,7 @@ var ResizeController = Em.Controller.extend({
 		this.set('deltaX', e.pageX - beginPageX);
 		this.set('deltaY', e.pageY - beginPageY);
 	},
-	stopResize: function (e) {
+	stopResize: function () {
 		Em.$(window).off('mousemove', this.handleResize);
 		this.set('eventBegin', null);
 	},

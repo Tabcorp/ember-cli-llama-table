@@ -1,7 +1,5 @@
 import Em from 'ember';
 import layout from './template';
-var get = Em.get;
-var set = Em.set;
 var observer = Em.observer;
 var alias = Em.computed.alias;
 var filterBy = Em.computed.filterBy;
