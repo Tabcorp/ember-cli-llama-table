@@ -30,6 +30,6 @@
 
 <h4>Events</h4>
 
-{{#each event in events}}
+{{#each events as |event|}}
 	<p>Clicked row {{event.index}}: {{event.row.title}}<br>Clicked on "{{event.column.label}}"</p>
 {{/each}}
