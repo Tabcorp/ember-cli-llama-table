@@ -2,24 +2,24 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('llama-header', 'Integration | Component | llama header', {
-  integration: true
+	integration: true
 });
 
 test('it renders', function(assert) {
-  
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
 
-  this.render(hbs`{{llama-header}}`);
+	// Set any properties with this.set('myProperty', 'value');
+	// Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
 
-  assert.equal(this.$().text().trim(), '');
+	this.render(hbs`{{llama-header}}`);
 
-  // Template block usage:" + EOL +
-  this.render(hbs`
-    {{#llama-header}}
-      template block text
-    {{/llama-header}}
-  `);
+	assert.equal(this.$().text().trim(), '');
 
-  assert.equal(this.$().text().trim(), 'template block text');
+	// Template block usage:" + EOL +
+	this.render(hbs`
+		{{#llama-header}}
+			template block text
+		{{/llama-header}}
+	`);
+
+	assert.equal(this.$().text().trim(), 'template block text');
 });
