@@ -47,7 +47,7 @@ var CellTypesMixin = Em.Mixin.create({
 			default:
 				return this.get('BodyCellView');
 		}
-	}
+	},
 });
 
 export default CellTypesMixin;

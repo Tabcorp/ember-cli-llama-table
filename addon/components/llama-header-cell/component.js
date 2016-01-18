@@ -24,7 +24,7 @@ var LlamaHeaderCell = LlamaCell.extend({
 				label = this.get('column.name');
 			}
 			return label;
-		}
+		},
 	}),
 
 	tableIsSortable: defaultValue('root.isSortable', true),
@@ -43,7 +43,7 @@ var LlamaHeaderCell = LlamaCell.extend({
 			var sortBy = this.get('sortProperties.firstObject');
 			var thisColumn = this.get('column.name');
 			return sortBy === thisColumn;
-		}
+		},
 	}),
 
 	sortByThisAscending: and('sortByThis', 'sortAscending'),
@@ -61,7 +61,7 @@ var LlamaHeaderCell = LlamaCell.extend({
 				controller.send('sortBy', this.get('column.name'));
 			}
 		}
-	}
+	},
 });
 
 export default LlamaHeaderCell;

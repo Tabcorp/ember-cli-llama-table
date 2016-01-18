@@ -19,7 +19,7 @@ export function defaultValue (watchKey, defaultValue) {
 			// getter
 			value = get(this, watchKey);
 			return isBlank(value) ? defaultValue : value;
-		}
+		},
 	});
 }
 
@@ -30,7 +30,7 @@ export function join (watchKey, separator = ',') {
 			var strings = value.map(String);
 			var result = strings.join(separator);
 			return result;
-		}
+		},
 	});
 }
 
@@ -38,12 +38,12 @@ export function makeArray (watchKey) {
 	return computed(watchKey, {
 		get: function () {
 			return Em.A(this.get(watchKey));
-		}
+		},
 	});
 }
 
 export default {
 	defaultValue: defaultValue,
 	join: join,
-	makeArray: makeArray
+	makeArray: makeArray,
 };

@@ -5,7 +5,7 @@ var cols = [
 	{ name: 'foo', label: 'Foo' },
 	{ name: 'bar', label: 'Bar' },
 	{ name: 'baz', label: 'Baz' },
-	{ name: 'qux', label: 'Qux' }
+	{ name: 'qux', label: 'Qux' },
 ];
 
 var data = [
@@ -18,11 +18,11 @@ var data = [
 	{ foo: 'a6', bar: 'b6', baz: 'c6', qux: 'd6' },
 	{ foo: 'a7', bar: 'b7', baz: 'c7', qux: 'd7' },
 	{ foo: 'a8', bar: 'b8', baz: 'c8', qux: 'd8' },
-	{ foo: 'a9', bar: 'b9', baz: 'c9', qux: 'd9' }
+	{ foo: 'a9', bar: 'b9', baz: 'c9', qux: 'd9' },
 ];
 
 var config = {
-	maxHeight: 149
+	maxHeight: 149,
 };
 
 var MultiController = Em.Controller.extend({
@@ -60,8 +60,8 @@ var MultiController = Em.Controller.extend({
 				case 'down':
 					return this.tableMove(direction, table);
 			}
-		}
-	}
+		},
+	},
 });
 
 export default MultiController;

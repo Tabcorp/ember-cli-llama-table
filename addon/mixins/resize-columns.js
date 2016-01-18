@@ -20,7 +20,7 @@ var ResizeColumns = Em.Mixin.create({
 	resizeController: computed({
 		get: function () {
 			return ResizeController.create();
-		}
+		},
 	}),
 
 	willDestroy: function () {
@@ -49,8 +49,8 @@ var ResizeColumns = Em.Mixin.create({
 			this.set('resizeColumn', column);
 			this.set('resizeBeginWidth', get(column, 'width'));
 			this.get('resizeController').send('startResize', e);
-		}
-	}
+		},
+	},
 });
 
 export default ResizeColumns;

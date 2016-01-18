@@ -2,7 +2,7 @@ import Em from 'ember';
 
 var RowHeightsController = Em.Controller.extend({
 	tableColumns: [
-		{ name: 'height', label: 'Row height (px)' }
+		{ name: 'height', label: 'Row height (px)' },
 	],
 
 	tableData: Em.A(),
@@ -33,7 +33,7 @@ var RowHeightsController = Em.Controller.extend({
 		// generate row data
 		data = data.map(function (value) {
 			return {
-				height: Math.round(maxHeight * (value / total))
+				height: Math.round(maxHeight * (value / total)),
 			};
 		});
 		// set row data
@@ -43,8 +43,8 @@ var RowHeightsController = Em.Controller.extend({
 	actions: {
 		regenerate: function () {
 			this.generateData();
-		}
-	}
+		},
+	},
 });
 
 export default RowHeightsController;

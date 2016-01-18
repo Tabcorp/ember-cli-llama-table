@@ -9,7 +9,7 @@ var LlamaCell = Em.Component.extend({
 	row: null,
 
 	columnView: alias('parentView'),
-	config: alias('columnView.config')
+	config: alias('columnView.config'),
 });
 
 export default LlamaCell;

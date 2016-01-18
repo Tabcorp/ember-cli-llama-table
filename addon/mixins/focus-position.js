@@ -163,8 +163,8 @@ var FocusPositionMixin = Em.Mixin.create({
 			if (newRow) {
 				this.set('focusRow', newRow);
 			}
-		}
-	}
+		},
+	},
 });
 
 export default FocusPositionMixin;

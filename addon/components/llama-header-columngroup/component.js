@@ -8,7 +8,7 @@ var LlamaHeaderColumngroup = LlamaColumngroup.extend({
 	classNames: 'llama-header-columngroup',
 	itemViewClass: alias('root.HeaderColumnView'),
 
-	columns: null
+	columns: null,
 });
 
 export default LlamaHeaderColumngroup;

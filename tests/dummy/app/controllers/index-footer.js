@@ -10,7 +10,7 @@ var IndexFooterController = Em.ArrayController.extend({
 			return total + val;
 		}, 0);
 		return sum;
-	})
+	}),
 });
 
 export default IndexFooterController;

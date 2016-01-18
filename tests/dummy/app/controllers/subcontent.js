@@ -5,7 +5,7 @@ var SubcontentController = Em.Controller.extend({
 		{ order: 0, name: 'expando', label: 'Expand subcontent', type: 'expando', width: 50, isResizable: false, isSortable: false, showLabel: false },
 		{ order: 1, name: 'id', label: 'Employee ID', isHidden: true },
 		{ order: 2, name: 'given_name', label: 'Given Name' },
-		{ order: 3, name: 'family_name', label: 'Family Name' }
+		{ order: 3, name: 'family_name', label: 'Family Name' },
 	],
 	config: {
 		hasSubcontent: true,
@@ -14,9 +14,9 @@ var SubcontentController = Em.Controller.extend({
 		subcontentView: 'embedded-content',
 		sortProperties: ['family_name'],
 		types: [
-			{ name: 'expando', view: 'expando-cell' }
-		]
-	}
+			{ name: 'expando', view: 'expando-cell' },
+		],
+	},
 });
 
 export default SubcontentController;

@@ -41,7 +41,7 @@ var LlamaEmbed = Em.Component.extend({
 			var thisHeight = get(row, 'height');
 			var offsetTop = previousHeight + thisHeight;
 			return offsetTop;
-		}
+		},
 	}),
 
 	updateOffsetTop: observer('offsetTop', function () {
@@ -52,7 +52,7 @@ var LlamaEmbed = Em.Component.extend({
 	updateHeight: observer('height', function () {
 		var $embed = Em.$(this.$());
 		$embed.css('height', this.get('height'));
-	})
+	}),
 });
 
 export default LlamaEmbed;

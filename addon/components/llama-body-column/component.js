@@ -19,8 +19,8 @@ var LlamaBodyColumn = LlamaColumn.extend({
 			var column = this.get('column');
 			var type = get(column, 'type');
 			return controller.getCellType(type);
-		}
-	})
+		},
+	}),
 });
 
 export default LlamaBodyColumn;

@@ -32,7 +32,7 @@ var ArrowKeysMixin = Em.Mixin.create({
 				e.preventDefault();
 				break;
 		}
-	}
+	},
 });
 
 export default ArrowKeysMixin;

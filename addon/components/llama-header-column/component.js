@@ -17,8 +17,8 @@ var LlamaHeaderColumn = LlamaColumn.extend({
 				ViewClass = this.get('root.HeaderCellView');
 			}
 			return ViewClass;
-		}
-	})
+		},
+	}),
 });
 
 export default LlamaHeaderColumn;

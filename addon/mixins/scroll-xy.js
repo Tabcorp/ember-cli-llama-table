@@ -15,13 +15,13 @@ var ScrollXYMixin = Em.Mixin.create(ScrollHandlerMixin, {
 	_scrollLeft: computed({
 		get: function () {
 			return Em.$(this.$()).scrollLeft();
-		}
+		},
 	}),
 
 	_scrollTop: computed({
 		get: function () {
 			return Em.$(this.$()).scrollTop();
-		}
+		},
 	}),
 
 	_updateScrollLeftAndTop: observer(function () {
@@ -48,7 +48,7 @@ var ScrollXYMixin = Em.Mixin.create(ScrollHandlerMixin, {
 			this.set('_scrollTop', newScrollTop);
 			this.send('scrollY', newScrollTop);
 		}
-	}
+	},
 });
 
 export default ScrollXYMixin;

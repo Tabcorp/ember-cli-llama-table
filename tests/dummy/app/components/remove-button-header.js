@@ -8,8 +8,8 @@ var RemoveButtonHeader = LlamaHeaderCell.extend({
 	actions: {
 		click: function () {
 			this.get('root').sendAction('removeAll');
-		}
-	}
+		},
+	},
 });
 
 export default RemoveButtonHeader;

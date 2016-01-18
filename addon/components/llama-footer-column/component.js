@@ -19,7 +19,7 @@ var LlamaFooterColumn = LlamaColumn.extend({
 			var column = this.get('column');
 			var type = get(column, 'type');
 			return controller.getCellType(type);
-		}
+		},
 	}),
 
 	createChildView: function (View, attrs) {
@@ -30,7 +30,7 @@ var LlamaFooterColumn = LlamaColumn.extend({
 		set(attrs, 'column', column);
 		set(attrs, 'isFooter', true);
 		return this._super(View, attrs);
-	}
+	},
 });
 
 export default LlamaFooterColumn;

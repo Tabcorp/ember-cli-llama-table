@@ -99,8 +99,8 @@ var LlamaContent = Em.Component.extend(ArrowKeysMixin, {
 			else {
 				controller.send('focusDown');
 			}
-		}
-	}
+		},
+	},
 });
 
 export default LlamaContent;

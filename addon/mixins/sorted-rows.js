@@ -27,7 +27,7 @@ var SortedRowsMixin = Em.Mixin.create({
 	 *   custom controller if it is not necessary.
 	 * @property {Ember.ArrayProxy} sortedRows
 	 */
-	sortedRows: reads('_rowsSorted')
+	sortedRows: reads('_rowsSorted'),
 });
 
 export default SortedRowsMixin;

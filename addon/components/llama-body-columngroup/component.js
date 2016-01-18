@@ -9,7 +9,7 @@ var LlamaBodyColumngroup = LlamaColumngroup.extend({
 	itemViewClass: Em.computed.alias('root.BodyColumnView'),
 
 	columns: null,
-	rows: null
+	rows: null,
 });
 
 export default LlamaBodyColumngroup;

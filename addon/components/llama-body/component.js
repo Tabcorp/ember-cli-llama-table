@@ -21,7 +21,7 @@ var LlamaBody = Em.Component.extend({
 	renderContent: true,
 	renderSubcontent: bool('hasSubcontent'),
 	renderEmpty: and('isEmpty', 'notLoading'),
-	renderLoading: and('isEmpty', 'isLoading')
+	renderLoading: and('isEmpty', 'isLoading'),
 });
 
 export default LlamaBody;

@@ -31,7 +31,7 @@ var LlamaFooter = Em.Component.extend({
 				});
 			}
 			return instance;
-		}
+		},
 	}),
 
 	didInsertElement: function () {
@@ -56,7 +56,7 @@ var LlamaFooter = Em.Component.extend({
 	willDestroy: function () {
 		this.get('data').destroy();
 		this._super();
-	}
+	},
 });
 
 export default LlamaFooter;

@@ -72,7 +72,7 @@ var ItemControllerFunctionMixin = Em.Mixin.create({
 		subControllers[idx] = subController;
 
 		return subController;
-	}
+	},
 });
 
 export default ItemControllerFunctionMixin;

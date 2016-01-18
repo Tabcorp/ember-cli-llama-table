@@ -20,7 +20,7 @@ var ScrollHandlerMixin = Em.Mixin.create({
 	willDestroyElement: function () {
 		this.$().off('scroll.scroll-handler-mixin');
 		this._super();
-	}
+	},
 });
 
 export default ScrollHandlerMixin;

@@ -33,7 +33,7 @@ var LlamaColumn = Em.Component.extend({
 			var name = this.get('columnType') || this.get('columnName');
 			var type = Em.A(types).findBy('name', name);
 			return type;
-		}
+		},
 	}),
 
 	setWidth: on('didInsertElement', observer('width', function () {
@@ -52,7 +52,7 @@ var LlamaColumn = Em.Component.extend({
 			case 'center': return 'text-center';
 			case 'justify': return 'text-justify';
 		}
-	})
+	}),
 });
 
 export default LlamaColumn;

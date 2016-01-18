@@ -27,7 +27,7 @@ var LlamaColumngroup = Em.Component.extend({
 		var width = this.get('width');
 		var $columngroup = Em.$(this.$());
 		$columngroup.width(width);
-	}))
+	})),
 });
 
 export default LlamaColumngroup;

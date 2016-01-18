@@ -33,7 +33,7 @@ var Copy = Em.Controller.extend({
 			var contents = '::selection { background: inherit; color: inherit; }';
 			style.appendChild(document.createTextNode(contents));
 			return Em.$(style);
-		}
+		},
 	}),
 
 	/**
@@ -114,7 +114,7 @@ var Copy = Em.Controller.extend({
 				this.showHighlight();
 			});
 		}
-	}
+	},
 });
 
 export default Copy;

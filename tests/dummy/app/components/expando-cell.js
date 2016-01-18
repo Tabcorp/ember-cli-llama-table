@@ -13,8 +13,8 @@ var ExpandoCell = LlamaBodyCell.extend({
 		},
 		toggle: function () {
 			this.toggleProperty('isExpanded');
-		}
-	}
+		},
+	},
 });
 
 export default ExpandoCell;

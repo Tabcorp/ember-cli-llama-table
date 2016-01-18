@@ -65,7 +65,7 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 	config: computed({
 		get: function () {
 			return {};
-		}
+		},
 	}),
 
 	/**
@@ -75,7 +75,7 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 	self: computed({
 		get: function () {
 			return this;
-		}
+		},
 	}),
 
 	/**
@@ -327,8 +327,8 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 			var args = Array.prototype.slice.call(arguments);
 			args.unshift('rowClick');
 			this.sendAction.apply(this, args);
-		}
-	}
+		},
+	},
 });
 
 /**

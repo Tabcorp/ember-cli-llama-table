@@ -141,7 +141,7 @@ var ColumnController = Em.ObjectProxy.extend({
 				return 'right';
 			}
 			return 'left';
-		}
+		},
 	}),
 
 	/**
@@ -150,7 +150,7 @@ var ColumnController = Em.ObjectProxy.extend({
 	 * @property {String} format
 	 * @optional
 	 */
-	format: alias('model.format')
+	format: alias('model.format'),
 });
 
 export default ColumnController;

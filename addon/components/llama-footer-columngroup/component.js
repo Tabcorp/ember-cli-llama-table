@@ -10,7 +10,7 @@ var LlamaFooterColumngroup = LlamaColumngroup.extend({
 	itemViewClass: alias('root.FooterColumnView'),
 
 	columns: null,
-	data: null
+	data: null,
 });
 
 export default LlamaFooterColumngroup;

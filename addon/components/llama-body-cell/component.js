@@ -20,7 +20,7 @@ function eq (left, right) {
 	return computed(left, right, {
 		get: function () {
 			return this.get(left) === this.get(right);
-		}
+		},
 	});
 }
 
@@ -60,7 +60,7 @@ var LlamaBodyCell = LlamaCell.extend({
 	hover: computed('root.hoverRow', 'row', 'isFooter', {
 		get: function () {
 			return !this.get('isFooter') && this.get('root.hoverRow') === this.get('row');
-		}
+		},
 	}),
 
 	tabindex: computed('isEditable', {
@@ -69,7 +69,7 @@ var LlamaBodyCell = LlamaCell.extend({
 			var isEditable = this.get('isEditable');
 			var index = onlyFocusEditable && !isEditable ? null : 0;
 			return index;
-		}
+		},
 	}),
 
 	// only calculated once
@@ -81,7 +81,7 @@ var LlamaBodyCell = LlamaCell.extend({
 			}
 			var id = this.get('column.name');
 			return id;
-		}
+		},
 	}),
 
 	marginBottom: computed('showingSubcontent', 'row.subcontentHeight', {
@@ -91,7 +91,7 @@ var LlamaBodyCell = LlamaCell.extend({
 				return this.get('row.subcontentHeight');
 			}
 			return null;
-		}
+		},
 	}),
 
 	init: function () {
@@ -171,8 +171,8 @@ var LlamaBodyCell = LlamaCell.extend({
 		primaryAction: function (e) {
 			// cancel action by default
 			e.preventDefault();
-		}
-	}
+		},
+	},
 });
 
 export default LlamaBodyCell;

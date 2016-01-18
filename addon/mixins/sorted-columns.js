@@ -21,7 +21,7 @@ var SortedColumnsMixin = Em.Mixin.create({
 	 * Column definitions array with added sorting functionality.
 	 * @property {Ember.ArrayProxy} sortedColumns
 	 */
-	sortedColumns: reads('_columnsSorted')
+	sortedColumns: reads('_columnsSorted'),
 });
 
 export default SortedColumnsMixin;

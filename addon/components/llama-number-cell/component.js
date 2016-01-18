@@ -9,8 +9,8 @@ var LlamaNumberCell = LlamaBodyCell.extend({
 			var value = this.get('value');
 			var number = Number(value);
 			return number;
-		}
-	})
+		},
+	}),
 });
 
 export default LlamaNumberCell;

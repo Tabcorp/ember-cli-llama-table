@@ -24,7 +24,7 @@ var LlamaHeader = Em.Component.extend({
 	updateScrollPosition: observer('scrollTop', function () {
 		var $header = Em.$(this.$());
 		$header.css('marginTop', this.get('scrollTop'));
-	})
+	}),
 });
 
 export default LlamaHeader;

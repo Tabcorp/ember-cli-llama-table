@@ -26,7 +26,7 @@ var ViewConstructorsMixin = Em.Mixin.create({
 	EmbedView: defaultValue('config.EmbedView', 'llama-embed'),
 	FooterView: defaultValue('config.FooterView', 'llama-footer'),
 	FooterColumngroupView: defaultValue('config.FooterColumngroupView', 'llama-footer-columngroup'),
-	FooterColumnView: defaultValue('config.FooterColumnView', 'llama-footer-column')
+	FooterColumnView: defaultValue('config.FooterColumnView', 'llama-footer-column'),
 });
 
 export default ViewConstructorsMixin;

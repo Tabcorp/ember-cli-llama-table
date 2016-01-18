@@ -14,7 +14,7 @@ var LlamaSubcontent = Em.Component.extend({
 	rows: null,
 
 	itemViewClass: alias('root.EmbedView'),
-	expandedRows: filterBy('rows', 'isExpanded')
+	expandedRows: filterBy('rows', 'isExpanded'),
 });
 
 export default LlamaSubcontent;

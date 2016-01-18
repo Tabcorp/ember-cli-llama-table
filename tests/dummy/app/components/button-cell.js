@@ -15,8 +15,8 @@ var ButtonCell = LlamaBodyCell.extend({
 			var row = this.get('content');
 			var index = rows.indexOf(row);
 			controller.sendAction(this.get('actionName'), index);
-		}
-	}
+		},
+	},
 });
 
 export default ButtonCell;

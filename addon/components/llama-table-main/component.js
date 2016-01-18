@@ -40,8 +40,8 @@ var LlamaTable = Em.Component.extend(ScrollXYMixin, {
 		},
 		scrollY: function (pos) {
 			this.set('scrollTop', pos);
-		}
-	}
+		},
+	},
 });
 
 export default LlamaTable;

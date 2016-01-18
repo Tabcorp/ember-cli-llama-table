@@ -9,35 +9,35 @@ var IndexController = Em.Controller.extend({
 			label: 'A',
 			order: 1,
 			type: 'number',
-			width: 80
+			width: 80,
 		},
 		{
 			name: 'b',
 			label: 'B',
 			order: 2,
 			type: 'number',
-			width: 80
+			width: 80,
 		},
 		{
 			name: 'c',
 			label: 'C',
 			order: 3,
 			type: 'number',
-			width: 80
+			width: 80,
 		},
 		{
 			name: 'd',
 			label: 'D',
 			order: 4,
 			type: 'number',
-			width: 80
+			width: 80,
 		},
 		{
 			name: 'e',
 			label: 'E',
 			order: 5,
 			type: 'number',
-			width: 80
+			width: 80,
 		}
 	],
 	tableData: Em.A(),
@@ -45,7 +45,7 @@ var IndexController = Em.Controller.extend({
 		maxHeight: 200,
 		isSortable: false,
 		isResizable: false,
-		onlyFocusEditable: true
+		onlyFocusEditable: true,
 	},
 	actions: {
 		add: function (num) {
@@ -59,7 +59,7 @@ var IndexController = Em.Controller.extend({
 					b: Math.random(),
 					c: Math.random(),
 					d: Math.random(),
-					e: Math.random()
+					e: Math.random(),
 				});
 			}
 			this.get('tableData').pushObjects(data);
@@ -79,8 +79,8 @@ var IndexController = Em.Controller.extend({
 			this.get('tableData').clear();
 			console.timeEnd(label);
 			console.profileEnd();
-		}
-	}
+		},
+	},
 });
 
 export default IndexController;
