@@ -8,10 +8,13 @@ var LlamaBodyColumngroup = LlamaColumngroup.extend({
 
 	columns: null,
 	rows: null,
+	visibleRows: null,
 
 	createChildView: function (View, attrs) {
 		var rows = this.get('rows');
+		var visibleRows = this.get('visibleRows');
 		set(attrs, 'rows', rows);
+		set(attrs, 'visibleRows', visibleRows);
 		return this._super(View, attrs);
 	}
 });

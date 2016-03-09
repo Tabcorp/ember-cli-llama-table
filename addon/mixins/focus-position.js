@@ -20,13 +20,13 @@ var FocusPositionMixin = Em.Mixin.create({
 	},
 
 	getVisibleRowIndex: function (row) {
-		var visibleRows = this.get('sortedRows').rejectBy('isHidden');
+		var visibleRows = this.get('visibleRows');
 		var rowIndex = visibleRows.indexOf(row);
 		return rowIndex;
 	},
 
 	getVisibleRowAtIndex: function (rowIndex, wrap) {
-		var visibleRows = this.get('sortedRows').rejectBy('isHidden');
+		var visibleRows = this.get('visibleRows');
 		var row;
 		if (wrap && rowIndex < 0) {
 			rowIndex += visibleRows.length;

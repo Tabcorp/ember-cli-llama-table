@@ -13,6 +13,7 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 	scrollTop: alias('controller.scrollTop'),
 
 	rows: null,
+	visibleRows: null,
 	columngroups: null,
 
 	headerView: computed(function () {
@@ -33,7 +34,8 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 		var View = this.get('controller.BodyView');
 		return this.createChildView(View, {
 			columngroups: this.get('columngroups'),
-			rows: this.get('rows')
+			rows: this.get('rows'),
+			visibleRows: this.get('visibleRows'),
 		});
 	}),
 

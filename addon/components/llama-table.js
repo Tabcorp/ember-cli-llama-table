@@ -37,6 +37,10 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	classNames: ['llama-table-component'],
 	classNameBindings: ['isSortable', 'isResizable', 'isEmpty', 'isLoading', 'hasSubcontent', 'showHeader', 'showFooter'],
 
+	currentPage: 0,
+
+	rowsPerPage: 30,
+
 	/**
 	 * Column definitions array
 	 * @property {Object[]} columns
@@ -106,6 +110,32 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 			Controller = Rows;
 		}
 		return Controller.create(options);
+	}),
+
+	visibleRows: computed('currentPage', function() {
+		const currentPage = this.get('currentPage');
+		const rowsPerPage = this.get('rowsPerPage');
+
+		console.log(currentPage, rowsPerPage);
+
+		if (!currentPage && !rowsPerPage) {
+			return this.get('sortedRows');
+		} else {
+			const zeroedStart = !!currentPage ? currentPage - 1 : 0;
+
+			const start = zeroedStart * rowsPerPage;
+			const finish = start + rowsPerPage;
+
+			return this.get('sortedRows').slice(start, finish);
+		}
+	}),
+
+	currentPageObserver: observer('currentPage', function () {
+		const currentPage = this.get('currentPage');
+		const rowsPerPage = this.get('rowsPerPage');
+
+		//console.log(currentPage, rowsPerPage);
+		//this.setVisibleRows();
 	}),
 
 	/**
@@ -265,7 +295,8 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 		var TableView = this.get('TableView');
 		return this.createChildView(TableView, {
 			columngroups: this.get('columngroups'),
-			rows: this.get('sortedRows')
+			rows: this.get('sortedRows'),
+			visibleRows: this.get('visibleRows'),
 		});
 	}),
 

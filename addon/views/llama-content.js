@@ -17,6 +17,7 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 	columngroupViews: alias('childViews'),
 
 	rows: null,
+	visibleRows: null,
 	columngroups: null,
 	contentBinding: 'columngroups',
 
@@ -24,8 +25,10 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 
 	createChildView: function (View, attrs) {
 		var rows = this.get('rows');
+		var visibleRows = this.get('visibleRows');
 		var columns = get(attrs, 'content');
 		set(attrs, 'rows', rows);
+		set(attrs, 'visibleRows', visibleRows);
 		set(attrs, 'columns', columns);
 		return this._super(View, attrs);
 	},

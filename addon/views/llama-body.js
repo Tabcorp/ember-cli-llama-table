@@ -10,12 +10,14 @@ var LlamaBody = Em.ContainerView.extend({
 
 	columngroups: null,
 	rows: null,
+	visibleRows: null,
 
 	contentView: computed(function () {
 		var View = this.get('controller.ContentView');
 		return this.createChildView(View, {
 			columngroups: this.get('columngroups'),
-			rows: this.get('rows')
+			rows: this.get('rows'),
+			visibleRows: this.get('visibleRows'),
 		});
 	}),
 

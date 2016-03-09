@@ -6,28 +6,13 @@ var computed = Em.computed;
 
 var LlamaBodyColumn = LlamaColumn.extend({
 	classNames: 'llama-body-column',
-	contentBinding: 'subsetRows',
+	contentBinding: 'visibleRows',
 	currentPage: computed.alias('controller.currentPage'),
 	rowsPerPage: computed.alias('controller.rowsPerPage'),
 
 	rows: null,
+	visibleRows: null,
 	column: null,
-
-	subsetRows: computed('currentPage', 'rowsPerPage', 'rows.[]', function() {
-		const currentPage = this.get('currentPage');
-		const rowsPerPage = this.get('rowsPerPage');
-
-		if (!currentPage && !rowsPerPage) {
-			return this.get('rows');
-		} else {
-			const zeroedStart = !!currentPage ? currentPage - 1 : 0;
-
-			const start = zeroedStart * rowsPerPage;
-			const finish = start + rowsPerPage;
-
-			return this.get('rows').slice(start, finish);
-		}
-	}),
 
 	itemViewClass: computed(function () {
 		var controller = this.get('controller');
