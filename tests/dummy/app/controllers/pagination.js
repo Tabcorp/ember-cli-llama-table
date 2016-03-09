@@ -5,6 +5,8 @@ var get = Em.get;
 
 var PaginationController = Em.Controller.extend({
 
+	currentPage: 0,
+
 	tableColumns: [
 		{
 			name: 'item',
@@ -32,6 +34,12 @@ var PaginationController = Em.Controller.extend({
 		maxHeight: 300,
 		showFooter: true,
 		footerController: PaginationFooterController,
+	},
+
+	actions: {
+		setPage: function (page) {
+			this.set('currentPage', page);
+		},
 	},
 
 });

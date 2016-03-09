@@ -6,6 +6,13 @@
 	rows=tableData
 	columns=tableColumns
 	config=tableConfig
-	currentPage=1
-	rowsPerPage=2
+	currentPage=currentPage
+	rowsPerPage=3
 }}
+<p>Page Index: {{currentPage}}</p>
+<p>
+	<button {{action 'setPage' 1}}>1</button>
+	<button {{action 'setPage' 2}}>2</button>
+	<button {{action 'setPage' 3}}>3</button>
+	<button {{action 'setPage' 4}}>4</button>
+</p>
