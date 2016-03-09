@@ -5,7 +5,7 @@ var get = Em.get;
 
 var PaginationController = Em.Controller.extend({
 
-	currentPage: 0,
+	currentPage: 1,
 
 	tableColumns: [
 		{
