@@ -7,26 +7,17 @@ var computed = Em.computed;
 var LlamaBodyColumn = LlamaColumn.extend({
 	classNames: 'llama-body-column',
 	contentBinding: 'subsetRows',
-	currentPage: computed.alias('controller.currentPage'),
-	rowsPerPage: computed.alias('controller.rowsPerPage'),
+	visibleIndexStart: computed.alias('controller.visibleIndexStart'),
+	visibleIndexEnd: computed.alias('controller.visibleIndexEnd'),
 
 	rows: null,
 	column: null,
 
-	subsetRows: computed('currentPage', 'rowsPerPage', 'rows.[]', function() {
-		const currentPage = this.get('currentPage');
-		const rowsPerPage = this.get('rowsPerPage');
+	subsetRows: computed('visibleIndexStart', 'visibleIndexEnd', 'rows.[]', function() {
+		const start = this.get('visibleIndexStart');
+		const end = this.get('visibleIndexEnd');
 
-		if (!currentPage && !rowsPerPage) {
-			return this.get('rows');
-		} else {
-			const zeroedStart = !!currentPage ? currentPage - 1 : 0;
-
-			const start = zeroedStart * rowsPerPage;
-			const finish = start + rowsPerPage;
-
-			return this.get('rows').slice(start, finish);
-		}
+		return this.get('rows').slice(start, end);
 	}),
 
 	itemViewClass: computed(function () {
