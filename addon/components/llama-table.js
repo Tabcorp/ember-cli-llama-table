@@ -126,6 +126,31 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	}),
 
 	/**
+	 * The index in sortedRows of the first visible row on the current page
+	 * @property {Number} visibleIndexStart
+	 */
+	visibleIndexStart: computed('currentPage', 'rowsPerPage', function () {
+		const currentPage = this.get('currentPage');
+		const rowsPerPage = this.get('rowsPerPage');
+
+		const zeroedPageIndex = currentPage - 1;
+		const start = zeroedPageIndex * rowsPerPage;
+
+		return start >= 0 ? start : 0;
+	}),
+
+	/**
+	 * The index in sortedRows of the last visible row on the current page
+	 * @property {Number} visibleIndexEnd
+	 */
+	visibleIndexEnd: computed('visibleIndexStart', function () {
+		const start = this.get('visibleIndexStart');
+		const rowsPerPage = this.get('rowsPerPage');
+
+		return start + rowsPerPage;
+	}),
+
+	/**
 	 * Maximum height of table before introducing vertical scrollbars.
 	 * @property {Number} maxHeight
 	 */
