@@ -38,6 +38,23 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	classNameBindings: ['isSortable', 'isResizable', 'isEmpty', 'isLoading', 'hasSubcontent', 'showHeader', 'showFooter'],
 
 	/**
+	 * Current page that is been viewed when using pagination
+	 * To use pagination, override this property along with rowsPerPage
+	 * @property {Number} currentPage
+	 */
+	currentPage: 1,
+
+	/**
+	 * Number of rows to display per page when using pagination
+	 * To use pagination, override this property along with currentPage
+	 * Defaults to length of entire set of rows, which means one page with the entire rowset
+	 * @property {Number} rowsPerPage
+	 */
+	rowsPerPage: computed('sortedRows', function () {
+		return this.get('sortedRows.length');
+	}),
+
+	/**
 	 * Column definitions array
 	 * @property {Object[]} columns
 	 * @public
