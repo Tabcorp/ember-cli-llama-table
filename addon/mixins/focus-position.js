@@ -1,6 +1,7 @@
 import Em from 'ember';
 var observer = Em.observer;
 var computed = Em.computed;
+var get = Em.get;
 
 /**
  * Responsible for observing and maintaining the position of the focused cell.
@@ -20,19 +21,23 @@ var FocusPositionMixin = Em.Mixin.create({
 	},
 
 	getVisibleRowIndex: function (row) {
-		var visibleRows = this.get('sortedRows').rejectBy('isHidden');
-		var rowIndex = visibleRows.indexOf(row);
-		return rowIndex;
+		const start = this.get('visibleIndexStart');
+		const end = this.get('visibleIndexEnd');
+		const rows = this.get('sortedRows').slice(start, end);
+
+		return rows.indexOf(row);
 	},
 
 	getVisibleRowAtIndex: function (rowIndex, wrap) {
-		var visibleRows = this.get('sortedRows').rejectBy('isHidden');
-		var row;
+		const start = this.get('visibleIndexStart');
+		const end = this.get('visibleIndexEnd');
+		const visibleRows = this.get('sortedRows').slice(start, end);
+
 		if (wrap && rowIndex < 0) {
 			rowIndex += visibleRows.length;
 		}
-		row = visibleRows.objectAt(rowIndex);
-		return row;
+
+		return visibleRows.objectAt(rowIndex);
 	},
 
 	getVisibleColumnIndex: function (column) {
@@ -53,6 +58,7 @@ var FocusPositionMixin = Em.Mixin.create({
 
 	getCellFor: function (row, column) {
 		var rowIndex = this.getRowIndex(row);
+		var rowsPerPage = this.get('rowsPerPage');
 		var columngroupViews = this.get('bodyColumngroupViews');
 		var cellView;
 		columngroupViews.find(function (columngroupView) {
@@ -62,7 +68,7 @@ var FocusPositionMixin = Em.Mixin.create({
 			});
 			if (!columnView) return;
 			var cellViews = columnView.get('cellViews');
-			cellView = cellViews.objectAt(rowIndex);
+			cellView = cellViews.objectAt(rowIndex % rowsPerPage);
 			return cellView;
 		});
 		return cellView || null;
