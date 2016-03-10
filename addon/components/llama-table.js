@@ -126,10 +126,21 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	}),
 
 	/**
+	 * The visible rows to be displayed based on the currently paginated page
+	 * @property {Ember.ArrayProxy} visibleRows
+	 */
+	visibleRows: computed('visibleIndexStart', 'visibleIndexEnd', 'sortedRows.[]', function () {
+		const start = this.get('visibleIndexStart');
+		const end = this.get('visibleIndexEnd');
+
+		return this.get('sortedRows').slice(start, end);
+	}),
+
+	/**
 	 * The index in sortedRows of the first visible row on the current page
 	 * @property {Number} visibleIndexStart
 	 */
-	visibleIndexStart: computed('currentPage', 'rowsPerPage', function () {
+	visibleIndexStart: computed('currentPage', 'rowsPerPage', 'sortedRows.[]', function () {
 		const currentPage = this.get('currentPage');
 		const rowsPerPage = this.get('rowsPerPage');
 		const maxStart = this.get('sortedRows.length');

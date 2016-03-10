@@ -7,18 +7,10 @@ var computed = Em.computed;
 var LlamaBodyColumn = LlamaColumn.extend({
 	classNames: 'llama-body-column',
 	contentBinding: 'subsetRows',
-	visibleIndexStart: computed.alias('controller.visibleIndexStart'),
-	visibleIndexEnd: computed.alias('controller.visibleIndexEnd'),
+	subsetRows: computed.alias('controller.visibleRows'),
 
 	rows: null,
 	column: null,
-
-	subsetRows: computed('visibleIndexStart', 'visibleIndexEnd', 'rows.[]', function() {
-		const start = this.get('visibleIndexStart');
-		const end = this.get('visibleIndexEnd');
-
-		return this.get('rows').slice(start, end);
-	}),
 
 	itemViewClass: computed(function () {
 		var controller = this.get('controller');

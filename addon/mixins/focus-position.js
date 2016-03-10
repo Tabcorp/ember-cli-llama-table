@@ -21,17 +21,11 @@ var FocusPositionMixin = Em.Mixin.create({
 	},
 
 	getVisibleRowIndex: function (row) {
-		const start = this.get('visibleIndexStart');
-		const end = this.get('visibleIndexEnd');
-		const rows = this.get('sortedRows').slice(start, end);
-
-		return rows.indexOf(row);
+		return this.get('visibleRows').indexOf(row);
 	},
 
 	getVisibleRowAtIndex: function (rowIndex, wrap) {
-		const start = this.get('visibleIndexStart');
-		const end = this.get('visibleIndexEnd');
-		const visibleRows = this.get('sortedRows').slice(start, end);
+		const visibleRows = this.get('visibleRows');
 
 		if (wrap && rowIndex < 0) {
 			rowIndex += visibleRows.length;
