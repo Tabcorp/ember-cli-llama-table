@@ -33,6 +33,8 @@ var PaginationController = Em.Controller.extend({
 	tableConfig: {
 		maxHeight: 300,
 		showFooter: true,
+		wrapFocusHorizontal: true,
+		wrapFocusVertical: true,
 		footerController: PaginationFooterController,
 	},
 
