@@ -132,22 +132,32 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	visibleIndexStart: computed('currentPage', 'rowsPerPage', function () {
 		const currentPage = this.get('currentPage');
 		const rowsPerPage = this.get('rowsPerPage');
+		const maxStart = this.get('sortedRows.length');
 
 		const zeroedPageIndex = currentPage - 1;
 		const start = zeroedPageIndex * rowsPerPage;
 
-		return start >= 0 ? start : 0;
+		if (start > maxStart) {
+			return maxStart;
+		} else if (start < 0) {
+			return 0;
+		}
+
+		return start;
 	}),
 
 	/**
 	 * The index in sortedRows of the last visible row on the current page
 	 * @property {Number} visibleIndexEnd
 	 */
-	visibleIndexEnd: computed('visibleIndexStart', function () {
+	visibleIndexEnd: computed('visibleIndexStart', 'sortedRows.[]', function () {
 		const start = this.get('visibleIndexStart');
 		const rowsPerPage = this.get('rowsPerPage');
+		const maxEnd = this.get('sortedRows.length');
 
-		return start + rowsPerPage;
+		const end = start + rowsPerPage;
+
+		return end <= maxEnd ? end : maxEnd;
 	}),
 
 	/**
