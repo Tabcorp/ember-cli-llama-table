@@ -28,20 +28,23 @@ var LlamaEmbed = Em.Component.extend({
 		return result;
 	},
 
-	offsetTop: computed('rows.@each.isExpanded', 'rows.@each.height', 'rows.@each.subcontentHeight', {
-		get: function () {
-			var sortedRows = this.get('rows');
-			var row = this.get('row');
-			var index = sortedRows.indexOf(row);
-			var previous = sortedRows.slice(0, index);
-			var calc = this.calculateRowHeight;
-			var previousHeight = previous.reduce(function (total, row) {
-				return total + calc(row);
-			}, 0);
-			var thisHeight = get(row, 'height');
-			var offsetTop = previousHeight + thisHeight;
-			return offsetTop;
-		},
+	offsetTop: null,
+
+	rowHeightHandler: function () {
+		var sortedRows = this.get('rows');
+		var row = this.get('row');
+		var index = sortedRows.indexOf(row);
+		var previous = sortedRows.slice(0, index);
+		var previousHeight = previous.reduce((total, row) => {
+			return total + this.calculateRowHeight(row);
+		}, 0);
+		var thisHeight = get(row, 'height');
+		var offsetTop = previousHeight + thisHeight;
+		this.set('offsetTop', offsetTop);
+	},
+
+	rowHeightObserver: observer('rows.@each.isExpanded', 'rows.@each.height', 'rows.@each.subcontentHeight', function () {
+		Em.run.once(this, this.rowHeightHandler);
 	}),
 
 	updateOffsetTop: observer('offsetTop', function () {
