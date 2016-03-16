@@ -2,17 +2,27 @@
 
 <p>This table will display a subset of the records.</p>
 
+<div class="input-container">
+  <label>Number of rows in the table: </label><br>
+  {{input type="number" value=rowsInTable}}
+</div>
+
+<div class="input-container">
+  <label>Number of rows per page: </label><br>
+  {{input type="number" value=rowsPerPage}}
+</div>
+
 {{llama-table
 	rows=tableData
 	columns=tableColumns
 	config=tableConfig
 	currentPage=currentPage
-	rowsPerPage=3
+	rowsPerPage=rowsPerPage
 }}
+
 <p>Page Index: {{currentPage}}</p>
 <p>
-	<button {{action 'setPage' 1}}>1</button>
-	<button {{action 'setPage' 2}}>2</button>
-	<button {{action 'setPage' 3}}>3</button>
-	<button {{action 'setPage' 4}}>4</button>
+  {{#each button in buttons}}
+    <button {{action 'setPage' button}}>{{button}}</button>
+  {{/each}}
 </p>
