@@ -55,6 +55,15 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	}),
 
 	/**
+	 * Determines if pagination is in use.  Will always be true unless rowsPerPage is manually overridden
+	 * with a value less than the total number of rows in the table.
+	 * @property {Boolean} hasPagination
+	 */
+	hasPagination: computed('rowsPerPage', 'sortedRows.[]', function () {
+		return Boolean(this.get('rowsPerPage') < this.get('sortedRows.length'));
+	}),
+
+	/**
 	 * Column definitions array
 	 * @property {Object[]} columns
 	 * @public
@@ -130,6 +139,13 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * @property {Ember.ArrayProxy} visibleRows
 	 */
 	visibleRows: computed('visibleIndexStart', 'visibleIndexEnd', 'sortedRows.[]', function () {
+		// many optimizations to be had if we use the same object reference when we know
+		// pagination is not needed.  this is particularly true when rows are been regularly
+		// added and removed from the table.
+		if (this.get('hasPagination') === false) {
+			return this.get('sortedRows');
+		}
+
 		const start = this.get('visibleIndexStart');
 		const end = this.get('visibleIndexEnd');
 
