@@ -55,12 +55,15 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	}),
 
 	/**
-	 * Determines if pagination is in use.  Will always be true unless rowsPerPage is manually overridden
+	 * Determines if pagination is in use.  Will always be false unless rowsPerPage is manually overridden
 	 * with a value less than the total number of rows in the table.
 	 * @property {Boolean} hasPagination
 	 */
 	hasPagination: computed('rowsPerPage', 'sortedRows.[]', function () {
-		return Boolean(this.get('rowsPerPage') < this.get('sortedRows.length'));
+		const rowsPerPage = Number(this.get('rowsPerPage'));
+		const numRows = this.get('sortedRows.length');
+
+		return Boolean(rowsPerPage < numRows);
 	}),
 
 	/**
@@ -109,7 +112,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 *   custom controller if it is not necessary.
 	 * @property {Ember.ArrayProxy} sortedRows
 	 */
-	sortedRows: computed(function () {
+	sortedRows: computed('rows', function () {
 		var options = {
 			parentController: this,
 			container: this.get('container'),
@@ -157,8 +160,8 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * @property {Number} visibleIndexStart
 	 */
 	visibleIndexStart: computed('currentPage', 'rowsPerPage', 'sortedRows.[]', function () {
-		const currentPage = this.get('currentPage');
-		const rowsPerPage = this.get('rowsPerPage');
+		const currentPage = Number(this.get('currentPage'));
+		const rowsPerPage = Number(this.get('rowsPerPage'));
 		const maxStart = this.get('sortedRows.length');
 
 		const zeroedPageIndex = currentPage - 1;
@@ -179,7 +182,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 */
 	visibleIndexEnd: computed('visibleIndexStart', 'sortedRows.[]', function () {
 		const start = this.get('visibleIndexStart');
-		const rowsPerPage = this.get('rowsPerPage');
+		const rowsPerPage = Number(this.get('rowsPerPage'));
 		const maxEnd = this.get('sortedRows.length');
 
 		const end = start + rowsPerPage;

@@ -52,7 +52,7 @@ var FocusPositionMixin = Em.Mixin.create({
 
 	getCellFor: function (row, column) {
 		var rowIndex = this.getRowIndex(row);
-		var rowsPerPage = this.get('rowsPerPage');
+		var rowsPerPage = Number(this.get('rowsPerPage'));
 		var columngroupViews = this.get('bodyColumngroupViews');
 		var cellView;
 		columngroupViews.find(function (columngroupView) {
