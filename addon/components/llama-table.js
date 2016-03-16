@@ -50,9 +50,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * Defaults to length of entire set of rows, which means one page with the entire rowset
 	 * @property {Number} rowsPerPage
 	 */
-	rowsPerPage: computed('sortedRows', function () {
-		return this.get('sortedRows.length');
-	}),
+	rowsPerPage: alias('sortedRows.length'),
 
 	/**
 	 * Column definitions array
