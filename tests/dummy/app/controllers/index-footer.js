@@ -2,7 +2,7 @@ import Em from 'ember';
 var computed = Em.computed;
 var alias = Em.computed.alias;
 
-var IndexFooterController = Em.ArrayController.extend({
+var IndexFooterController = Em.Controller.extend({
 	episode: alias('content.length'),
 	million_viewers: computed('content.@each.million_viewers', function () {
 		var vals = this.get('content').mapBy('million_viewers');
