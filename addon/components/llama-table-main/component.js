@@ -15,6 +15,7 @@ var LlamaTable = Em.Component.extend(ScrollXYMixin, {
 	scrollTop: alias('root.scrollTop'),
 
 	rows: null,
+	visibleRows: null,
 	columngroups: null,
 
 	didInsertElement: function () {

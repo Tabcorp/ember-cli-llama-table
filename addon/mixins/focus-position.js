@@ -1,5 +1,8 @@
 import Em from 'ember';
 var deprecate = Em.deprecateFunc;
+var observer = Em.observer;
+var computed = Em.computed;
+var get = Em.get;
 
 /**
  * Responsible for observing and maintaining the position of the focused cell.
@@ -19,19 +22,17 @@ var FocusPositionMixin = Em.Mixin.create({
 	},
 
 	getVisibleRowIndex: function (row) {
-		var visibleRows = Em.A(this.get('sortedRows').rejectBy('isHidden'));
-		var rowIndex = visibleRows.indexOf(row);
-		return rowIndex;
+		return this.get('visibleRows').indexOf(row);
 	},
 
 	getVisibleRowAtIndex: function (rowIndex, wrap) {
-		var visibleRows = Em.A(this.get('sortedRows').rejectBy('isHidden'));
-		var row;
+		const visibleRows = this.get('visibleRows');
+
 		if (wrap && rowIndex < 0) {
 			rowIndex += visibleRows.length;
 		}
-		row = visibleRows.objectAt(rowIndex);
-		return row;
+
+		return visibleRows.objectAt(rowIndex);
 	},
 
 	getVisibleColumnIndex: function (column) {

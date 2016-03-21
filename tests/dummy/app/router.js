@@ -11,6 +11,7 @@ Router.map(function () {
 	this.route('subcontent');
 	this.route('switch');
 	this.route('row-heights');
+	this.route('pagination');
 });
 
 export default Router;
