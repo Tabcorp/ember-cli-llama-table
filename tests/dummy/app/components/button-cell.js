@@ -12,7 +12,8 @@ var ButtonCell = LlamaBodyCell.extend({
 		click: function () {
 			var controller = this.get('root');
 			var rows = controller.get('rows');
-			var row = this.get('content');
+			var rowController = this.get('content');
+			var row = Em.get(rowController, 'content');
 			var index = rows.indexOf(row);
 			controller.sendAction(this.get('actionName'), index);
 		},
