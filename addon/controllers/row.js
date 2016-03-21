@@ -17,14 +17,15 @@ var RowController = Em.ObjectProxy.extend({
 	contentIndex: computed('parentController.[]', {
 		get: function () {
 			var array = this.get('parentController');
-			var content = this;
+			var self = this;
+			var content = self;
 			var index = makeArray(array).indexOf(content);
 			return index;
-		}
+		},
 	}),
 	isExpanded: false,
 	height: defaultValue('content.height', 30),
-	subcontentHeight: reads('height')
+	subcontentHeight: reads('height'),
 });
 
 export default RowController;

@@ -56,8 +56,7 @@ var LlamaHeaderCell = LlamaCell.extend({
 			e.preventDefault();
 			if (isResizeAction && this.get('isResizable')) {
 				controller.send('startResize', e, this.get('column'));
-			}
-			else if (this.get('isSortable')) {
+			} else if (this.get('isSortable')) {
 				controller.send('sortBy', this.get('column.name'));
 			}
 		}

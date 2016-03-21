@@ -25,6 +25,7 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
+    "lint": "eslint addon/ app/",
     "test": "ember try:testall"
   },
   "engines": {
@@ -44,7 +45,9 @@
     "ember-disable-prototype-extensions": "^1.0.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
-    "ember-try": "~0.0.8"
+    "ember-try": "~0.0.8",
+    "eslint": "^2.4.0",
+    "eslint-config-luxjs": "0.0.48"
   },
   "dependencies": {
     "ember-cli-babel": "^5.1.5",

@@ -149,11 +149,9 @@ var LlamaBodyCell = LlamaCell.extend({
 	keyDown: function (e) {
 		if (e.which === ESC) {
 			this.$().blur();
-		}
-		else if (e.which === SPACE) {
+		} else if (e.which === SPACE) {
 			this.send('primaryAction', e);
-		}
-		else {
+		} else {
 			this._super(e);
 		}
 	},

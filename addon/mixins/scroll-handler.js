@@ -10,9 +10,8 @@ import Em from 'ember';
 var ScrollHandlerMixin = Em.Mixin.create({
 	didInsertElement: function () {
 		this._super();
-		var context = this;
-		this.$().on('scroll.scroll-handler-mixin', function (e) {
-			context.handleEvent('scroll', e);
+		this.$().on('scroll.scroll-handler-mixin', (e) => {
+			this.handleEvent('scroll', e);
 		});
 	},
 	willDestroyElement: function () {

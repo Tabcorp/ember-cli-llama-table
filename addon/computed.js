@@ -9,8 +9,7 @@ export function defaultValue (watchKey, defValue) {
 		set: function (setKey, value) {
 			try {
 				set(this, watchKey, value);
-			}
-			catch (e) {
+			} catch (e) {
 				// swallow
 			}
 			return value;

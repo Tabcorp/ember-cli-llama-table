@@ -26,8 +26,7 @@ var LlamaContent = Em.Component.extend(ArrowKeysMixin, {
 		e.preventDefault();
 		if (e.shiftKey) {
 			this.get('root').send('reverseTabKey');
-		}
-		else {
+		} else {
 			this.get('root').send('tabKey');
 		}
 	},
@@ -36,8 +35,7 @@ var LlamaContent = Em.Component.extend(ArrowKeysMixin, {
 		e.preventDefault();
 		if (e.shiftKey) {
 			this.get('root').send('reverseEnterKey');
-		}
-		else {
+		} else {
 			this.get('root').send('enterKey');
 		}
 	},
@@ -48,14 +46,11 @@ var LlamaContent = Em.Component.extend(ArrowKeysMixin, {
 		var isRange = controller.isSelectionRange();
 		if (isCopy && !isRange) {
 			controller.copy(e.target);
-		}
-		else if (e.which === TAB) {
+		} else if (e.which === TAB) {
 			this.handleTabKey(e);
-		}
-		else if (e.which === ENTER) {
+		} else if (e.which === ENTER) {
 			this.handleEnterKey(e);
-		}
-		else {
+		} else {
 			this._super(e);
 		}
 	},
@@ -65,8 +60,7 @@ var LlamaContent = Em.Component.extend(ArrowKeysMixin, {
 			var controller = this.get('root');
 			if (e.shiftKey) {
 				controller.send('focusHardLeft');
-			}
-			else {
+			} else {
 				controller.send('focusLeft');
 			}
 		},
@@ -74,8 +68,7 @@ var LlamaContent = Em.Component.extend(ArrowKeysMixin, {
 			var controller = this.get('root');
 			if (e.shiftKey) {
 				controller.send('focusHardUp');
-			}
-			else {
+			} else {
 				controller.send('focusUp');
 			}
 		},
@@ -83,8 +76,7 @@ var LlamaContent = Em.Component.extend(ArrowKeysMixin, {
 			var controller = this.get('root');
 			if (e.shiftKey) {
 				controller.send('focusHardRight');
-			}
-			else {
+			} else {
 				controller.send('focusRight');
 			}
 		},
@@ -92,8 +84,7 @@ var LlamaContent = Em.Component.extend(ArrowKeysMixin, {
 			var controller = this.get('root');
 			if (e.shiftKey) {
 				controller.send('focusHardDown');
-			}
-			else {
+			} else {
 				controller.send('focusDown');
 			}
 		},
