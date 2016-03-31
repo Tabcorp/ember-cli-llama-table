@@ -12,10 +12,10 @@ var SortedRowsMixin = Em.Mixin.create({
 	_rowsSortOrder: makeArray('sortProperties'),
 
 	_rowsMapped: map('_rowsSource', function (model) {
-		var Controller = this.get('itemController') || Row;
-		if (Controller) {
-			return Controller.create({ model });
+		if (!(model instanceof Row)) {
+			return Row.create({ model });
 		}
+
 		return model;
 	}),
 
