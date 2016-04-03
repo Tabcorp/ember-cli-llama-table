@@ -84,6 +84,20 @@ var ColumnController = Em.ObjectProxy.extend({
 	isSortable: defaultValue('model.isSortable', true),
 
 	/**
+	 * Get's the key name to use for sorting
+	 * @property {String}
+	 */
+	sortBy: computed('model.sortBy', 'name', function () {
+		const sortBy = this.get('model.sortBy');
+
+		if (Em.isEmpty(sortBy)) {
+			return this.get('name');
+		}
+
+		return sortBy;
+	}),
+
+	/**
 	 * Values in the column can be edited. NOT YET IMPLEMENTED.
 	 * @property {Boolean} isEditable
 	 * @optional

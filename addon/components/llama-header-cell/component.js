@@ -38,10 +38,10 @@ var LlamaHeaderCell = LlamaCell.extend({
 	sortAscending: bool('root.sortAscending'),
 	sortDescending: not('sortAscending'),
 
-	sortByThis: computed('sortProperties.firstObject', 'column.name', {
+	sortByThis: computed('sortProperties.firstObject', 'column.sortBy', {
 		get: function () {
 			var sortBy = this.get('sortProperties.firstObject');
-			var thisColumn = this.get('column.name');
+			var thisColumn = this.get('column.sortBy');
 			return sortBy === thisColumn;
 		},
 	}),
@@ -57,7 +57,7 @@ var LlamaHeaderCell = LlamaCell.extend({
 			if (isResizeAction && this.get('isResizable')) {
 				controller.send('startResize', e, this.get('column'));
 			} else if (this.get('isSortable')) {
-				controller.send('sortBy', this.get('column.name'));
+				controller.send('sortBy', this.get('column.sortBy'));
 			}
 		}
 	},
