@@ -14,6 +14,7 @@ var get = Em.get;
 var FocusPositionMixin = Em.Mixin.create({
 	focusRow: null,
 	focusColumn: null,
+	focusCell: null,
 
 	getRowIndex: function (row) {
 		var sortedRows = this.get('sortedRows');
@@ -55,7 +56,7 @@ var FocusPositionMixin = Em.Mixin.create({
 
 	focusView: deprecate('Assign `focusRow` and `focusColumn` instead', function () {}),
 
-	focusCell: function (row, column) {
+	setFocusCell: function (row, column) {
 		this.setProperties({
 			focusRow: row,
 			focusColumn: column
@@ -66,7 +67,7 @@ var FocusPositionMixin = Em.Mixin.create({
 
 	actions: {
 		focusCell: function (row, column) {
-			this.focusCell(row, column);
+			this.setFocusCell(row, column);
 		},
 		focusCurrentCell: function () {
 			this.focusCurrentCell();

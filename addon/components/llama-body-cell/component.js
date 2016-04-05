@@ -38,6 +38,7 @@ var LlamaBodyCell = LlamaCell.extend({
 		if (this.get('isFocusCell')) {
 			var $cell = Em.$(this.$());
 			$cell.focus();
+			this.set('root.focusCell', this);
 		}
 	}),
 
