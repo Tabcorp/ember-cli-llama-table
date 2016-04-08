@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-llama-table",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Easy Ember.js table component",
   "author": "Jamie Hoeks <j@skeoh.com>",
   "license": "MIT",
