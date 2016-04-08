@@ -23,12 +23,16 @@ var LlamaFooter = Em.Component.extend({
 			if (old) {
 				old.destroy();
 			}
-			var Constructor = this.get('root.footerController');
-			var instance;
-			if (typeof Constructor === 'function') {
+			var footerController = this.get('root.footerController');
+			var Constructor, instance;
+			if (typeof footerController === 'function') {
+				Constructor = footerController;
 				instance = Constructor.create({
 					content: this.get('rows')
 				});
+			}
+			else if (footerController) {
+				instance = footerController;
 			}
 			return instance;
 		},
