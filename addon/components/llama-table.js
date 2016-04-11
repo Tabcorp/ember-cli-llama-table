@@ -38,6 +38,35 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	classNameBindings: ['isSortable', 'isResizable', 'isEmpty', 'isLoading', 'hasSubcontent', 'showHeader', 'showFooter'],
 
 	/**
+	 * Current page that is been viewed when using pagination
+	 * To use pagination, override this property along with rowsPerPage
+	 * @property {Number} currentPage
+	 */
+	currentPage: 1,
+
+	/**
+	 * Number of rows to display per page when using pagination
+	 * To use pagination, override this property along with currentPage
+	 * Defaults to length of entire set of rows, which means one page with the entire rowset
+	 * @property {Number} rowsPerPage
+	 */
+	rowsPerPage: computed('sortedRows.[]', function () {
+		return this.get('sortedRows.length');
+	}),
+
+	/**
+	 * Determines if pagination is in use.  Will always be false unless rowsPerPage is manually overridden
+	 * with a value less than the total number of rows in the table.
+	 * @property {Boolean} hasPagination
+	 */
+	hasPagination: computed('rowsPerPage', 'sortedRows.[]', function () {
+		const rowsPerPage = Number(this.get('rowsPerPage'));
+		const numRows = this.get('sortedRows.length');
+
+		return Boolean(rowsPerPage < numRows);
+	}),
+
+	/**
 	 * Column definitions array
 	 * @property {Object[]} columns
 	 * @public
@@ -83,7 +112,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 *   custom controller if it is not necessary.
 	 * @property {Ember.ArrayProxy} sortedRows
 	 */
-	sortedRows: computed(function () {
+	sortedRows: computed('rows', function () {
 		var options = {
 			parentController: this,
 			container: this.get('container'),
@@ -106,6 +135,59 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 			Controller = Rows;
 		}
 		return Controller.create(options);
+	}),
+
+	/**
+	 * The visible rows to be displayed based on the currently paginated page
+	 * @property {Ember.ArrayProxy} visibleRows
+	 */
+	visibleRows: computed('visibleIndexStart', 'visibleIndexEnd', 'sortedRows.[]', function () {
+		// many optimizations to be had if we use the same object reference when we know
+		// pagination is not needed.  this is particularly true when rows are been regularly
+		// added and removed from the table.
+		if (this.get('hasPagination') === false) {
+			return this.get('sortedRows');
+		}
+
+		const start = this.get('visibleIndexStart');
+		const end = this.get('visibleIndexEnd');
+
+		return this.get('sortedRows').slice(start, end);
+	}),
+
+	/**
+	 * The index in sortedRows of the first visible row on the current page
+	 * @property {Number} visibleIndexStart
+	 */
+	visibleIndexStart: computed('currentPage', 'rowsPerPage', 'sortedRows.[]', function () {
+		const currentPage = Number(this.get('currentPage'));
+		const rowsPerPage = Number(this.get('rowsPerPage'));
+		const maxStart = this.get('sortedRows.length');
+
+		const zeroedPageIndex = currentPage - 1;
+		const start = zeroedPageIndex * rowsPerPage;
+
+		if (start > maxStart) {
+			return maxStart;
+		} else if (start < 0) {
+			return 0;
+		}
+
+		return start;
+	}),
+
+	/**
+	 * The index in sortedRows of the last visible row on the current page
+	 * @property {Number} visibleIndexEnd
+	 */
+	visibleIndexEnd: computed('visibleIndexStart', 'sortedRows.[]', function () {
+		const start = this.get('visibleIndexStart');
+		const rowsPerPage = Number(this.get('rowsPerPage'));
+		const maxEnd = this.get('sortedRows.length');
+
+		const end = start + rowsPerPage;
+
+		return end <= maxEnd ? end : maxEnd;
 	}),
 
 	/**

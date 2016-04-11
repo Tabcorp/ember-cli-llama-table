@@ -1,13 +1,13 @@
 import Em from 'ember';
 import LlamaColumn from './llama-column';
-import LlamaBodyCell from './llama-body-cell';
 var get = Em.get;
 var set = Em.set;
 var computed = Em.computed;
 
 var LlamaBodyColumn = LlamaColumn.extend({
 	classNames: 'llama-body-column',
-	contentBinding: 'rows',
+	contentBinding: 'subsetRows',
+	subsetRows: computed.alias('controller.visibleRows'),
 
 	rows: null,
 	column: null,
