@@ -22,7 +22,7 @@
 
 <p>Page Index: {{currentPage}}</p>
 <p>
-  {{#each button in buttons}}
+  {{#each buttons as |button|}}
     <button {{action 'setPage' button}}>{{button}}</button>
   {{/each}}
 </p>
