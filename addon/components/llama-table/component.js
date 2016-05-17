@@ -374,6 +374,7 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 			var sortProperties = this.get('sortProperties');
 			var sortProperty = Em.makeArray(sortProperties)[0];
 			if (columnNamesMatch(column, sortProperty)) {
+				this.toggleProperty('sortAscending');
 				column = toggleColumnDescending(sortProperty);
 			}
 			this.set('sortProperties', [column]);
