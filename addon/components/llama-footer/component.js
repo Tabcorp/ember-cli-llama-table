@@ -18,7 +18,7 @@ var LlamaFooter = Em.Component.extend({
 	columngroups: null,
 	rows: null,
 
-	isConstructor: false,
+	didConstruct: false,
 
 	data: computed('root.footerController', {
 		get: function (key, val, old) {
@@ -28,15 +28,15 @@ var LlamaFooter = Em.Component.extend({
 			var footerController = this.get('root.footerController');
 			var Constructor, instance;
 			if (typeof footerController === 'function') {
-				this.set('isConstructor', true);
 				Constructor = footerController;
 				instance = Constructor.create({
 					content: this.get('rows')
 				});
+				this.set('didConstruct', true);
 			}
 			else if (footerController) {
-				this.set('isConstructor', false);
 				instance = footerController;
+				this.set('didConstruct', false);
 			}
 			return instance;
 		},
@@ -62,8 +62,8 @@ var LlamaFooter = Em.Component.extend({
 	}),
 
 	willDestroy: function () {
-		if (this.get('isConstructor')) {
-			let footerController = this.get('data');
+		if (this.get('didConstruct')) {
+			const footerController = this.get('data');
 			footerController.destroy();
 		}
 		this._super();
