@@ -41,7 +41,10 @@ var LlamaHeaderCell = LlamaCell.extend({
 	sortByThis: computed('sortProperties.firstObject', 'column.sortBy', {
 		get: function () {
 			const sortBy = this.get('sortProperties.firstObject');
-			const sortedColumn = sortBy.split(':', 1)[0];
+			if (Em.isEmpty(sortBy)) {
+				return false;
+			}
+			const sortedColumn = String(sortBy).split(':', 1)[0];
 			const thisColumn = this.get('column.sortBy');
 			return sortedColumn === thisColumn;
 		},
